@@ -1,0 +1,552 @@
+<!DOCTYPE html><html lang="zh-CNs" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>docker | VV</title><meta name="keywords" content="其他,工具"><meta name="author" content="VVkladg0r"><meta name="copyright" content="VVkladg0r"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="docker"><meta name="application-name" content="docker"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="docker"><meta property="og:url" content="http://cszvvds.cc/2024/05/13/docker/index.html"><meta property="og:site_name" content="VV"><meta property="og:description" content="docker介绍介绍Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可抑制的容器中，然后发布到任何流行的Linux机器上，也可以实现虚拟化。容器完全使用沙盒机制，相互之间不会存在任何接口。几乎没有性能开销，可以很容易的在机器和数据中心运行。最重要的是，他们不依赖于任何"><meta property="og:locale" content="zh-CNs"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="VVkladg0r"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="docker介绍介绍Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可抑制的容器中，然后发布到任何流行的Linux机器上，也可以实现虚拟化。容器完全使用沙盒机制，相互之间不会存在任何接口。几乎没有性能开销，可以很容易的在机器和数据中心运行。最重要的是，他们不依赖于任何"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://cszvvds.cc/2024/05/13/docker/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"VV:QAQ","backTitle":"VV!"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":null},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: VVkladg0r","link":"链接: ","source":"来源: VV","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'VV',
+  title: 'docker',
+  postAI: '',
+  pageFillDescription: 'docker介绍, 介绍, Docker容器技术与虚拟机的区别, kali下docker安装, Linux内核版本查看, 更新apt, 进行系统或工具更新, 安装Docker, 检验Docker, Docker开机自启, Docker使用, 拉取环境, 例1, 例2, 例3, 常用命令, docker –help中文译解介绍介绍是一个开源的应用容器引擎让开发者可以打包他们的应用以及依赖包到一个可抑制的容器中然后发布到任何流行的机器上也可以实现虚拟化容器完全使用沙盒机制相互之间不会存在任何接口几乎没有性能开销可以很容易的在机器和数据中心运行最重要的是他们不依赖于任何语言框架或者包装系统小知识沙盒也叫沙箱在计算机领域指一种虚拟技术而且多用于计算机安全技术安全软件可以让它在沙盒中运行如果含有恶意行为则禁止程序的进一步运行而这不会对系统造成任何危害是公司开源的一个基于的高级容器引擎源码托管在上基于语言并且遵从协议开源容器技术与虚拟机的区别和容器技术和虚拟机技术都是虚拟化技术有着比虚拟机更少的抽象层由于不需要实现硬件资源虚拟化运行在容器上的程序直接使用的都是实际物理机的硬件资源所以效率比虚拟机效率高达到了秒级启动的地步相较于的优点比小快容器的尺寸减小相比于整个虚拟机大大简化了分布到云和分发时间的开销启动一个容器实例时间仅仅需要几秒钟是一个开放的平台构建发布和运行分布式应用程序开发人员不需要关系具体是哪个操作系统微软亚马逊等都支持支持操作系统也支持和局限性用于应用程序时是最有用的但并不包含数据日志数据库等通常放在容器外一个容器的镜像通常都很小不用和存储大量数据存储可以通过外部挂载等方式使用比如等或者命令映射磁盘分区总之只用于计算存储交给别人特性文件系统隔离每个进程容器运行在一个完全独立的根文件系统里资源隔离系统资源像和内存等可以分配到不同的容器中使用网络隔离每个进程容器运行在自己的网路空间虚拟接口和地址日志记录将收集到和记录的每个进程容器的标准流用于实时检索或者批量检索变更管理容器文件系统的变更可以提交到新的镜像中并可重复使用以创建更多的容器无需使用模板或者手动配置交互式可以分配一个虚拟终端并且关联到任何容器的标准输出上例如运行一个一次性交互下安装内核版本查看安装要求内核版本为此先检查当前系统的内核版本更新新重写中内容一个个字母删除太久了进入重新编辑源直接大法写入下面的源阿里云这一步在我实际安装时其实是没有执行的不影响进行系统或工具更新进行系统或工具的更新还是要挺久的注当出现正在设定软件包界面时直接按进行确认礼貌性清除更新缓存安装为什么采用安装因为之后采用源安装的其他组件时新组件与已安装的容器最为匹配或我这里是第二个可以执行第一个报错检验启动服务查看版本列出现有镜像好像要用户因为我没有安装任何镜像所以的镜像中为空开机自启设置开机自启使用拉取环境例以拉取的漏洞环境为例搜索漏洞环境拉取漏洞环境根据镜像创建并运行容器查看已运行容器中使用浏览器访问可为查看正在运行的容器进入容器退出容器到宿主机容器不会停止运行关闭容器唯一标识建议使用例搭建环境是指一个经典的网络架构直接在中拉取一个现成的镜其实是比较慢的但是可以通过切换镜像源的方法加速然后以镜像创建容器并且将容器的端口映射到本机端口再分别输入命令启动服务访问例搭建实验环境是用于定义和运行多容器应用程序的工具使用步骤使用定义应用程序的环境使用定义构成应用程序的服务这样它们可以在隔离环境中一起运行执行命令来启动并运行整个应用程序安装检查只要给出实验环境的文件我们只需要新建文件夹然后将文件放在该目录中进入该目录执行命令即可构建环境并启动实验环境参数表示后台运行可根据需要填写用搭建漏洞这里可能是文件的问题最后在执行时报错了但时步骤因该是没问题的从这里的文件可以看出映射的有两个端口和其中为服务端口常用命令系统命令启动停止重启设置开机自启基本命令查看版本查看详细信息查看命令镜像命令查看镜像列表列出本地所有镜像显示镜像的摘要信息从上查找镜像从上下载镜像删除为的镜像镜像名搜索镜像镜像名标签下载镜像如果不写默认是镜像名标签删除镜像删除全部镜像镜像名版本新镜像名版本复制镜像并且修改名称镜像名字版本提交镜像提交的镜像作者使用指令来创建镜像提交时的说明文字运行命令端口映射前表示主机部分后表示容器部分在后台运行容器不进入终端并打印容器容器名表示自定义容器名为根据镜像创建并运行容器容器名字后面跟待完成的命令以后台方式运行并且返回启动守护进程式容器使用交互方式运行容器通常与同时使用为容器重新分配一个伪输入终端也即启动交互式容器指定容器端口容器端口物理机端口映射端口随机指定端口给容器挂载存储卷容器命令或查看正在运行的容器或列出所有容器容器或容器名称启动容器容器或容器名称启动容器容器或容器名称停止容器容器或容器名称停止容器容器或容器名称删除容器容器或容器名称删除容器容器或容器名称查看容器日志进入容器名中开启交互式的终端退出创建镜像指定文件路径镜像名字以及标签容器实例的查看容器日志旧名字新名字给容器重新命名容器实例的查看容器内进程列出所有容器不加就是在运行的容器实例的删除容器正在运行容器不能删除除非加选项容器实例的杀掉容器容器实例的查看镜像的变更历史容器实例的启动容器容器实例的重启容器容器实例的停止正在运行的容器容器实例的同为进入容器命令不同的是连接终止会让容器退出后台运行而不会并且是进入正在执行的终端不会情动新的进程而则会开启一个新的终端可以在里面操作容器名称容器标签查看容器内源数据容器容器内路径目的主机路径从容器内拷贝文件到主机常用或者从主机拷贝到容器一般用挂载直接退出容器退出容器但是不终止运行中文译解客户端配置文件的位置启用调试模式守护进程的套接字连接打印使用设置日志级别信任证书签名证书文件路径密钥文件路径使用验证远程打印版本信息并退出当前下连接指定运行镜像通过定制镜像提交当前容器为新的镜像从容器中拷贝指定文件或者目录到宿主机中创建一个新的容器同但不启动容器查看容器变化从服务获取容器实时事件在已存在的容器上运行命令导出容器的内容流作为一个归档文件对应展示一个镜像形成历史列出系统当前镜像从包中的内容创建一个新的文件系统映像对应显示系统相关信息查看容器详细信息指定容器从一个包中加载一个镜像对应注册或者登陆一个源服务器从当前退出输出当前容器日志信息暂停容器查看映射端口对应的容器内部源端口列出容器列表从镜像源服务器拉取指定镜像或者库镜像推送指定镜像或者库镜像至源服务器重命名容器重启运行的容器移除一个或者多个容器移除一个或多个镜像无容器使用该镜像才可以删除否则需要删除相关容器才可以继续或者强制删除创建一个新的容器并运行一个命令保存一个镜像为一个包对应在中搜索镜像启动容器统计容器使用资源停止容器给源中镜像打标签查看容器中运行的进程信息取消暂停容器查看容器版本号截取容器停止时的退出状态值',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-05-13 13:43:45',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 5 || hour >= 5
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://cszvvds.cc" title="博客"><img class="back-menu-item-icon" src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">VV</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 文章总览</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 全部分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言面板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacae5439.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://bu.dusays.com/2024/05/13/6640eacae5439.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>1</sup></a><a href="/tags/misc/" style="font-size: 1.05rem;">misc<sup>1</sup></a><a href="/tags/web/" style="font-size: 1.05rem;">web<sup>7</sup></a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 1.05rem;">其他<sup>5</sup></a><a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 1.05rem;">内网<sup>1</sup></a><a href="/tags/%E5%90%8E%E7%AB%AF%E6%BC%8F%E6%B4%9E/" style="font-size: 1.05rem;">后端漏洞<sup>5</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>2</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 1.05rem;">编程语言<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">May 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">14</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E5%85%B6%E4%BB%96/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>其他</span></a><a class="article-meta__tags" href="/tags/%E5%B7%A5%E5%85%B7/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>工具</span></a></span></div></div><h1 class="post-title" itemprop="name headline">docker</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-05-13T05:42:48.000Z" title="发表于 2024-05-13 13:42:48">2024-05-13</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-05-13T05:43:45.371Z" title="更新于 2024-05-13 13:43:45">2024-05-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">3.6k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="docker"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://cszvvds.cc/2024/05/13/docker/"><header><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a><a href="/tags/%E5%85%B6%E4%BB%96/" tabindex="-1" itemprop="url">其他</a><a href="/tags/%E5%B7%A5%E5%85%B7/" tabindex="-1" itemprop="url">工具</a><h1 id="CrawlerTitle" itemprop="name headline">docker</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">VVkladg0r</span><time itemprop="dateCreated datePublished" datetime="2024-05-13T05:42:48.000Z" title="发表于 2024-05-13 13:42:48">2024-05-13</time><time itemprop="dateCreated datePublished" datetime="2024-05-13T05:43:45.371Z" title="更新于 2024-05-13 13:43:45">2024-05-13</time></header><h1 id="docker介绍"><a href="#docker介绍" class="headerlink" title="docker介绍"></a>docker介绍</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可抑制的容器中，然后发布到任何流行的Linux机器上，也可以实现虚拟化。容器完全使用沙盒机制，相互之间不会存在任何接口。几乎没有性能开销，可以很容易的在机器和数据中心运行。最重要的是，他们不依赖于任何语言、框架或者包装系统。</p>
+<p>小知识：沙盒也叫沙箱（sandbox）。在计算机领域指一种虚拟技术，而且多用于计算机安全技术。安全软件可以让它在沙盒中运行，如果含有恶意行为，则禁止程序的进一步运行，而这不会对系统造成任何危害。</p>
+<p>Docker是dotCloud公司开源的一个基于LXC的高级容器引擎，源码托管在Github上，基于go语言并且遵从Apache2.0协议开源。</p>
+<h2 id="Docker容器技术与虚拟机的区别"><a href="#Docker容器技术与虚拟机的区别" class="headerlink" title="Docker容器技术与虚拟机的区别"></a>Docker容器技术与虚拟机的区别</h2><p>docker和容器技术和虚拟机技术，都是虚拟化技术。</p>
+<p>docker有着比虚拟机更少的抽象层。 由于docker不需要Hypervisor实现硬件资源虚拟化，运行在docker容器上的程序直接使用的都是实际物理机的硬件资源。所以docker效率比虚拟机效率高。达到了秒级启动的地步。</p>
+<p>docker相较于VM的优点：</p>
+<blockquote>
+<p>1、比VM小、快，Docker容器的尺寸减小相比于整个虚拟机大大简化了分布<br>到云和分发时间的开销。Docker启动一个容器实例时间仅仅需要几秒钟。</p>
+<p>2、Docker是一个开放的平台，构建、发布和运行分布式应用程序。</p>
+<p>3、开发人员不需要关系具体是哪个Linux操作系统</p>
+<p>4、Google、微软（azure）、亚马逊、IBM等都支持docker。</p>
+<p>5、Docker支持Unix&#x2F;Linux操作系统，也支持Windows和Mac。</p>
+</blockquote>
+<p>Docker局限性：<br>Docker用于应用程序时是最有用的，但并不包含数据。日志、数据库等通常放在Docker容器外。一个容器的镜像通常都很小，不用和存储大量数据，存储可以通过外部挂载等方式使用，比如：NFS、ipsan、MFS等 ，或者docker命令 ，-v映射磁盘分区。</p>
+<p>总之，docker只用于计算，存储交给别人。</p>
+<p>Docker特性。<br>文件系统隔离：每个进程容器运行在一个完全独立的根文件系统里。</p>
+<p>资源隔离：系统资源，像CPU和内存等可以分配到不同的容器中，使用cgroup。<br>网络隔离：每个进程容器运行在自己的网路空间，虚拟接口和IP地址。</p>
+<p>日志记录：Docker将收集到和记录的每个进程容器的标准流（stdout&#x2F;stderr&#x2F;stdin），用于实时检索或者批量检索</p>
+<p>变更管理：容器文件系统的变更可以提交到新的镜像中，并可重复使用以创建更多的容器。无需使用模板或者手动配置。</p>
+<p>交互式shell：Docker可以分配一个虚拟终端并且关联到任何容器的标准输出上，例如运行一个一次性交互shell。</p>
+<h1 id="kali下docker安装"><a href="#kali下docker安装" class="headerlink" title="kali下docker安装"></a>kali下docker安装</h1><h2 id="Linux内核版本查看"><a href="#Linux内核版本查看" class="headerlink" title="Linux内核版本查看"></a>Linux内核版本查看</h2><blockquote>
+<p>#安装docker要求内核版本kerner&gt;&#x3D;3.10<br>#为此，先检查当前Linux系统的内核版本<br><code>uname -a</code></p>
+</blockquote>
+<h2 id="更新apt"><a href="#更新apt" class="headerlink" title="更新apt"></a>更新apt</h2><blockquote>
+<p>#新重写sources.list中内容，一个个字母删除太久了<br><code>cho &gt; /etc/apt/sources.list</code></p>
+<p>#进入sources.lis重新编辑apt源<br><code>vim /etc/apt/sources.list</code></p>
+<p>#直接CV大法写入下面的apt源</p>
+<p>#阿里云<br><code>deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</code><br><code>deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib </code></p>
+</blockquote>
+<p>这一步在我实际安装时其实是没有执行的 不影响</p>
+<h2 id="进行系统或工具更新"><a href="#进行系统或工具更新" class="headerlink" title="进行系统或工具更新"></a>进行系统或工具更新</h2><blockquote>
+<p>进行系统或工具的更新（还是要挺久的 ）<br>注：当出现正在设定软件包界面时，直接按<code>tab+enter</code>进行确认<br><code>apt-get update &amp;&amp; apt-get upgrade &amp;&amp; apt-get dist-upgrade</code></p>
+<p>礼貌性清除更新缓存<br><code>apt-get clean</code></p>
+</blockquote>
+<h2 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h2><blockquote>
+<p>为什么采用apt安装？因为之后采用apt源安装Docker的其他组件时，新组件与已安装的Docker容器最为匹配。<br>apt-get install docker docker-compose</p>
+<p>或<br>apt-get install docker.io</p>
+</blockquote>
+<p>我这里是第二个可以执行 第一个报错</p>
+<h2 id="检验Docker"><a href="#检验Docker" class="headerlink" title="检验Docker"></a>检验Docker</h2><blockquote>
+<p>启动docker服务 </p>
+<p>service docker start</p>
+</blockquote>
+<blockquote>
+<p>查看docker版本</p>
+<p>docker -v</p>
+</blockquote>
+<blockquote>
+<p>列出docker现有镜像 </p>
+<p>docker images</p>
+</blockquote>
+<p>好像要root用户</p>
+<p>因为我没有安装任何镜像 所以的镜像中为空</p>
+<h2 id="Docker开机自启"><a href="#Docker开机自启" class="headerlink" title="Docker开机自启"></a>Docker开机自启</h2><blockquote>
+<p>设置docker开机自启<br>systemctl enable docker</p>
+</blockquote>
+<h2 id="Docker使用"><a href="#Docker使用" class="headerlink" title="Docker使用"></a>Docker使用</h2><h3 id="拉取环境"><a href="#拉取环境" class="headerlink" title="拉取环境"></a>拉取环境</h3><h4 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">以拉取 CVE-2017-7504 的漏洞环境为例。</span><br><span class="line">docker search testjboss    							#搜索漏洞环境</span><br><span class="line">docker pull testjboss/jboss							#拉取漏洞环境</span><br><span class="line">docker run -d -p 80:8080 testjboss/jboss:latest		#根据testjboss/jboss镜像创建并运行容器</span><br><span class="line">ifconfig																						#查看已运行容器ip</span><br><span class="line">#kali中，使用浏览器访问http://IP						#IP可为127.0.0.1</span><br><span class="line">docker ps																						#查看正在运行的容器</span><br><span class="line">docker exec -it e8f4844aabc1 /bin/bash				#进入容器(id:e8f4844aabc1)</span><br><span class="line">exit																								#退出容器到宿主机（容器不会停止运行）</span><br><span class="line">docker stop 3b41c0c08430							#关闭容器(id唯一标识，建议使用id)</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6641a888aa457.png" alt="image-20240402231620258"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6641a889390c3.png" alt="image-20240402231637817"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6641a888e326c.png" alt="image-20240402231649876"></p>
+<h4 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h4><p>Docker搭建LAMP环境</p>
+<blockquote>
+<p>LAMP是指Linux+Apache+MYSQL+PHP 一个经典的网络架构</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker pull linode/lamp</span><br><span class="line">直接在Docker中拉取一个现成的LAMP镜</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6641a88933d07.png" alt="image-20240403000528688"></p>
+<p>其实是比较慢的 但是可以通过切换Docker镜像源的方法加速</p>
+<p>然后</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -it -p 8001:80 linode/lamp /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>以linode&#x2F;lamp镜像创建容器并且将容器的80端口映射到本机8001端口</p>
+<p>再分别输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service apache2 start</span><br><span class="line"></span><br><span class="line">service mysql start</span><br></pre></td></tr></table></figure>
+
+<p>命令启动服务</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6641a889424bf.png" alt="image-20240403001248397"></p>
+<p>kali访问127.0.0.1：8001</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6641a8877695d.png" alt="image-20240403001515272"></p>
+<h4 id="例3"><a href="#例3" class="headerlink" title="例3"></a>例3</h4><p>Docker Compose搭建实验环境</p>
+<p>Docker Compose是用于定义和运行多容器应用程序的工具</p>
+<p>使用步骤：</p>
+<blockquote>
+<p>1.使用Dockerfile定义应用程序的环境</p>
+<p>2.使用docker-compose.yml定义构成应用程序的服务，这样它们可以在隔离环境中一起运行</p>
+<p>3.执行docker-compose up 命令来启动并运行整个应用程序</p>
+</blockquote>
+<p>安装docker-compose</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apt-get install docker-compose</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6641a8892ea66.png" alt="image-20240403003730268"></p>
+<p>检查</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose -v</span><br></pre></td></tr></table></figure>
+
+
+
+<p>只要给出实验环境的docker-compose.yml文件  我们只需要新建文件夹，然后将docker-compose.yml文件放在该目录中，进入该目录执行<code>docker-compose up -d</code>命令即可构建环境并启动实验环境， -d参数表示后台运行 可根据需要填写</p>
+<p>用docker compose搭建漏洞 CVE-2020-17518</p>
+<p>docker-compose.yml：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;2&#x27;</span><br><span class="line">services:</span><br><span class="line"> flink:</span><br><span class="line">   image: vulhub/flink:1.11.2</span><br><span class="line">   command: jobmanager</span><br><span class="line">   ports:</span><br><span class="line">    - &quot;8081:8081&quot;</span><br><span class="line">    - &quot;6123:6123&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这里可能是yml文件的问题 最后在执行docker-compose up -d时报错了 但时步骤因该是没问题的</p>
+<p>从这里的YAML文件可以看出 映射的有两个端口 8081和6123 其中8081为web服务端口</p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#系统命令</span><br><span class="line">systemctl start docker				#启动docker</span><br><span class="line">systemctl stop docker				#停止docker</span><br><span class="line">systemctl restart docker			#重启docker</span><br><span class="line">systemctl enable docker				#设置docker开机自启</span><br><span class="line"> </span><br><span class="line">#基本命令</span><br><span class="line">docker version						#查看docker版本</span><br><span class="line">docker info							#查看docker详细信息</span><br><span class="line">docker --help						#查看docker命令</span><br><span class="line"> </span><br><span class="line">#镜像命令</span><br><span class="line">docker images						#查看docker镜像列表</span><br><span class="line">docker images -a					#列出本地所有镜像</span><br><span class="line">docker images --digests				#显示镜像的摘要信息</span><br><span class="line">docker search redis					#从Docker Hub上查找redis镜像</span><br><span class="line">docker pull redis					#从Docker Hub上下载redis镜像</span><br><span class="line">docker rmi 373f0984b070				#删除IMAGE ID 为373f0984b070的镜像</span><br><span class="line">docker search 镜像名           #搜索镜像</span><br><span class="line">docker pull 镜像名 [标签]      #下载镜像（如果不写tag，默认是latest）</span><br><span class="line">docker rmi 镜像名 [标签]       #删除镜像    docker rmi -f $(docker images -aq)  删除全部镜像</span><br><span class="line">docker tag  镜像名:版本   新镜像名:版本    #复制镜像并且修改名称</span><br><span class="line">docker commit  -a &quot;xxx&quot;  -c &quot;xxx&quot; 镜像ID 名字：版本   #提交镜像 </span><br><span class="line">-a :提交的镜像作者；</span><br><span class="line">-c :使用Dockerfile指令来创建镜像；</span><br><span class="line">-m :提交时的说明文字；</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">#运行命令</span><br><span class="line">#-p 6379:6379	端口映射：前表示主机部分,后表示容器部分</span><br><span class="line">#-d	在后台运行容器（不进入终端）并打印容器ID/容器名</span><br><span class="line">#--name myredis表示自定义容器名为myredis</span><br><span class="line">docker run -d -p 6379:6379 --name myredis redis:latest		#根据镜像创建并运行容器</span><br><span class="line">--name = &quot;Name&quot;   容器名字</span><br><span class="line">-c   后面跟待完成的命令</span><br><span class="line">-d   以后台方式运行并且返回ID，启动守护进程式容器</span><br><span class="line">-i   使用交互方式运行容器，通常与t同时使用</span><br><span class="line">-t   为容器重新分配一个伪输入终端。也即启动交互式容器</span><br><span class="line">-p   指定容器端口    -p 容器端口:物理机端口  映射端口</span><br><span class="line">-P   随机指定端口</span><br><span class="line">-v   给容器挂载存储卷</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">#容器命令</span><br><span class="line">docker container ls 或 docker ps				#查看正在运行的容器</span><br><span class="line">docker container ls -a 或 docker ps -a			#列出所有容器</span><br><span class="line">docker container start 容器ID 或 容器名称		#启动容器</span><br><span class="line">docker start 容器ID 或 容器名称					#启动容器</span><br><span class="line">docker container stop 容器ID 或 容器名称			#停止容器</span><br><span class="line">docker stop 容器ID 或 容器名称					#停止容器</span><br><span class="line">docker container rm 容器ID 或 容器名称			#删除容器</span><br><span class="line">docker rm 容器ID 或 容器名称						#删除容器</span><br><span class="line">docker container logs -f 容器ID 或 容器名称		#查看容器日志</span><br><span class="line">docker exec -it name /bin/bash 					#进入name（容器名/id）中开启交互式的终端，exit退出</span><br><span class="line"></span><br><span class="line">docker build  #创建镜像        -f：指定dockerfile文件路径   -t：镜像名字以及标签</span><br><span class="line">docker logs 容器实例的ID          #查看容器日志</span><br><span class="line">docker rename 旧名字  新名字      # 给容器重新命名</span><br><span class="line">docker top    容器实例的ID                  #查看容器内进程</span><br><span class="line">docker ps -a                    #列出所有容器（不加-a就是在运行的）</span><br><span class="line">docker rm      容器实例的ID                 #删除容器（正在运行容器不能删除，除非加-f选项）</span><br><span class="line">docker kill  容器实例的ID        #杀掉容器</span><br><span class="line">docker history   容器实例的ID    #查看docker镜像的变更历史</span><br><span class="line">docker start 容器实例的ID        #启动容器</span><br><span class="line">docker restart 容器实例的ID       #重启容器</span><br><span class="line">docker stop 容器实例的ID         #停止正在运行的容器</span><br><span class="line">docker attach /docker exec  容器实例的ID   #同为进入容器命令，不同的是attach连接终止会让容器退出后台运行，而exec不会。并且，docker attach是进入正在执行的终端，不会情动新的进程，而docker exec则会开启一个新的终端，可以在里面操作。</span><br><span class="line">docker image inspect  容器名称：容器标签       #查看容器内源数据</span><br><span class="line">docker cp  容器id：容器内路径   目的主机路径           #从容器内拷贝文件到主机（常用）或者从主机拷贝到容器（一般用挂载）</span><br><span class="line">exit                           #直接退出容器 </span><br><span class="line">crlt + P + Q                   #退出容器但是不终止运行</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="docker-–help中文译解"><a href="#docker-–help中文译解" class="headerlink" title="docker –help中文译解"></a>docker –help中文译解</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Usage:</span><br><span class="line">docker [OPTIONS] COMMAND [arg...]</span><br><span class="line">       docker daemon [ --help | ... ]</span><br><span class="line">       docker [ --help | -v | --version ]</span><br><span class="line">A</span><br><span class="line">self-sufficient runtime for containers.</span><br><span class="line"> </span><br><span class="line">Options:</span><br><span class="line">  --config=~/.docker              Location of client config files  #客户端配置文件的位置</span><br><span class="line">  -D, --debug=false               Enable debug mode  #启用Debug调试模式</span><br><span class="line">  -H, --host=[]                   Daemon socket(s) to connect to  #守护进程的套接字（Socket）连接</span><br><span class="line">  -h, --help=false                Print usage  #打印使用</span><br><span class="line">  -l, --log-level=info            Set the logging level  #设置日志级别</span><br><span class="line">  --tls=false                     Use TLS; implied by--tlsverify  #</span><br><span class="line">  --tlscacert=~/.docker/ca.pem    Trust certs signed only by this CA  #信任证书签名CA</span><br><span class="line">  --tlscert=~/.docker/cert.pem    Path to TLS certificate file  #TLS证书文件路径</span><br><span class="line">  --tlskey=~/.docker/key.pem      Path to TLS key file  #TLS密钥文件路径</span><br><span class="line">  --tlsverify=false               Use TLS and verify the remote  #使用TLS验证远程</span><br><span class="line">  -v, --version=false             Print version information and quit  #打印版本信息并退出</span><br><span class="line"> </span><br><span class="line">Commands:</span><br><span class="line">    attach    Attach to a running container  #当前shell下attach连接指定运行镜像</span><br><span class="line">    build     Build an image from a Dockerfile  #通过Dockerfile定制镜像</span><br><span class="line">    commit    Create a new image from a container&#x27;s changes  #提交当前容器为新的镜像</span><br><span class="line">    cp    	  Copy files/folders from a container to a HOSTDIR or to STDOUT  #从容器中拷贝指定文件或者目录到宿主机中</span><br><span class="line">    create    Create a new container  #创建一个新的容器，同run 但不启动容器</span><br><span class="line">    diff      Inspect changes on a container&#x27;s filesystem  #查看docker容器变化</span><br><span class="line">    events    Get real time events from the server#从docker服务获取容器实时事件</span><br><span class="line">    exec      Run a command in a running container#在已存在的容器上运行命令</span><br><span class="line">    export    Export a container&#x27;s filesystem as a tar archive  #导出容器的内容流作为一个tar归档文件(对应import)</span><br><span class="line">    history   Show the history of an image  #展示一个镜像形成历史</span><br><span class="line">    images    List images  #列出系统当前镜像</span><br><span class="line">    import    Import the contents from a tarball to create a filesystem image  #从tar包中的内容创建一个新的文件系统映像(对应export)</span><br><span class="line">    info      Display system-wide information  #显示系统相关信息</span><br><span class="line">    inspect   Return low-level information on a container or image  #查看容器详细信息</span><br><span class="line">    kill      Kill a running container  #kill指定docker容器</span><br><span class="line">    load      Load an image from a tar archive or STDIN  #从一个tar包中加载一个镜像(对应save)</span><br><span class="line">    login     Register or log in to a Docker registry#注册或者登陆一个docker源服务器</span><br><span class="line">    logout    Log out from a Docker registry  #从当前Docker registry退出</span><br><span class="line">    logs   	  Fetch the logs of a container  #输出当前容器日志信息</span><br><span class="line">    pause     Pause all processes within a container#暂停容器</span><br><span class="line">    port      List port mappings or a specific mapping for the CONTAINER  #查看映射端口对应的容器内部源端口</span><br><span class="line">    ps    	  List containers  #列出容器列表</span><br><span class="line">    pull      Pull an image or a repository from a registry  #从docker镜像源服务器拉取指定镜像或者库镜像</span><br><span class="line">    push      Push an image or a repository to a registry  #推送指定镜像或者库镜像至docker源服务器</span><br><span class="line">    rename    Rename a container  #重命名容器</span><br><span class="line">    restart   Restart a running container  #重启运行的容器</span><br><span class="line">    rm    	  Remove one or more containers  #移除一个或者多个容器</span><br><span class="line">    rmi    	  Remove one or more images  #移除一个或多个镜像(无容器使用该镜像才可以删除，否则需要删除相关容器才可以继续或者-f强制删除)</span><br><span class="line">    run   	  Run a command in a new container  #创建一个新的容器并运行一个命令</span><br><span class="line">    save      Save an image(s) to a tar archive#保存一个镜像为一个tar包(对应load)</span><br><span class="line">    search    Search the Docker Hub for images  #在docker</span><br><span class="line">hub中搜索镜像</span><br><span class="line">    start     Start one or more stopped containers#启动容器</span><br><span class="line">    stats     Display a live stream of container(s) resource usage statistics  #统计容器使用资源</span><br><span class="line">    stop      Stop a running container  #停止容器</span><br><span class="line">    tag       Tag an image into a repository  #给源中镜像打标签</span><br><span class="line">    top       Display the running processes of a container #查看容器中运行的进程信息</span><br><span class="line">    unpause   Unpause all processes within a container  #取消暂停容器</span><br><span class="line">    version   Show the Docker version information#查看容器版本号</span><br><span class="line">    wait      Block until a container stops, then print its exit code  #截取容器停止时的退出状态值</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">VVkladg0r</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://cszvvds.cc/2024/05/13/docker/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://cszvvds.cc/2024/05/13/docker/')">docker</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacae5439.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6640eacae5439.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://cszvvds.cc/2024/05/13/docker/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=docker&amp;url=http://cszvvds.cc/2024/05/13/docker/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cszvvds.cc" target="_blank">VV</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E5%85%B6%E4%BB%96/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>其他<span class="tagsPageCount">5</span></a><a class="post-meta__box__tags" href="/tags/%E5%B7%A5%E5%85%B7/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>工具<span class="tagsPageCount">2</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/13/burpfakeIP/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">burpfakeIP</div></div></a></div><div class="next-post pull-right"><a href="/2024/05/13/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">frp内网穿透</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/05/13/burpfakeIP/" title="burpfakeIP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-05-13</div><div class="title">burpfakeIP</div></div></a></div><div><a href="/2024/05/13/USB%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/" title="USB流量分析"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-05-13</div><div class="title">USB流量分析</div></div></a></div><div><a href="/2024/05/13/MD5%E9%95%BF%E5%BA%A6%E6%8B%93%E5%B1%95%E6%94%BB%E5%87%BB/" title="MD5长度拓展攻击"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-05-13</div><div class="title">MD5长度拓展攻击</div></div></a></div><div><a href="/2024/05/12/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="博客搭建"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-05-12</div><div class="title">博客搭建</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/03/03/e511960ac5488.png" alt="status"/></div></div><div class="author-info__description">生活明朗 万物可爱</div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">大家好 我是VV 欢迎来看我的博客鸭~  之前上传文章的时候 图床好像被DDOS了 有些图片没上传起 懒的重新弄了 大家需要的话d我 我重新上传</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#docker%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">docker介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF%E4%B8%8E%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.</span> <span class="toc-text">Docker容器技术与虚拟机的区别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#kali%E4%B8%8Bdocker%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">kali下docker安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%86%85%E6%A0%B8%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B"><span class="toc-number">2.1.</span> <span class="toc-text">Linux内核版本查看</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0apt"><span class="toc-number">2.2.</span> <span class="toc-text">更新apt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E7%B3%BB%E7%BB%9F%E6%88%96%E5%B7%A5%E5%85%B7%E6%9B%B4%E6%96%B0"><span class="toc-number">2.3.</span> <span class="toc-text">进行系统或工具更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Docker"><span class="toc-number">2.4.</span> <span class="toc-text">安装Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E9%AA%8CDocker"><span class="toc-number">2.5.</span> <span class="toc-text">检验Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="toc-number">2.6.</span> <span class="toc-text">Docker开机自启</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E4%BD%BF%E7%94%A8"><span class="toc-number">2.7.</span> <span class="toc-text">Docker使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E7%8E%AF%E5%A2%83"><span class="toc-number">2.7.1.</span> <span class="toc-text">拉取环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B1"><span class="toc-number">2.7.1.1.</span> <span class="toc-text">例1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B2"><span class="toc-number">2.7.1.2.</span> <span class="toc-text">例2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B3"><span class="toc-number">2.7.1.3.</span> <span class="toc-text">例3</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.7.2.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-%E2%80%93help%E4%B8%AD%E6%96%87%E8%AF%91%E8%A7%A3"><span class="toc-number">2.7.3.</span> <span class="toc-text">docker –help中文译解</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/13/%E5%8F%8D%E5%BC%B9shell/" title="反弹shell">反弹shell</a><time datetime="2024-05-13T05:47:17.000Z" title="发表于 2024-05-13 13:47:17">2024-05-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/13/MD5%E9%95%BF%E5%BA%A6%E6%8B%93%E5%B1%95%E6%94%BB%E5%87%BB/" title="MD5长度拓展攻击">MD5长度拓展攻击</a><time datetime="2024-05-13T05:45:35.000Z" title="发表于 2024-05-13 13:45:35">2024-05-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/13/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" title="frp内网穿透">frp内网穿透</a><time datetime="2024-05-13T05:44:10.000Z" title="发表于 2024-05-13 13:44:10">2024-05-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/13/docker/" title="docker">docker</a><time datetime="2024-05-13T05:42:48.000Z" title="发表于 2024-05-13 13:42:48">2024-05-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/13/burpfakeIP/" title="burpfakeIP">burpfakeIP</a><time datetime="2024-05-13T05:41:16.000Z" title="发表于 2024-05-13 13:41:16">2024-05-13</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By VVkladg0r</div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">1</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://cszvvds.cc" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 文章总览</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 全部分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言面板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>1</sup></a><a href="/tags/misc/" style="font-size: 0.88rem;">misc<sup>1</sup></a><a href="/tags/web/" style="font-size: 0.88rem;">web<sup>7</sup></a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 0.88rem;">其他<sup>5</sup></a><a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 0.88rem;">内网<sup>1</sup></a><a href="/tags/%E5%90%8E%E7%AB%AF%E6%BC%8F%E6%B4%9E/" style="font-size: 0.88rem;">后端漏洞<sup>5</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>2</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 0.88rem;">编程语言<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 VVkladg0r 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'waline.cszvvds.cc',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.css')
+      await getScript('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = async () => {
+    try {
+      const res = await fetch('waline.cszvvds.cc/api/comment?type=recent&count=6', { method: 'GET' })
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray)
+    } catch (err) {
+      console.error(err)
+      const $dom = document.querySelector('#card-newest-comments .aside-list')
+      $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('waline-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

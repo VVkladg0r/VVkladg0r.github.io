@@ -1,0 +1,747 @@
+<!DOCTYPE html><html lang="zh-CNs" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>内网基础 | VV</title><meta name="keywords" content="学习,内网,渗透"><meta name="author" content="VVkladg0r"><meta name="copyright" content="VVkladg0r"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="内网基础"><meta name="application-name" content="内网基础"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="内网基础"><meta property="og:url" content="http://cszvvds.cc/2024/10/11/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/index.html"><meta property="og:site_name" content="VV"><meta property="og:description" content="内网基础前置知识内网定义 内网渗透分类 简单架构 DMZ中存放一些对外的服务 内网常用概念工作组 域 活动目录(AD) 域权限 域控制器(DC) 内网渗透的攻击目标就是DC 其他 AGDLP策略   相关操作判断工作环境高级系统设置中–&amp;gt;计算机名  看到是工作组环境 在属性里面也可以看到 添加"><meta property="og:locale" content="zh-CNs"><meta property="og:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta property="article:author" content="VVkladg0r"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"><meta name="description" content="内网基础前置知识内网定义 内网渗透分类 简单架构 DMZ中存放一些对外的服务 内网常用概念工作组 域 活动目录(AD) 域权限 域控制器(DC) 内网渗透的攻击目标就是DC 其他 AGDLP策略   相关操作判断工作环境高级系统设置中–&amp;gt;计算机名  看到是工作组环境 在属性里面也可以看到 添加"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://cszvvds.cc/2024/10/11/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"VV:QAQ","backTitle":"VV!"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":null},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: VVkladg0r","link":"链接: ","source":"来源: VV","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'VV',
+  title: '内网基础',
+  postAI: '',
+  pageFillDescription: '内网基础, 前置知识, 内网定义, 内网渗透分类, 简单架构, 内网常用概念, 工作组, 域, 活动目录(AD), 域权限, 域控制器(DC), 其他, 相关操作, 判断工作环境, 添加到域, 渗透流程, 信息收集, Windows信息收集, 一、本机信息, 1、系统程序, 2、进程服务, a.进程查看, b.用户信息, c.操作记录, 二、网络发现, 1、基本信息收集, 2、系统日志, 3、浏览器日志, 4、DNS 服务器记录, 三、域信息查询, 1、基本信息收集, 2、dsquery, 3、powershell, 四、配置文件收集, 配置文件, Navicat, SecureCRT, Xshell, VNC, 自动化工具, wmic_info, nishang, LaZagne, Linux信息收集, 获取内核操作系统和设备信息, 用户和组, 用户和权限信息, 环境信息, 有用的命令, 服务信息, 作业和任务, 网络、路由和通信, 软件信息内网基础前置知识内网定义内网渗透分类简单架构中存放一些对外的服务内网常用概念工作组域活动目录域权限域控制器内网渗透的攻击目标就是其他策略相关操作判断工作环境高级系统设置中计算机名看到是工作组环境在属性里面也可以看到添加到域高级系统设置中计算机名更改渗透流程信息收集权限提升横向移动权限维持清理痕迹信息收集主要就是敲命令和用工具信息收集一本机信息系统程序收集系统信息包括操作系统版本已安装补丁列表等通常使用以下方法收集查询简易系统信息查询全部内容查询已安装的补丁列表注其中命令查询内容最全但如果系统更新的补丁较多可能会导致反应反应时间过长使用执行此命令可能会因为超时导致无法正常回显或回显内容长度过长无法全部显示进程服务进程查看查询正在运行的进程查询所有安装过的软件及版本使用查询所有安装过的软件及版本效果和相同查询当前机器的服务信息查看启动项查看任务计划自带防火墙及特殊过滤规则等网络访问均可使用及相关命令查看查看防火墙信息但命令已弃用可使用命令代替查看配置规则关闭防火墙开启防火墙导出导入配置文件新建规则阻止协议端口新建规则允许通过防火墙删除名为的规则连接安全规则配置很少配置用户信息当前用户查询登录用户同查询登录用户同查询登录用户查询会话查询远程桌面主机列表查询域密码策略查询本地用户列表查询指定用户查询本地用户组列表查询指定用户组成员仅域控可执行查询用户组列表仅域控可执行查询用户组成员注和命令只存在于允许安装服务的主机上官方描述其仅存在于及以上版本存在其中命令存在问题本地测试时与描述严重不符无法列出信息操作记录和以下的操作记录无法长时间保存仅限当前窗口查询当前窗口历史操作记录删除当前窗口历史操作记录删除当前窗口指定的历史操作记录查看的历史操作记录删除的历史操作记录可以通过向进程发送键盘内容的方式将运行中的窗口历史操作记录导出以上的操作历史记录会直接保存在指定文件中直接查看即可查看历史操作记录版本需要安装二网络发现内网网络发现是一个很重要的信息收集内容一般情况下是不建议使用扫描器扫描尤其不建议使用当然如果是靶场或是甲方授权就另当别论命令探测存活主机几的基本信息收集列出当前主机详细网络信息列出缓存信息查询路由表地址解析协议缓存表端口使用情况查看共享信息查看共享资源列表查看共享信息查看文件使用命令收集最近建立过连接的但是此方法在某些时候无法收集到网段外的地址系统日志可以使用或者的模块进行日志导出的域控可使用导出不需要支持很多过滤语法若有需要请查看官方说明查询登录日志语法查询所有登录注销相关的日志语法远程查询时在后面加入比如查询上的登录注销日志本地使用日志分析工具整理导出的日志然后去除重复数据无效数据以结束的用户名导出域控登录日志到域控上域控域管域管密码浏览器日志收集浏览器访问记录或浏览器的历史记录文件是使用格式记录的直接打开是一个二进制文件可以下载到本地破解或者直接替换查看需要注意的是版本的历史记录文件在用户登录状态下是锁定的服务器记录如果目标机器在域内只需要按部就班收集域信息准备域横向渗透即可但其中有一点单独提一下一般在域环境中都会有一台服务器小企业或内网环境较小的可能会和域控为同一台大一些的企业多为独立的服务器由于服务器的特性因此在服务器上会存在大量内网地址解析记录如果可以获取会极大的方便内网拓扑展开同时很多其他主机无法到达的地址服务器是可以到达的列出区域中当前节点的资源记录列出的信息列出中的详细记录记录有正向解析和反向解析两种正向解析是从域名到反向解析则是从到域名反向隔离和正向隔离相同都会有一个对应的区域因此查询方式与正向记录相同服务器还存在域传送漏洞可以直接获得记录三域信息查询基本信息收集域信息收集需要当前用户为域用户本地用户无法执行域命令查询域内容查询当前登录域同步时间通常为域控服务器查询域密码策略列出当前域成员列表列出域成员详细信息列出域内组列表列出域内组成员列表查询同一域内机器列表查询域列表查询域中计算机列表查询域内的所有拿到当前的认证信息查询域信任信息得到用户信息想要定位域管和域控机器可以查询和组需要注意的是组名会随系统语言变化而变化如会变化成在域内其他机器上查询组是而在域控上则是命令很少使用而且限制较大仅能在域控上执行所以相对而言较为鸡肋但是在一定条件下还是具有一定的使用价值查询目录中的计算机查询目录中的联系人查询目录中的子网查询目录中的组查询目录中的站点查询目录中的用户查询当前信息查询域信任关系查询当前林信息查询林信任信息四配置文件收集配置文件配置文件路径为使用的方式可以快速导出所需内容自动化工具把这个软件上传到目标主机该脚本可以在目标机器上面完成服务用户列表用户组网络接口硬件信息网络共享信息操作系统安装的补丁安装的软件自启程序时区等信息的查询工作其利用来收集信息执行脚本后会将所有结果写入一个文件解压文件之后得到一个文件双击运行之后会得到一个格式的文件打开即可功能很全但是要权限教程查看执行权限默认设置不允许执行任何脚本只能运行经过证书验证的脚本权限最高可以执行任意脚本对本地脚本不进行限制对来自网络的脚本必须验证其签名修改执行权限导入模块带参数扫描执行可以抓密码用法信息收集我们在获取到之后经常会遇到的操作系统这是我们需要对系统本地的敏感资源进行信息收集下面就是一些有用的信息获取方式获取内核操作系统和设备信息打印所有可用的系统信息内核版本信息系统主机名字主机名内核架构内核信息发布信息发布信息信息文件系统信息用户和组列出系统所有用户列出系统所有组列出所有用户需要权限当前登录的用户当前登录的用户显示目前登入系统的用户有那些人以及他们正在执行的程序显示登入过的用户信息显示系统中所有用户最近一次登录信息显示指定用户最后一次登入信息用户和权限信息当前用户当前用户信息可以使用提升到的用户需要权限允许普通用户执行一些或者全部的命令的一个工具列出目前用户可执行与无法执行的指令切换当前用户身份到其他用户身份环境信息打印系统环境信息打印系统环境信息环境变量中的路径信息打印历史命令显示当前路径显示默认系统遍历显示可用的有用的命令查找的文件查找权限的文件找出可写的文件查找以外的可写文件找出可写目录查找的配置文件查询文件并打印查看是否有权限列用户目录查看当前用户的历史记录查看当前用户的各种历史记录查看用户登录信息检查服务的配置查询包含的日志并打印匹配到的行列出下的所有配置文件列出打开的文件答应的开头服务信息查看进程信息由管理的服务列表由管理的服务列表服务器的配置作业和任务显示指定用户的计划作业需要权限计划任务列出当前进程网络路由和通信列出网络接口信息列出网络接口信息查看系统表打印如有信息查看配置信息打印本地端口开放信息列出的配置规则查看端口服务映射软件信息软件安装软件安装查看的版本信息查看的版本信息查看的版本信息列出加载的模块的版本信息数据库的版本信息的版本信息的版本信息的版本信息的版本信息查找有用的软件查找有用的软件查看运行的帐号',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-11 21:28:18',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 5 || hour >= 5
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">VV</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 文章总览</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 全部分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言面板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacae5439.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://bu.dusays.com/2024/05/13/6640eacae5439.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/CC%E9%93%BE/" style="font-size: 1.05rem;">CC链<sup>7</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>12</sup></a><a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">java安全<sup>12</sup></a><a href="/tags/misc/" style="font-size: 1.05rem;">misc<sup>1</sup></a><a href="/tags/web/" style="font-size: 1.05rem;">web<sup>7</sup></a><a href="/tags/wp/" style="font-size: 1.05rem;">wp<sup>7</sup></a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 1.05rem;">其他<sup>5</sup></a><a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 1.05rem;">内网<sup>2</sup></a><a href="/tags/%E5%90%8E%E7%AB%AF%E6%BC%8F%E6%B4%9E/" style="font-size: 1.05rem;">后端漏洞<sup>5</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">学习<sup>13</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>2</sup></a><a href="/tags/%E6%B8%97%E9%80%8F/" style="font-size: 1.05rem;">渗透<sup>2</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 1.05rem;">编程语言<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">October 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">June 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">May 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">25</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" itemprop="url">内网渗透</a><i class="anzhiyufont anzhiyu-icon-angle-right post-meta-separator"></i><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E5%9F%9F%E6%B8%97%E9%80%8F/" itemprop="url">域渗透</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>学习</span></a><a class="article-meta__tags" href="/tags/%E5%86%85%E7%BD%91/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>内网</span></a><a class="article-meta__tags" href="/tags/%E6%B8%97%E9%80%8F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>渗透</span></a></span></div></div><h1 class="post-title" itemprop="name headline">内网基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-10-11T13:23:00.000Z" title="发表于 2024-10-11 21:23:00">2024-10-11</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-10-11T13:28:18.093Z" title="更新于 2024-10-11 21:28:18">2024-10-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">4.1k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>15分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="内网基础"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://cszvvds.cc/2024/10/11/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/"><header><a class="post-meta-categories" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" itemprop="url">内网渗透</a><a class="post-meta-categories" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E5%9F%9F%E6%B8%97%E9%80%8F/" itemprop="url">域渗透</a><a href="/tags/%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url">学习</a><a href="/tags/%E5%86%85%E7%BD%91/" tabindex="-1" itemprop="url">内网</a><a href="/tags/%E6%B8%97%E9%80%8F/" tabindex="-1" itemprop="url">渗透</a><h1 id="CrawlerTitle" itemprop="name headline">内网基础</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">VVkladg0r</span><time itemprop="dateCreated datePublished" datetime="2024-10-11T13:23:00.000Z" title="发表于 2024-10-11 21:23:00">2024-10-11</time><time itemprop="dateCreated datePublished" datetime="2024-10-11T13:28:18.093Z" title="更新于 2024-10-11 21:28:18">2024-10-11</time></header><h1 id="内网基础"><a href="#内网基础" class="headerlink" title="内网基础"></a>内网基础</h1><h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><h3 id="内网定义"><a href="#内网定义" class="headerlink" title="内网定义"></a>内网定义</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/6709265a855e4.png" alt="image-20240819161432403"></p>
+<h3 id="内网渗透分类"><a href="#内网渗透分类" class="headerlink" title="内网渗透分类"></a>内网渗透分类</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092650d7a3b.png" alt="image-20240819161545743"></p>
+<h3 id="简单架构"><a href="#简单架构" class="headerlink" title="简单架构"></a>简单架构</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/6709265c34fb9.png" alt="image-20240819161857880"></p>
+<p>DMZ中存放一些对外的服务</p>
+<h3 id="内网常用概念"><a href="#内网常用概念" class="headerlink" title="内网常用概念"></a>内网常用概念</h3><h4 id="工作组"><a href="#工作组" class="headerlink" title="工作组"></a>工作组</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/6709265882bd8.png" alt="image-20240819162117942"></p>
+<h4 id="域"><a href="#域" class="headerlink" title="域"></a>域</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092651d2fa9.png" alt="image-20240819162242979"></p>
+<h4 id="活动目录-AD"><a href="#活动目录-AD" class="headerlink" title="活动目录(AD)"></a>活动目录(AD)</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/6709265c166a7.png" alt="image-20240819164153657"></p>
+<h4 id="域权限"><a href="#域权限" class="headerlink" title="域权限"></a>域权限</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/6709265cd6d5b.png" alt="image-20240819164418840"></p>
+<h4 id="域控制器-DC"><a href="#域控制器-DC" class="headerlink" title="域控制器(DC)"></a>域控制器(DC)</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092650bcc95.png" alt="image-20240819164915764"></p>
+<p>内网渗透的攻击目标就是DC</p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/6709265e258b7.png" alt="image-20240819162602713"></p>
+<p>AGDLP策略</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/6709264f7246c.png" alt="image-20240819164451292"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/6709265cec40b.png" alt="image-20240819164626475"></p>
+<h3 id="相关操作"><a href="#相关操作" class="headerlink" title="相关操作"></a>相关操作</h3><h4 id="判断工作环境"><a href="#判断工作环境" class="headerlink" title="判断工作环境"></a>判断工作环境</h4><p>高级系统设置中–&gt;计算机名</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092650eef4b.png" alt="image-20240819163058229"></p>
+<p>看到是工作组环境</p>
+<p>在属性里面也可以看到</p>
+<h4 id="添加到域"><a href="#添加到域" class="headerlink" title="添加到域"></a>添加到域</h4><p>高级系统设置中–&gt;计算机名–&gt;更改</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092659b41fa.png" alt="image-20240819163320338"></p>
+<h3 id="渗透流程"><a href="#渗透流程" class="headerlink" title="渗透流程"></a>渗透流程</h3><ul>
+<li>信息收集</li>
+<li>权限提升</li>
+<li>横向移动</li>
+<li>权限维持</li>
+<li>清理痕迹</li>
+</ul>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/6709265743f49.png" alt="image-20240819165810565"></p>
+<p>主要就是敲命令和用工具</p>
+<h3 id="Windows信息收集"><a href="#Windows信息收集" class="headerlink" title="Windows信息收集"></a>Windows信息收集</h3><h4 id="一、本机信息"><a href="#一、本机信息" class="headerlink" title="一、本机信息"></a>一、本机信息</h4><h5 id="1、系统程序"><a href="#1、系统程序" class="headerlink" title="1、系统程序"></a>1、系统程序</h5><p>收集系统信息，包括操作系统版本，已安装补丁列表等。通常使用以下方法收集：</p>
+<p>net config workstation                               # 查询简易系统信息</p>
+<p>systeminfo                                # 查询全部内容</p>
+<p>wmic qfe get Caption,Description,HotFixID,InstalledOn      # 查询已安装的补丁列表</p>
+<p>注：其中systeminfo命令查询内容最全，但如果系统更新的补丁较多，可能会导致反应反应时间过长；使用 webshell 执行此命令可能会因为超时导致无法正常回显，或回显内容长度过长，无法全部显示。</p>
+<h5 id="2、进程服务"><a href="#2、进程服务" class="headerlink" title="2、进程服务"></a>2、进程服务</h5><h6 id="a-进程查看"><a href="#a-进程查看" class="headerlink" title="a.进程查看"></a>a.进程查看</h6><p>tasklist &#x2F;v                # 查询正在运行的进程</p>
+<p>wmic product get name,version        # 查询所有安装过的软件及版本</p>
+<p>powershell “Get-WmiObject -class Win32_Product |Select-Object -Property name,version”</p>
+<p> # 使用 powershell 查询所有安装过的软件及版本，效果和 wmic 相同</p>
+<p>wmic service list brief          # 查询当前机器的服务信息</p>
+<p>wmic startup get command,caption      # 查看启动项</p>
+<p>schtasks &#x2F;query &#x2F;fo LIST &#x2F;v       # 查看任务计划</p>
+<p>windows 自带防火墙及特殊过滤规则等网络访问均可使用netsh及相关命令查看。</p>
+<p>netsh firewall show config            # 查看防火墙信息，但 firewall 命令已    弃用，可使用 advfirewall 命令代替</p>
+<p>netsh advfirewall firewall show rule name&#x3D;all   # 查看配置规则</p>
+<p>netsh advfirewall set allprofiles state off\on  # 关闭防火墙\开启防火墙</p>
+<p>netsh advfirewall export\import xx.pol      # 导出\导入配置文件</p>
+<p>netsh advfirewall firewall add rule name&#x3D;”deny tcp 139″ dir&#x3D;in protocol&#x3D;tcp localport&#x3D;139 action&#x3D;block      # 新建规则阻止TCP协议139端口</p>
+<p>netsh advfirewall firewall add rule name&#x3D;”Remote Desktop” protocol&#x3D;TCP dir&#x3D;in localport&#x3D;3389 action&#x3D;allow         # 新建规则允许3389通过防火墙</p>
+<p>netsh advfirewall firewall delete rule name&#x3D;Remote Desktop  # 删除名为Remote Desktop的规则</p>
+<p>netsh interface                  # 连接安全规则配置，很少配置。</p>
+<h6 id="b-用户信息"><a href="#b-用户信息" class="headerlink" title="b.用户信息"></a>b.用户信息</h6><p>whoami                   # 当前用户</p>
+<p>quser                   # 查询登录用户，同 query user</p>
+<p>qwinsta                  # 查询登录用户，同 query user</p>
+<p>query user                 # 查询登录用户</p>
+<p>query session                # 查询会话</p>
+<p>query termserver              # 查询远程桌面主机列表。</p>
+<p>net accounts                # 查询域密码策略</p>
+<p>net user                 # 查询本地用户列表</p>
+<p>net user “$username”            # 查询指定用户</p>
+<p>net localgroup               # 查询本地用户组列表</p>
+<p>net localgroup “$groupname”        # 查询指定用户组成员</p>
+<p>net group                 # 仅域控可执行，查询用户组列表</p>
+<p>net group “$groupname”           # 仅域控可执行，查询用户组成员</p>
+<p>注：quser、qwinsta和query命令只存在于允许安装 RDP 服务的主机上，官方描述其仅存在于 server 2012 及以上版本存在。其中query termserver命令存在问题，本地测试时与描述严重不符，无法列出信息。</p>
+<h6 id="c-操作记录"><a href="#c-操作记录" class="headerlink" title="c.操作记录"></a>c.操作记录</h6><p>cmd 和 powershell v3 以下的操作记录无法长时间保存，仅限当前窗口。</p>
+<p>Get-History | Format-List -Property *      # 查询 powershell 当前窗口历史操作记录</p>
+<p>Clear-History                  # 删除 powershell 当前窗口历史操作记录</p>
+<p>Clear-History -Id 3               # 删除 powershell 当前窗口指定 ID 的历史操作记录</p>
+<p>doskey &#x2F;h                    # 查看 cmd 的历史操作记录</p>
+<p>doskey &#x2F;reinstall                # 删除 cmd 的历史操作记录</p>
+<p>可以通过向进程发送键盘内容的方式将运行中的窗口历史操作记录导出。</p>
+<p>powershell v5 以上的操作历史记录会直接保存在指定文件中。直接查看即可。</p>
+<p># 查看 powershell 历史操作记录</p>
+<p>type %appdata%\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt</p>
+<p>powershell v3、v4 版本需要安装Get-PSReadlineOption。 </p>
+<p>msiexec &#x2F;q &#x2F;i PackageManagement_x64.msi</p>
+<h4 id="二、网络发现"><a href="#二、网络发现" class="headerlink" title="二、网络发现"></a>二、网络发现</h4><p> 内网网络发现是一个很重要的信息收集内容，一般情况下是不建议使用扫描器扫描，尤其不建议使用 nmap，当然，如果是靶场，或是甲方授权就另当别论。</p>
+<p><code>for /L %I in (1.1.245) DO @ping -w l -n l 192.168.0.%l | findstr &quot;TTL=&quot;      ping命令 探测存活主机 192.168.0.几的</code></p>
+<h5 id="1、基本信息收集"><a href="#1、基本信息收集" class="headerlink" title="1、基本信息收集"></a>1、基本信息收集</h5><p><code>ipconfig /all            # 列出当前主机详细网络信息</code></p>
+<p>ipconfig &#x2F;displaydns       # 列出dns缓存信息</p>
+<p><code>route print             # 查询路由表</code></p>
+<p>arp -a               # 地址解析协议缓存表</p>
+<p><code>netstat -ano            # 端口使用情况</code></p>
+<p>net share              # 查看共享信息</p>
+<p>net view               # 查看共享资源列表</p>
+<p>wmic share get name,path,status   # 查看共享信息</p>
+<p># 查看 host 文件</p>
+<p>type c:\Windows\system32\drivers\etc\hosts</p>
+<p>使用 arp 命令收集最近建立过连接的 ip，但是此方法在某些时候无法收集到网段外的 ip 地址。</p>
+<h5 id="2、系统日志"><a href="#2、系统日志" class="headerlink" title="2、系统日志"></a>2、系统日志</h5><p>可以使用 wevtutil.exe psloglist.exe 或者 powershell 的Get-WinEvent模块进行日志导出，server 03 的域控可使用 eventquery.vbs 导出。</p>
+<p>wevtutil 不需要 UAC， 支持很多过滤语法，若有需要请查看官方说明。</p>
+<p># 查询登录日志语法</p>
+<p>wevtutil qe security &#x2F;f:text &#x2F;q:*[System[(EventID&#x3D;4624)]]</p>
+<p># 查询所有登录、注销相关的日志语法</p>
+<p>wevtutil qe security &#x2F;rd:true &#x2F;f:text &#x2F;q:”*[system&#x2F;eventid&#x3D;4624 and 4623 and 4627]”</p>
+<p># 远程查询时在后面加入&#x2F;r:computer &#x2F;u:user &#x2F;p:password 比如查询dc1上的登录注销日志</p>
+<p>wevtutil qe security &#x2F;rd:true &#x2F;f:text &#x2F;q:”*[system&#x2F;eventid&#x3D;4624 and 4623 and 4672]” &#x2F;r:dc1 &#x2F;u:administrator &#x2F;p:password</p>
+<p>#本地使用 LogParser 日志分析工具整理导出的日志，然后去除重复数据、无效数据（以 ‘$’ 结束的用户名） </p>
+<p>LogParser.exe -i:EVT -o txt “SELECT TO_UPPERCASE(EXTRACT_TOKEN(Strings,5,’|’)) as USERNAME,TO_UPPERCASE(EXTRACT_TOKEN(Strings,18,’|’)) as SOURCE_IP FROM C:\ProgramData\log.evtx” &gt; C:\ProgramData\log.txt</p>
+<p>#导出域控登录日志到域控上:</p>
+<p>wevtutil epl Security C:\ProgramData\dc.evtx &#x2F;q:”*[EventData[Data[@Name&#x3D;’LogonType’]&#x3D;’3’] and System[(EventID&#x3D;4624) and TimeCreated[timediff(@SystemTime) &lt;&#x3D; 2592000000]]]” &#x2F;r:域控IP &#x2F;u:域管 &#x2F;p:域管密码</p>
+<h5 id="3、浏览器日志"><a href="#3、浏览器日志" class="headerlink" title="3、浏览器日志"></a>3、浏览器日志</h5><p>收集浏览器访问记录。</p>
+<p>chrome</p>
+<p>C:\Users$username\AppData\Local\Google\Chrome\User Data\Default\History</p>
+<p>firefox</p>
+<p>C:\UsersUndefined control sequence \AppDataname.default\places.sqlite</p>
+<p>IE</p>
+<p>reg query “HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\TypedURLs” 或C:\Users$user\AppData\Local\Microsoft\Windows\History</p>
+<p>edge, v79+:</p>
+<p>C:\Users$user\AppData\Local\Microsoft\Edge\User Data\Default\History</p>
+<p>v44+</p>
+<p>C:\Users$user\AppData\Local\Microsoft\Windows\WebCache\WebCacheV01.dat</p>
+<p>浏览器的历史记录文件 history，是使用 sqlite 格式记录的，直接打开是一个二进制文件，可以下载到本地破解，或者直接替换查看。</p>
+<p>需要注意的是，edge v44+ 版本的历史记录文件在用户登录状态下是锁定的。</p>
+<h5 id="4、DNS-服务器记录"><a href="#4、DNS-服务器记录" class="headerlink" title="4、DNS 服务器记录"></a>4、DNS 服务器记录</h5><p>如果目标机器在域内，只需要按部就班收集域信息，准备域横向渗透即可。</p>
+<p>但其中有一点单独提一下，一般在域环境中都会有一台 DNS 服务器，小企业或内网环境较小的可能会和域控为同一台，大一些的企业，多为独立的 DNS 服务器。</p>
+<p>由于 DNS 服务器的特性，因此，在 DNS 服务器上会存在大量内网地址解析记录，如果可以获取，会极大的方便内网拓扑展开，同时很多其他主机无法到达的地址，DNS 服务器是可以到达的。</p>
+<p> #列出 DNS 区域中当前节点的资源记录</p>
+<p> dnscmd . &#x2F;EnumZones</p>
+<p>#列出 test.com 的信息</p>
+<p> dnscmd . &#x2F;ZoneInfo test.com</p>
+<p> #列出 test.com 中的详细记录</p>
+<p> dnscmd . &#x2F;ZonePrint test.com</p>
+<p>DNS 记录有正向解析和反向解析两种。</p>
+<p>正向解析是从域名到IP，反向解析则是从 IP 到域名。</p>
+<p>反向隔离和正向隔离相同，都会有一个对应的区域，因此，查询方式与正向记录相同。</p>
+<p>DNS 服务器还存在域传送漏洞。可以直接获得 DNS 记录。</p>
+<p>nslookup -type&#x3D;all_ldap._tcp.dc.greyfinger.com nslookup -type&#x3D;ns domain.com cmd&gt; nslookup server dns.domain.com ls domain.com</p>
+<h4 id="三、域信息查询"><a href="#三、域信息查询" class="headerlink" title="三、域信息查询"></a>三、域信息查询</h4><h5 id="1、基本信息收集-1"><a href="#1、基本信息收集-1" class="headerlink" title="1、基本信息收集"></a>1、基本信息收集</h5><p>域信息收集，<strong>需要当前用户为域用户</strong>。本地用户无法执行域命令查询域内容。</p>
+<p><code>net config workstation          # 查询当前登录域</code></p>
+<p><code>net time                 # 同步时间，通常为域控服务器</code></p>
+<p>net accounts &#x2F;domain           # 查询域密码策略</p>
+<p><code>net user /domain             # 列出当前域成员列表</code></p>
+<p>net user username &#x2F;domain         # 列出域成员详细信息</p>
+<p><code>net group /domain             # 列出域内组列表</code></p>
+<p>net group groupname &#x2F;domain        # 列出域内组成员列表</p>
+<p>net view                  # 查询同一域内机器列表</p>
+<p>net view &#x2F;domain              # 查询域列表</p>
+<p>net view &#x2F;domain:test            # 查询 test 域中计算机列表</p>
+<p><code>nltest /dclist:domain           # 查询域内的所有DC</code></p>
+<p>nltest &#x2F;dsgetdc:domain           # 拿到DC当前的认证信息</p>
+<p>nltest &#x2F;domain_trusts            # 查询域信任信息</p>
+<p>nltest &#x2F;user:”username”           # 得到用户信息</p>
+<p>想要定位域管和域控机器，可以查询domain admin和domain controllers组，需要注意的是，组名会随系统语言变化而变化，如domain controllers会变化成domaine contrôleurs。 </p>
+<p>在域内其他机器上，查询组是net group &#x2F;domain，而在域控上则是net group。</p>
+<h5 id="2、dsquery"><a href="#2、dsquery" class="headerlink" title="2、dsquery"></a>2、dsquery</h5><p>dsquery 命令很少使用，而且限制较大仅能在域控上执行，所以相对而言较为鸡肋，但是在一定条件下还是具有一定的使用价值。</p>
+<p>dsquery computer              # 查询目录中的计算机</p>
+<p>dsquery contact               # 查询目录中的联系人</p>
+<p>dsquery subnet               # 查询目录中的子网</p>
+<p>dsquery group                # 查询目录中的组</p>
+<p>dsquery site                # 查询目录中的站点</p>
+<p>dsquery user                # 查询目录中的用户</p>
+<h5 id="3、powershell"><a href="#3、powershell" class="headerlink" title="3、powershell"></a>3、powershell</h5><p># 查询当前Domain信息[System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()</p>
+<p># 查询域信任关系([System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()).GetAllTrustRelationships()</p>
+<p># 查询当前林信息[System.DirectoryServices.ActiveDirectory.Forest]::GetCurrentForest()</p>
+<p># 查询林信任信息([System.DirectoryServices.ActiveDirectory.Forest]::GetForest((New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext(‘Forest’, ‘forest-of-interest.local’)))).GetAllTrustRelationships()</p>
+<h4 id="四、配置文件收集"><a href="#四、配置文件收集" class="headerlink" title="四、配置文件收集"></a>四、配置文件收集</h4><h5 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h5><p>IIS 配置文件路径为：</p>
+<p>%windir%\system32\inetsrv\config\applicationHost.config</p>
+<p>使用 appcmd 的方式可以快速导出所需内容：</p>
+<p>%windir%\system32\inetsrv\appcmd list site &#x2F;config %windir%\system32\inetsrv\appcmd list site &#x2F;config &#x2F;xml &gt; c:\sites.xml</p>
+<h5 id="Navicat"><a href="#Navicat" class="headerlink" title="Navicat"></a>Navicat</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/670926556cae6.png" alt="image-20240819180117583"></p>
+<h5 id="SecureCRT"><a href="#SecureCRT" class="headerlink" title="SecureCRT"></a>SecureCRT</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/670926505dd7a.png" alt="image-20240819180131406"></p>
+<h5 id="Xshell"><a href="#Xshell" class="headerlink" title="Xshell"></a>Xshell</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092651ccf39.png" alt="image-20240819180147126"></p>
+<h5 id="VNC"><a href="#VNC" class="headerlink" title="VNC"></a>VNC</h5><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/10/11/67092653907ed.png" alt="image-20240819180202863"></p>
+<h4 id="自动化工具"><a href="#自动化工具" class="headerlink" title="自动化工具"></a>自动化工具</h4><h5 id="wmic-info"><a href="#wmic-info" class="headerlink" title="wmic_info"></a>wmic_info</h5><p><a target="_blank" rel="noopener" href="http://www.fuzzysecurity.com/scripts/files/wmic_info.rar">wmic_info</a></p>
+<p>把这个软件上传到目标主机</p>
+<p>该脚本可以在目标机器上面完成服务。用户列表，用户组、网络接口、硬件信息、网络共享信息、操作系统、安装的补丁、安装的软件、自启程序、时区等信息的查询工作。其利用WMIC来收集信息。执行脚本后,会将所有结果写入一个HTML文件</p>
+<p>解压文件之后得到一个bat文件，双击运行之后会得到一个html格式的文件，打开即可</p>
+<h5 id="nishang"><a href="#nishang" class="headerlink" title="nishang"></a>nishang</h5><p><a target="_blank" rel="noopener" href="https://github.com/samratashok/nishang">nishang</a></p>
+<p>功能很全 但是要权限</p>
+<p>教程：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40412037/article/details/115510209">https://blog.csdn.net/weixin_40412037/article/details/115510209</a></p>
+<p>get-executionpolicy  查看执行权限</p>
+<p>Restricted:默认设置，不允许执行任何脚本<br>Allsigned:只能运行经过证书验证的脚本<br>Unrestricted:权限最高，可以执行任意脚本<br>RemoteSigned:对本地脚本不进行限制；对来自网络的脚本必须验证其签名</p>
+<p>set-executionpolicy Unrestricted  修改执行权限</p>
+<p>import-module .\nishang.psm1	导入模块</p>
+<p>Invoke-PortScan -StartAddress 192.168.10.133 -EndAddress 192.168.10.255 -ResolveHost -ScanPort  带参数扫描</p>
+<h5 id="LaZagne"><a href="#LaZagne" class="headerlink" title="LaZagne"></a>LaZagne</h5><p><a target="_blank" rel="noopener" href="https://github.com/AlessandroZ/LaZagne">LaZagne</a></p>
+<p>执行可以抓密码</p>
+<blockquote>
+<p>用法</p>
+<ul>
+<li>Launch all modules</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">laZagne.exe all</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<ul>
+<li>Launch only a specific module</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">laZagne.exe browsers</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<ul>
+<li>Launch only a specific software script</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">laZagne.exe browsers -firefox</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<ul>
+<li>Write all passwords found into a file (-oN for Normal txt, -oJ for Json, -oA for All). Note: If you have problems to parse JSON results written as a multi-line strings, check <a target="_blank" rel="noopener" href="https://github.com/AlessandroZ/LaZagne/issues/226">this</a>.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">laZagne.exe all -oN</span><br><span class="line">laZagne.exe all -oA -output C:\Users\test\Desktop</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<ul>
+<li>Get help</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">laZagne.exe -h</span><br><span class="line">laZagne.exe browsers -h</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<ul>
+<li>Change verbosity mode (2 different levels)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">laZagne.exe all -vv</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<ul>
+<li>Quiet mode (nothing will be printed on the standard output)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">laZagne.exe all -quiet -oA</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<ul>
+<li>To decrypt domain credentials, it could be done specifying the user  windows password. Otherwise it will try all passwords already found as  windows passwords.</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">laZagne.exe all -password ZapataVive</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<p><strong>Note: For wifi passwords \ Windows Secrets, launch it with administrator privileges (UAC Authentication &#x2F; sudo)</strong></p>
+</blockquote>
+<h3 id="Linux信息收集"><a href="#Linux信息收集" class="headerlink" title="Linux信息收集"></a>Linux信息收集</h3><p> 我们在获取到webshell之后，经常会遇到Linux的操作系统，这是我们需要对Linux系统本地的敏感资源进行信息收集，下面就是一些有用的信息获取方式。</p>
+<h4 id="获取内核，操作系统和设备信息"><a href="#获取内核，操作系统和设备信息" class="headerlink" title="获取内核，操作系统和设备信息"></a>获取内核，操作系统和设备信息</h4><p> uname -a #打印所有可用的系统信息</p>
+<p> uname -r #内核版本信息</p>
+<p> uname -n #系统主机名字</p>
+<p> hostname #主机名</p>
+<p> uname -m #Linux内核架构（x86&#x2F;x64）</p>
+<p> cat &#x2F;proc&#x2F;version #内核信息</p>
+<p> cat &#x2F;etc&#x2F;*-release #发布信息</p>
+<p> cat &#x2F;etc&#x2F;issue #发布信息</p>
+<p> cat &#x2F;proc&#x2F;cpuinfo #CPU信息</p>
+<p> df -a #文件系统信息</p>
+<h4 id="用户和组"><a href="#用户和组" class="headerlink" title="用户和组"></a>用户和组</h4><p>cat &#x2F;etc&#x2F;passwd 列出系统所有用户</p>
+<p>cat &#x2F;etc&#x2F;group 列出系统所有组</p>
+<p>cat &#x2F;etc&#x2F;shadow 列出所有用户hash（需要root权限）</p>
+<p>users 当前登录的用户</p>
+<p>who -a 当前登录的用户</p>
+<p>w 显示目前登入系统的用户有那些人，以及他们正在执行的程序</p>
+<p>last 显示登入过的用户信息</p>
+<p>lastlog 显示系统中所有用户最近一次登录信息</p>
+<p>lastlog  显示指定用户最后一次登入信息</p>
+<h4 id="用户和权限信息"><a href="#用户和权限信息" class="headerlink" title="用户和权限信息"></a>用户和权限信息</h4><p>whoami 当前用户</p>
+<p>id 当前用户信息</p>
+<p>cat &#x2F;etc&#x2F;sudoers 可以使用sudo提升到root的用户（需要root权限）</p>
+<p>sudo 允许普通用户执行一些或者全部的root命令的一个工具</p>
+<p>sudo -l 列出目前用户可执行与无法执行的指令</p>
+<p>su 切换当前用户身份到其他用户身份</p>
+<h4 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h4><p>env 打印系统环境信息</p>
+<p>set 打印系统环境信息</p>
+<p>echo $PATH 环境变量中的路径信息</p>
+<p>history 打印历史命令</p>
+<p>pwd 显示当前路径</p>
+<p>cat &#x2F;etc&#x2F;profile 显示默认系统遍历</p>
+<p>cat &#x2F;etc&#x2F;shells 显示可用的shell</p>
+<h4 id="有用的命令"><a href="#有用的命令" class="headerlink" title="有用的命令"></a>有用的命令</h4><p>find &#x2F; -perm -4000 -type f 查找SUID的文件</p>
+<p>find &#x2F; -uid 0 -perm -4000 -type f 查找root权限的SUID文件</p>
+<p>find &#x2F; -perm -2 -type f 找出可写的文件</p>
+<p>find &#x2F; ! -path “&#x2F;proc&#x2F;“ -perm -2 -type f -print 查找&#x2F;proc以外的可写文件</p>
+<p>find &#x2F; -perm -2 -type d 找出可写目录</p>
+<p>find &#x2F;home –name *.rhosts -print 查找rhosts的配置文件</p>
+<p>find &#x2F;home -iname *.plan -exec ls -la {} ; -exec cat {} 查询文件并打印</p>
+<p>ls -ahlR &#x2F;root&#x2F; 查看是否有权限列用户目录</p>
+<p>cat ~&#x2F;.bash_history 查看当前用户的历史记录</p>
+<p>ls -la ~&#x2F;.*_history 查看当前用户的各种历史记录</p>
+<p>ls -la ~&#x2F;.ssh&#x2F; 查看用户ssh登录信息</p>
+<p>ls -la &#x2F;usr&#x2F;sbin&#x2F;in.* 检查inetd服务的配置</p>
+<p>grep -l -i pass &#x2F;var&#x2F;log&#x2F;*.log 查询包含pass的日志并打印匹配到的行</p>
+<p>ls -la &#x2F;etc&#x2F;*.conf 列出&#x2F;etc&#x2F;下的所有配置文件</p>
+<p>lsof -i -n 列出打开的文件</p>
+<p>head &#x2F;var&#x2F;mail&#x2F;root 答应&#x2F;var&#x2F;mail&#x2F;root的开头</p>
+<h4 id="服务信息"><a href="#服务信息" class="headerlink" title="服务信息"></a>服务信息</h4><p>ps aux 查看进程信息</p>
+<p>cat &#x2F;etc&#x2F;inetd.conf 由inetd管理的服务列表</p>
+<p>cat &#x2F;etc&#x2F;xinetd.conf 由xinetd管理的服务列表</p>
+<p>cat &#x2F;etc&#x2F;exports nfs服务器的配置</p>
+<h4 id="作业和任务"><a href="#作业和任务" class="headerlink" title="作业和任务"></a>作业和任务</h4><p>crontab -l -u %username% 显示指定用户的计划作业（需要root权限）</p>
+<p>ls -la &#x2F;etc&#x2F;cron* 计划任务</p>
+<p>top 列出当前进程</p>
+<h4 id="网络、路由和通信"><a href="#网络、路由和通信" class="headerlink" title="网络、路由和通信"></a>网络、路由和通信</h4><p>&#x2F;sbin&#x2F;ifconfig -a 列出网络接口信息</p>
+<p>cat &#x2F;etc&#x2F;network&#x2F;interfaces 列出网络接口信息</p>
+<p>arp -a 查看系统arp表</p>
+<p>route 打印如有信息</p>
+<p>cat &#x2F;etc&#x2F;resolv.conf 查看dns配置信息</p>
+<p>netstat -an 打印本地端口开放信息</p>
+<p>iptables -L 列出iptable的配置规则</p>
+<p>cat &#x2F;etc&#x2F;services 查看端口服务映射</p>
+<h4 id="软件信息"><a href="#软件信息" class="headerlink" title="软件信息"></a>软件信息</h4><p>dpkg -l 软件安装（Debian）</p>
+<p>rpm -qa 软件安装（Red Hat</p>
+<p>sudo -V 查看sudo的版本信息</p>
+<p>httpd -v 查看apache的版本信息</p>
+<p>apache2 -v 查看apache的版本信息</p>
+<p>apache2ctl (or apachectl) -M 列出加载的apache模块</p>
+<p>mysql –version mysql的版本信息</p>
+<p>psql -V Postgres数据库的版本信息</p>
+<p>perl -v perl的版本信息</p>
+<p>java -version java的版本信息</p>
+<p>python –version python的版本信息</p>
+<p>ruby -v ruby的版本信息</p>
+<p>find &#x2F; -name %program_name% 查找有用的软件</p>
+<p>which %program_name% 查找有用的软件</p>
+<p>cat &#x2F;etc&#x2F;apache2&#x2F;envvars 查看运行apache的帐号</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">VVkladg0r</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://cszvvds.cc/2024/10/11/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://cszvvds.cc/2024/10/11/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/')">内网基础</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6640eacb0aad7.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://bu.dusays.com/2024/05/13/6640eacae5439.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2024/05/13/6640eacae5439.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://cszvvds.cc/2024/10/11/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=内网基础&amp;url=http://cszvvds.cc/2024/10/11/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://cszvvds.cc" target="_blank">VV</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E5%AD%A6%E4%B9%A0/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>学习<span class="tagsPageCount">13</span></a><a class="post-meta__box__tags" href="/tags/%E5%86%85%E7%BD%91/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>内网<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/%E6%B8%97%E9%80%8F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>渗透<span class="tagsPageCount">2</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2024/06/07/JAVA%E5%8A%A0%E8%BD%BD%E5%AD%97%E8%8A%82%E7%A0%81/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JAVA加载字节码</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/05/13/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" title="frp内网穿透"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-05-13</div><div class="title">frp内网穿透</div></div></a></div><div><a href="/2024/06/07/JAVA%E5%8A%A0%E8%BD%BD%E5%AD%97%E8%8A%82%E7%A0%81/" title="JAVA加载字节码"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">JAVA加载字节码</div></div></a></div><div><a href="/2024/05/23/java-RMI/" title="java-RMI"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-05-23</div><div class="title">java-RMI</div></div></a></div><div><a href="/2024/05/15/java%E5%8F%8D%E5%B0%84/" title="java反射"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-05-15</div><div class="title">java反射</div></div></a></div><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC1/" title="java反序列化--CC1"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC1</div></div></a></div><div><a href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC2/" title="java反序列化--CC2"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-07</div><div class="title">java反序列化--CC2</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2023/04/27/64496e511b09c.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/03/03/e511960ac5488.png" alt="status"/></div></div><div class="author-info__description">生活明朗 万物可爱</div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">大家好 我是VV 欢迎来看我的博客鸭~  之前上传文章的时候 图床好像被DDOS了 有些图片没上传起 懒的重新弄了 大家需要的话d我 我重新上传</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">内网基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">前置知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">内网定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.2.</span> <span class="toc-text">内网渗透分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.3.</span> <span class="toc-text">简单架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E5%B8%B8%E7%94%A8%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.4.</span> <span class="toc-text">内网常用概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%BB%84"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">工作组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B4%BB%E5%8A%A8%E7%9B%AE%E5%BD%95-AD"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">活动目录(AD)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E6%9D%83%E9%99%90"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">域权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E6%8E%A7%E5%88%B6%E5%99%A8-DC"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">域控制器(DC)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">1.1.4.6.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.5.</span> <span class="toc-text">相关操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">判断工作环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%88%B0%E5%9F%9F"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">添加到域</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%97%E9%80%8F%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.6.</span> <span class="toc-text">渗透流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.2.</span> <span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.2.1.</span> <span class="toc-text">Windows信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%9C%AC%E6%9C%BA%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">一、本机信息</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E7%B3%BB%E7%BB%9F%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.2.1.1.1.</span> <span class="toc-text">1、系统程序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E8%BF%9B%E7%A8%8B%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.2.1.1.2.</span> <span class="toc-text">2、进程服务</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#a-%E8%BF%9B%E7%A8%8B%E6%9F%A5%E7%9C%8B"><span class="toc-number">1.2.1.1.2.1.</span> <span class="toc-text">a.进程查看</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#b-%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.1.1.2.2.</span> <span class="toc-text">b.用户信息</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#c-%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95"><span class="toc-number">1.2.1.1.2.3.</span> <span class="toc-text">c.操作记录</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%BD%91%E7%BB%9C%E5%8F%91%E7%8E%B0"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">二、网络发现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.2.1.2.1.</span> <span class="toc-text">1、基本信息收集</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97"><span class="toc-number">1.2.1.2.2.</span> <span class="toc-text">2、系统日志</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E6%B5%8F%E8%A7%88%E5%99%A8%E6%97%A5%E5%BF%97"><span class="toc-number">1.2.1.2.3.</span> <span class="toc-text">3、浏览器日志</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81DNS-%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%B0%E5%BD%95"><span class="toc-number">1.2.1.2.4.</span> <span class="toc-text">4、DNS 服务器记录</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9F%9F%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">三、域信息查询</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-1"><span class="toc-number">1.2.1.3.1.</span> <span class="toc-text">1、基本信息收集</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81dsquery"><span class="toc-number">1.2.1.3.2.</span> <span class="toc-text">2、dsquery</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81powershell"><span class="toc-number">1.2.1.3.3.</span> <span class="toc-text">3、powershell</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%94%B6%E9%9B%86"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">四、配置文件收集</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.1.4.1.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Navicat"><span class="toc-number">1.2.1.4.2.</span> <span class="toc-text">Navicat</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#SecureCRT"><span class="toc-number">1.2.1.4.3.</span> <span class="toc-text">SecureCRT</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Xshell"><span class="toc-number">1.2.1.4.4.</span> <span class="toc-text">Xshell</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#VNC"><span class="toc-number">1.2.1.4.5.</span> <span class="toc-text">VNC</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">自动化工具</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#wmic-info"><span class="toc-number">1.2.1.5.1.</span> <span class="toc-text">wmic_info</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nishang"><span class="toc-number">1.2.1.5.2.</span> <span class="toc-text">nishang</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#LaZagne"><span class="toc-number">1.2.1.5.3.</span> <span class="toc-text">LaZagne</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.2.2.</span> <span class="toc-text">Linux信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%86%85%E6%A0%B8%EF%BC%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%92%8C%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">获取内核，操作系统和设备信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">用户和组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%92%8C%E6%9D%83%E9%99%90%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">用户和权限信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">环境信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.2.5.</span> <span class="toc-text">有用的命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.2.6.</span> <span class="toc-text">服务信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E5%92%8C%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.2.2.7.</span> <span class="toc-text">作业和任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E3%80%81%E8%B7%AF%E7%94%B1%E5%92%8C%E9%80%9A%E4%BF%A1"><span class="toc-number">1.2.2.8.</span> <span class="toc-text">网络、路由和通信</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.2.9.</span> <span class="toc-text">软件信息</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/11/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/" title="内网基础">内网基础</a><time datetime="2024-10-11T13:23:00.000Z" title="发表于 2024-10-11 21:23:00">2024-10-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/JAVA%E5%8A%A0%E8%BD%BD%E5%AD%97%E8%8A%82%E7%A0%81/" title="JAVA加载字节码">JAVA加载字节码</a><time datetime="2024-06-07T13:32:59.000Z" title="发表于 2024-06-07 21:32:59">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC7/" title="java反序列化--CC7">java反序列化--CC7</a><time datetime="2024-06-07T13:21:19.000Z" title="发表于 2024-06-07 21:21:19">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC6/" title="java反序列化--CC6">java反序列化--CC6</a><time datetime="2024-06-07T13:21:15.000Z" title="发表于 2024-06-07 21:21:15">2024-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/07/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CC5/" title="java反序列化--CC5">java反序列化--CC5</a><time datetime="2024-06-07T13:21:09.000Z" title="发表于 2024-06-07 21:21:09">2024-06-07</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By VVkladg0r</div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">34</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">5</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://cszvvds.cc" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 文章总览</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 全部分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言面板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/CC%E9%93%BE/" style="font-size: 0.88rem;">CC链<sup>7</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>12</sup></a><a href="/tags/java%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">java安全<sup>12</sup></a><a href="/tags/misc/" style="font-size: 0.88rem;">misc<sup>1</sup></a><a href="/tags/web/" style="font-size: 0.88rem;">web<sup>7</sup></a><a href="/tags/wp/" style="font-size: 0.88rem;">wp<sup>7</sup></a><a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 0.88rem;">其他<sup>5</sup></a><a href="/tags/%E5%86%85%E7%BD%91/" style="font-size: 0.88rem;">内网<sup>2</sup></a><a href="/tags/%E5%90%8E%E7%AB%AF%E6%BC%8F%E6%B4%9E/" style="font-size: 0.88rem;">后端漏洞<sup>5</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">学习<sup>13</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>2</sup></a><a href="/tags/%E6%B8%97%E9%80%8F/" style="font-size: 0.88rem;">渗透<sup>2</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 0.88rem;">编程语言<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 VVkladg0r 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'waline.cszvvds.cc',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.css')
+      await getScript('https://cdn.cbd.int/@waline/client@2.15.5/dist/waline.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script>window.addEventListener('load', () => {
+  const changeContent = content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const getComment = async () => {
+    try {
+      const res = await fetch('waline.cszvvds.cc/api/comment?type=recent&count=6', { method: 'GET' })
+      const result = await res.json()
+      const walineArray = result.data.map(e => {
+        return {
+          'content': changeContent(e.comment),
+          'avatar': e.avatar,
+          'nick': e.nick,
+          'url': e.url + '#' + e.objectId,
+          'date': e.time || e.insertedAt
+        }
+      })
+      saveToLocal.set('waline-newest-comments', JSON.stringify(walineArray), 10/(60*24))
+      generateHtml(walineArray)
+    } catch (err) {
+      console.error(err)
+      const $dom = document.querySelector('#card-newest-comments .aside-list')
+      $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+    }
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('waline-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
